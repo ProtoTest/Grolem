@@ -1,14 +1,18 @@
-require '../spec_helper'
-require '../pages/home_page'
+require "../core/base_page"
+require "../Google/home_page"
+include Pages
 
 describe 'home page' do
-  it 'welcomes the user' do
+  it 'welcomes the user', js: true do
+    RSpec.configure do |config|
+      puts config.default_browser
+    end
     @page = HomePage.new
-    @page.load
-    @page.
+        @page.load
+        @page.
         Search("prototest").
         ClickFirstResult.
-        GoBack.
+        GoBack
         ClickFirstResult.
         GoBack.
         GoBack.
@@ -17,4 +21,5 @@ describe 'home page' do
         GoBack.
         GoBack
   end
+
 end
