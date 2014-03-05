@@ -1,11 +1,7 @@
-require "site_prism"
 require "../core/spec_helper"
 
 module Pages
-  class BasePage < SitePrism::Page
-    set_url ""
-    set_url_matcher /onekingslane.com\/?/
-
+  class BasePage
     def initialize
       puts "Base Page Called"
     end
