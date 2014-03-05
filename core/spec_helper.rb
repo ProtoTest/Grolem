@@ -4,12 +4,11 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'rspec'
 require 'capybara'
 require 'capybara/rspec'
-require 'capybara-screenshot'
 require 'site_prism'
-require 'capybara-screenshot/rspec'
 require 'selenium-webdriver'
 require "../core/browsers"
 require "../core/config"
+require "capybara-screenshot"
 include Browsers
 
 HOST = ENV['HOST'] || 'local'

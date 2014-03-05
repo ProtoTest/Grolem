@@ -1,29 +1,57 @@
-require 'spec_helper'
-require '../pages/signup_modal'
+require "../core/base_page"
+require "../pages/signup_modal"
 include Pages
 
-feature 'User Authentication and Authorization' do
-
-  context 'As a new user' do
-    background do
-      #clear cookies
-    end
-    scenario 'Register a new ac1count' do
-      @page = SignupModal.new
-      @page.load
-      @page.Register("testuser12345@mailinator.com").
-    end
-    scenario 'Continue as guest' do
-    end
+feature 'User Login' do
+  before(:all) do
+    @rand = rand(1000).to_s
+    @email = "testuser" + @rand + "@mailinator.com"
+    @password = 'Proto123'
+    @firstname = 'TestUser'
+    @lastname = 'ProtoTest'
+    @page = SignupModal.new
   end
 
-  context 'As a recurring user' do
-    background do
-    end
-    scenario '' do
-    end
-    scenario '' do
-    end
+  scenario 'Register a new account' do
+    @page.load
+    @page = @page.
+        EnterEmail(@email).
+        EnterInfo(@firstname,@lastname,@password).
+  end
+  scenario 'Log In' do
+    @page.load
+    @page.
+        Login.
+        LoginWithInfo(@email,@password).
+        ClosePanel
+  end
+
+  scenario 'Change Your Mind' do
+    @page.load
+    @page.
+        Login.
+        JoinNow.
+        EnterEmail('slkdfj@lsasdfasdfdasfdkfjslk.com').
+        Back.
+        EnterEmail(@email)
+  end
+
+  scenario 'Register Email that already exists' do
+    @page.load
+    @page.
+        Login.
+        JoinNow.
+        EnterEmailThatAlreadyExists('asdf@asdf.com').
+        EnterEmail(@email)
+  end
+
+  scenario 'Enter Blank Registration Info' do
+    @page.load
+    @page.EnterEmail(@email).
+            EnterBlankInfo
+    page.should have_text 'Please enter a first name.'
+    page.should have_text 'Please enter a last name.'
+    page.should have_text 'Please enter a password between 6-16 characters long.'
   end
 end
 
