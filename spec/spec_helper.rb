@@ -1,4 +1,6 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'core'))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'pages'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'rspec'
@@ -6,8 +8,8 @@ require 'capybara'
 require 'capybara/rspec'
 require 'site_prism'
 require 'selenium-webdriver'
-require "../core/browsers"
-require "../core/config"
+require 'browsers'
+require 'config'
 require "capybara-screenshot"
 include Browsers
 

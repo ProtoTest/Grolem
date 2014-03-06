@@ -1,5 +1,5 @@
-require "../core/base_page"
-require "../pages/welcome_splash_page"
+require 'base_page'
+require 'welcome_splash_page'
 include Pages
 
 module Pages

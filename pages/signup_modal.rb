@@ -1,6 +1,6 @@
-require "../core/base_page"
-require "../pages/register_modal"
-require "../pages/login_page"
+require 'base_page'
+require 'register_modal'
+require 'login_page'
 include Pages
 include Core
 

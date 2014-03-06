@@ -1,7 +1,7 @@
-require "../core/base_page"
-require "../pages/register_modal"
-require "../pages/login_page"
-require "../core/element"
+require 'base_page'
+require 'register_modal'
+require 'login_page'
+require 'element'
 
 module Pages
   class WelcomeSplashPage < BasePage

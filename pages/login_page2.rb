@@ -1,6 +1,6 @@
-require "../core/base_page"
-require "../pages/welcome_splash_page"
-require "../pages/signup_modal"
+require 'base_page'
+require 'welcome_splash_page'
+require 'signup_modal'
 include Pages
 
 module Pages

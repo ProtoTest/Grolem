@@ -1,5 +1,6 @@
-require "../core/base_page"
-require "../pages/signup_modal"
+require 'spec_helper'
+require 'base_page'
+require 'signup_modal'
 include Pages
 
 feature 'User Login' do

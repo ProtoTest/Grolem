@@ -1,7 +1,7 @@
-require_relative "../core/base_page"
-require_relative "../pages/welcome_splash_page"
-require_relative "../pages/signup_modal"
-require_relative "../core/element"
+require 'base_page'
+require 'welcome_splash_page'
+require 'signup_modal'
+require 'element'
 include Pages
 
 module Pages

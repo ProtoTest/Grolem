@@ -1,5 +1,3 @@
-require "../core/spec_helper"
-
 module Pages
   class BasePage
     def initialize
