@@ -1,9 +1,8 @@
 require 'spec_helper'
-require 'base_page'
 require 'signup_modal'
 include Pages
 
-feature 'User Login' do
+feature 'UserLogin' do
   before(:all) do
     @rand = rand(1000).to_s
     @email = "testuser" + @rand + "@mailinator.com"
@@ -14,7 +13,7 @@ feature 'User Login' do
     visit RSpec.configuration.default_url
   end
 
-  scenario 'Log In' do
+  scenario 'LogIn' do
     @page.
         Login.
         LoginWithInfo(@email,@password).

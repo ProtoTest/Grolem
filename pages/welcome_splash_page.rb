@@ -1,28 +1,27 @@
-require 'base_page'
+require 'site_prism'
 require 'register_modal'
 require 'login_page'
 require 'element'
 
 module Pages
-  class WelcomeSplashPage < BasePage
-    include Core
-    def initialize
-      @@close_button = WebElement.new '#x_out'
-      @@shop_todays_sales = WebElement.new "#shop_todays"
-      @@welcome_panel = WebElement.new "#successContents"
-      @@change_email_pref_link = WebElement.new "#email_pref"
-      @@invite_friends_button = WebElement.new "#invite_circle"
-    end
+  class WelcomeSplashPage < SitePrism::Page
+
+    attr_reader :close_button,:shop_todays_sales,:welcome_panel,:change_email_pref_link,:invite_friends_button
+      element :close_button, '#x_out'
+      element :shop_todays_sales, "#shop_todays"
+      element :welcome_panel, "#successContents"
+      element :change_email_pref_link, "#email_pref"
+      element :invite_friends_button, "#invite_circle"
     def InviteFriends
-      @@invite_friends_button.click
+      invite_friends_button.click
     end
 
     def ClosePanel
-      @@close_button.click
+      close_button.click
     end
 
     def ShopTodaysSales
-      @@shop_todays_sales.click
+      shop_todays_sales.click
     end
   end
 end

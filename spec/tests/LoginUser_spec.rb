@@ -1,4 +1,4 @@
-require 'spec_helper'
+require '../spec_helper'
 require 'site_prism'
 require 'signup_modal'
 include Pages

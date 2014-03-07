@@ -1,30 +1,29 @@
-require 'base_page'
+require 'site_prism'
 require 'welcome_splash_page'
 require 'signup_modal'
 require 'element'
 include Pages
 
 module Pages
-  class LoginPage
+  class LoginPage < SitePrism::Page
+    attr_reader :email_field, :password_field,:log_in_button,:join_now_link,:facebook_login_link,:keep_logged_in_cbx
 
-    def initialize
-      @email_field = WebElement.new '#email2'
-      @password_field= WebElement.new'#password2'
-      @log_in_button = WebElement.new 'button[type=submit]', :text => "LOG IN"
-      @join_now_link = WebElement.new '.joinLink'
-      @facebook_login_link = WebElement.new '.fblogin'
-      @keep_logged_in_cbx = WebElement.new'#remember'
-    end
+      element :email_field, '#email2'
+      element :password_field,'#password2'
+      element :log_in_button , 'button[type=submit]', :text => "LOG IN"
+      element :join_now_link , '.joinLink'
+      element :facebook_login_link , '.fblogin'
+      element :keep_logged_in_cbx,'#remember'
 
     def LoginWithInfo email, password
-      @email_field.set email
-      @password_field.set password
-      @log_in_button.click
+      email_field.set email
+      password_field.set password
+      log_in_button.click
       WelcomeSplashPage.new
     end
 
     def JoinNow
-      @join_now_link.click
+      join_now_link.click
       SignupModal.new
     end
   end

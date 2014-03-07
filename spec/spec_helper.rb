@@ -11,6 +11,10 @@ require 'selenium-webdriver'
 require 'browsers'
 require 'config'
 require "capybara-screenshot"
+require "aquarium"
+require "logger"
+require "command_logger"
+require "test_logger"
 include Browsers
 
 HOST = ENV['HOST'] || 'local'
@@ -21,20 +25,10 @@ Capybara.app_host = RSpec.configuration.default_url
 Capybara.default_wait_time = RSpec.configuration.element_wait_sec
 Capybara.run_server = false;
 
-def SetDefaultBrowser
-  puts "SetDefaultBrowser"
-  Capybara.register_driver :selenium do |app|
-    if RSpec.configuration.remote_driver
-      Capybara::Selenium::Driver.new(app, :browser => GetRemoteBrowser())
-    end
-      Capybara::Selenium::Driver.new(app, :browser => RSpec.configuration.default_browser)
-  end
-end
 
-def GetRemoteBrowser
-    Selenium::WebDriver.for(:remote, :desired_capabilities => RSpec.configuration.default_browser)
-end
-SetDefaultBrowser()
+
+
+
 
 
 

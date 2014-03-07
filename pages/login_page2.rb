@@ -4,7 +4,8 @@ require 'signup_modal'
 include Pages
 
 module Pages
-  class LoginPageOld <BasePage
+  class LoginPageOld < SitePrism::Page
+    attr_reader :email_field,:password_field,:log_in_button,:join_now_link,:facebook_login_link,:keep_logged_in_cbx
     set_url '/login'
     set_url_matcher /onekingslane.com\/?/
 

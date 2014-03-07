@@ -6,18 +6,18 @@ module Core
     attr_accessor :find_args
 
     def initialize(*find_args)
-      puts 'Init element ' + find_args.to_s
+    #  puts 'Init element ' + find_args.to_s
       @find_args=*find_args
     end
     def element
-      puts 'Finding element'
+     # puts 'Finding element'
       page.find(*@find_args)
     end
     def checked?
       element.checked?
     end
     def click
-      puts 'Clicking element ' + @find_args.to_s
+     # puts 'Clicking element ' + @find_args.to_s
       element.click
     end
     def disabled?
