@@ -2,7 +2,6 @@ require 'site_prism'
 require 'register_modal'
 require 'login_page'
 include Pages
-include Core
 
 module Pages
   class SignupModal < SitePrism::Page
@@ -11,10 +10,14 @@ module Pages
       element :shop_now_button, :xpath, "//*[@type='submit']"
       element :login_button, 'a[data-panel=modalSignup-login]'
       element :okl_logo, '.intro'
+    element :test , '.test'
+    set_url ''
 
     def  EnterEmail username
-      @email_field.set username
-      @shop_now_button.click
+      if(!test.present?)
+      email_field.set username
+      shop_now_button.click
+      end
       RegisterModal.new
     end
 

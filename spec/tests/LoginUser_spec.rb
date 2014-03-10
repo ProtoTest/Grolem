@@ -7,38 +7,37 @@ feature 'User Login' do
   before(:all) do
     @rand = rand(1000).to_s
     @email = "testuser" + @rand + "@mailinator.com"
+    @email2 =  "testuser" + @rand + @rand + "@mailinator.com"
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
     @page = SignupModal.new
   end
+  before(:each) do
+    @page.load
+  end
 
   scenario 'Register a new account' do
-    @page.load
-    @page = @page.
+    @page.
         EnterEmail(@email).
         EnterInfo(@firstname,@lastname,@password)
   end
   scenario 'Log In' do
-    @page.load
     @page.
         Login.
-        LoginWithInfo(@email,@password).
-        ClosePanel
+        LoginWithInfo(@email,@password);
+    page.should have_text ""
   end
 
   scenario 'Change Your Mind' do
-    @page.load
     @page.
-        Login.
-        JoinNow.
-        EnterEmail('slkdfj@lsasdfasdfdasfdkfjslk.com').
+        EnterEmail(@email2).
         Back.
-        EnterEmail(@email)
+        EnterEmail(@email).
+        EnterInfo(@firstname,@lastname,@password)
   end
 
   scenario 'Register Email that already exists' do
-    @page.load
     @page.
         Login.
         JoinNow.
@@ -47,8 +46,8 @@ feature 'User Login' do
   end
 
   scenario 'Enter Blank Registration Info' do
-    @page.load
-    @page.EnterEmail(@email).
+    @page.
+        Login.
         EnterBlankInfo
     page.should have_text 'Please enter a first name.'
     page.should have_text 'Please enter a last name.'

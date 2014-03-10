@@ -5,7 +5,7 @@ include Pages
 describe 'home page' do
   it 'welcomes the user', js: true do
     RSpec.configure do |config|
-      puts config.default_browser
+      $logger.Log config.default_browser
     end
     @page = HomePage.new
         @page.load

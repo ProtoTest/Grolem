@@ -13,8 +13,11 @@ module Pages
       element :log_in_link, 'a', :text=> 'LOG IN'
 
     def EnterInfo firstname, lastname, password
-      first_name_field.set firstname
-      last_name_field.set lastname
+      if(first_name_field.present?)
+        first_name_field.set firstname
+        last_name_field.set lastname
+      end
+
       password_field.set password
       shop_today_sales_button.click
       WelcomeSplashPage.new
@@ -30,6 +33,7 @@ module Pages
 
     def Back
       back_link.click
+      SignupModal.new
     end
   end
 end

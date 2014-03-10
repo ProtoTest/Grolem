@@ -1,7 +1,6 @@
 require 'site_prism'
 require 'welcome_splash_page'
 require 'signup_modal'
-require 'element'
 include Pages
 
 module Pages
@@ -20,6 +19,13 @@ module Pages
       password_field.set password
       log_in_button.click
       WelcomeSplashPage.new
+    end
+
+    def LoginWithBlankInfo
+      email_field.set ''
+      password_field.set ''
+      log_in_button.click
+      LoginPage.new
     end
 
     def JoinNow

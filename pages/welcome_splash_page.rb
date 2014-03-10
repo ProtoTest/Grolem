@@ -1,7 +1,6 @@
 require 'site_prism'
 require 'register_modal'
 require 'login_page'
-require 'element'
 
 module Pages
   class WelcomeSplashPage < SitePrism::Page

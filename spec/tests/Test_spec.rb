@@ -10,14 +10,13 @@ feature 'UserLogin' do
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
     @page = SignupModal.new
-    visit RSpec.configuration.default_url
+    @page.load
   end
 
-  scenario 'LogIn' do
+  scenario 'Register' do
     @page.
-        Login.
-        LoginWithInfo(@email,@password).
-        ClosePanel
+        EnterEmail(@email).
+        EnterInfo(@firstname,@lastname,@password)
   end
 
 end

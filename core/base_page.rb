@@ -1,7 +1,7 @@
 module Pages
   class BasePage
     def initialize
-      puts "Base Page Called"
+      $logger.Log "Base Page Called"
     end
   end
 end
