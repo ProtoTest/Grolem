@@ -1,0 +1,23 @@
+
+User Login
+  Forgot Password (FAILED - 1)
+
+Failures:
+
+  1) User Login Forgot Password
+     Screenshot: ./screenshot_Forgot Password.png
+     HTML page: ./screenshot_Forgot Password.html
+     Failure/Error: @page.ClickText 'Click here to reset your password'
+     NoMethodError:
+       undefined method `click' for nil:NilClass
+     # ./pages/mailinator_page.rb:7:in `ClickText'
+     # ./spec/tests/Test_spec.rb:28:in `block (2 levels) in <top (required)>'
+
+Finished in 16.26 seconds
+1 example, 1 failure
+
+Failed examples:
+
+rspec ./spec/tests/Test_spec.rb:20 # User Login Forgot Password
+     Screenshot: ./screenshot_Forgot Password.png
+     HTML page: ./screenshot_Forgot Password.html

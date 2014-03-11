@@ -8,3 +8,4 @@ gem "capybara-screenshot",:group => :test
 gem "site_prism"
 gem "aquarium"
 gem "syntax"
+gem 'require_all'

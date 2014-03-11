@@ -1,6 +1,5 @@
-require 'spec_helper'
-require 'site_prism'
-require 'signup_modal'
+require_all 'pages'
+
 include Pages
 
 feature 'User Login' do
@@ -11,47 +10,60 @@ feature 'User Login' do
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
+    @createdemail = 'prototest@mailinator.com'
+    @facebookemail = 'bkitchener@prototest.com'
+    @facebookpassword = 'Qubit123!'
     @page = SignupModal.new
   end
-  before(:each) do
-    @page.load
-  end
 
-  scenario 'Register a new account' do
+  before(:each) { @page.load }
+
+  scenario 'Join as new User' do
     @page.
         EnterEmail(@email).
-        EnterInfo(@firstname,@lastname,@password)
+        EnterInfo(@firstname,@lastname,@password).ClosePanel.
   end
-  scenario 'Log In' do
+  scenario 'Login as Existing Member' do
     @page.
         Login.
-        LoginWithInfo(@email,@password);
+        LoginWithInfo(@email,@password).
     page.should have_text ""
   end
 
-  scenario 'Change Your Mind' do
-    @page.
-        EnterEmail(@email2).
-        Back.
-        EnterEmail(@email).
-        EnterInfo(@firstname,@lastname,@password)
+  scenario 'Login with Facebook' do
+    @page.Login.LoginWtihFacebook.LoginAs(facebookemail,@facebookpassword).LogOut
   end
 
-  scenario 'Register Email that already exists' do
-    @page.
-        Login.
-        JoinNow.
-        EnterEmailThatAlreadyExists('asdf@asdf.com').
-        EnterEmail(@email)
+  scenario 'Guest Pass' do
+    @page
+
   end
 
-  scenario 'Enter Blank Registration Info' do
-    @page.
-        Login.
-        EnterBlankInfo
-    page.should have_text 'Please enter a first name.'
-    page.should have_text 'Please enter a last name.'
-    page.should have_text 'Please enter a password between 6-16 characters long.'
+  scenario 'Forgot Password' do
+    @page = LoginPage.new
+    @page.load
+  end
+
+  scenario 'Join -b' do
+    @page
+
+  end
+
+  scenario 'Join -c' do
+    @page
+
+  end
+  scenario 'Keep me logged in ' do
+    @page
+
+  end
+  scenario 'Invite Friends' do
+    @page
+
+  end
+  scenario '/Login' do
+    @page
+
   end
 end
 

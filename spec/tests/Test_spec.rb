@@ -1,23 +1,38 @@
 require 'spec_helper'
-require 'signup_modal'
+require 'login_page'
+require 'mailinator_page'
 include Pages
 
-feature 'UserLogin' do
+
+feature 'User Login' do
   before(:all) do
     @rand = rand(1000).to_s
     @email = "testuser" + @rand + "@mailinator.com"
+    @email2 =  "testuser" + @rand + @rand + "@mailinator.com"
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
-    @page = SignupModal.new
+    @createdemail = 'prototest@mailinator.com'
+    @facebookemail = 'bkitchener@prototest.com'
+    @facebookpassword = 'Proto123!'
+  end
+
+  scenario 'Forgot Password' do
+    #@page = LoginPage.new
+    #@page.load
+    #@page.ForgotPassword @createdemail
+
+    @page = MailinatorPage.new
     @page.load
-  end
+    @page.ClickText 'One Kings Lane'
+    @page.ClickText 'Click here to reset your password'
+    @page = ResetPasswordPage.new
+    @password << "new"
+    @page.ResetPasswordTo @password
 
-  scenario 'Register' do
-    @page.
-        EnterEmail(@email).
-        EnterInfo(@firstname,@lastname,@password)
-  end
+    @page = LoginPage.new
+    @page.LoginWithInfo(@createdemail, @password).LogOut
 
+  end
 end
 

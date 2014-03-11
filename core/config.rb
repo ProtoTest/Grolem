@@ -18,17 +18,18 @@ RSpec.configure do |config|
 
   end
 
+  config.after(:all) do
+
+  end
+
   config.before(:each) do
     $logger = CommandLogger.new
     path = example.metadata[:description]
       config.test_name = path
-    @session = Capybara::Session.new(:selenium)
-    puts 'opened'
   end
 
   config.after(:each) do
-    @session.driver.browser.quit
-    puts 'closed'
+
   end
 end
 

@@ -9,3 +9,6 @@ module Capybara
     end
   end
 end
+
+
+

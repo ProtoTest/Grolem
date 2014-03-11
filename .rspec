@@ -1,6 +1,2 @@
 --color
 -fd
---format html
---out rspec_results.html
---format documentation
---out rspec_results.log

@@ -1,6 +1,7 @@
 require 'site_prism'
 require 'register_modal'
-require 'login_page'
+require 'login_modal'
+require 'home_page'
 
 module Pages
   class WelcomeSplashPage < SitePrism::Page
@@ -17,10 +18,12 @@ module Pages
 
     def ClosePanel
       close_button.click
+      HomePage.new
     end
 
     def ShopTodaysSales
       shop_todays_sales.click
+      HomePage.new
     end
   end
 end

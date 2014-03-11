@@ -1,7 +1,6 @@
 require 'site_prism'
 require 'register_modal'
-require 'login_page'
-include Pages
+require 'login_modal'
 
 module Pages
   class SignupModal < SitePrism::Page
@@ -14,8 +13,8 @@ module Pages
     set_url ''
 
     def  EnterEmail username
-      if(!test.present?)
-      email_field.set username
+      if(has_email_field?)
+        email_field.set username
       shop_now_button.click
       end
       RegisterModal.new
@@ -29,7 +28,7 @@ module Pages
 
     def Login
       login_button.click
-      LoginPage.new
+      LoginModal.new
     end
   end
 end

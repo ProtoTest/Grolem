@@ -13,7 +13,7 @@ module Pages
       element :log_in_link, 'a', :text=> 'LOG IN'
 
     def EnterInfo firstname, lastname, password
-      if(first_name_field.present?)
+      if(has_first_name_field?)
         first_name_field.set firstname
         last_name_field.set lastname
       end
