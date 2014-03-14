@@ -1,6 +1,0 @@
-
-User Login
-  Invite Friends
-
-Finished in 50.92 seconds
-1 example, 0 failures
