@@ -3,18 +3,18 @@ require_all 'pages'
 include Pages
 
 feature 'User Login' do
-  before(:all) do
-    @rand = rand(1000).to_s
-    @email = "testuser" + @rand + "@mailinator.com"
-    @email2 =  "testuser" + @rand + @rand + "@mailinator.com"
-    @password = 'Proto123'
-    @firstname = 'TestUser'
-    @lastname = 'ProtoTest'
-    @createdemail = 'prototest@mailinator.com'
-    @facebookemail = 'bkitchener@prototest.com'
-    @facebookpassword = 'Qubit123!'
-    @page = SignupModal.new
-  end
+    before(:all) do
+      @rand = rand(1000).to_s
+      @email = "testuser" + @rand + "@mailinator.com"
+      @email2 =  "testuser" + @rand + @rand + "@mailinator.com"
+      @password = 'Proto123'
+      @firstname = 'TestUser'
+      @lastname = 'ProtoTest'
+      @createdemail = 'prototest@mailinator.com'
+      @facebookemail = 'bkitchener@prototest.com'
+      @facebookpassword = 'Qubit123!'
+      @page = SignupModal.new
+    end
 
   before(:each) { @page.load }
 
@@ -25,29 +25,39 @@ feature 'User Login' do
   end
   scenario 'Login as Existing Member' do
     @page.
-        Login.
+        GoToLoginPage.
         LoginWithInfo(@email,@password).
     page.should have_text ""
   end
 
   scenario 'Login with Facebook' do
-    @page.Login.LoginWtihFacebook.LoginAs(facebookemail,@facebookpassword).LogOut
+    @page.GoToLoginPage.GoToFacebookLogin.LoginAs(facebookemail,@facebookpassword).LogOut
   end
 
-  scenario 'Guest Pass' do
-    @page
-
-  end
+    scenario 'Guest Pass' do
+      @page = GuestHomePage.new
+      @page.load
+      @page.logged_out_header.should be_all_there
+    end
 
   scenario 'Forgot Password' do
     @page = LoginPage.new
     @page.load
-  end
+    @page.ForgotPassword @createdemail
+    sleep 5
+    @page = MailinatorPage.new
+    @page.load
+    @page.ClickMailWithText 'Please Reset Your One Kings Lane Password'
+    @page.ClickBodyText 'Click here to reset your password'
+    @page = ResetPasswordPage.new
+
+    @page.ResetPasswordTo(@password).LogOut
+    end
 
   scenario 'Join -b' do
-    @page
+      @page
 
-  end
+    end
 
   scenario 'Join -c' do
     @page

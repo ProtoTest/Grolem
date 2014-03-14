@@ -12,6 +12,7 @@ module Pages
     element :test , '.test'
     set_url ''
 
+
     def  EnterEmail username
       if(has_email_field?)
         email_field.set username
@@ -26,8 +27,10 @@ module Pages
       SignupModal.new
     end
 
-    def Login
+    def GoToLoginPage
+      #sleep 2
       login_button.click
+      #sleep 2
       LoginModal.new
     end
   end

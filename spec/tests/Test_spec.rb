@@ -7,32 +7,31 @@ include Pages
 feature 'User Login' do
   before(:all) do
     @rand = rand(1000).to_s
-    @email = "testuser" + @rand + "@mailinator.com"
-    @email2 =  "testuser" + @rand + @rand + "@mailinator.com"
-    @password = 'Proto123'
-    @firstname = 'TestUser'
-    @lastname = 'ProtoTest'
-    @createdemail = 'prototest@mailinator.com'
-    @facebookemail = 'bkitchener@prototest.com'
-    @facebookpassword = 'Proto123!'
+    @username = "testuser" + @rand
+    @email =  @username + "@mailinator.com"
+    @email2 =  @username + @rand + "@mailinator.com"
+    @password = "Proto123!"
+    @firstname = "TestUser"
+    @lastname = "ProtoTest"
+    @createdemail = "prototest@mailinator.com"
+    @facebookemail = "bkitchener@prototest.com"
   end
-
-  scenario 'Forgot Password' do
-    #@page = LoginPage.new
-    #@page.load
-    #@page.ForgotPassword @createdemail
+  scenario 'Invite Friends' do
+    @page = SignupModal.new
+    @page.load
+    @page.
+        GoToLoginPage.
+        LoginWithInfo @facebookemail, @password
+    @page = InvitePage.new
+    @page.load
+    @page.SendInviteToEmails @email, 'this is the message i am sending'
 
     @page = MailinatorPage.new
-    @page.load
-    @page.ClickText 'One Kings Lane'
-    @page.ClickText 'Click here to reset your password'
-    @page = ResetPasswordPage.new
-    @password << "new"
-    @page.ResetPasswordTo @password
+    visit "http://mailinator.com/inbox.jsp?to=" + @username
 
-    @page = LoginPage.new
-    @page.LoginWithInfo(@createdemail, @password).LogOut
-
+    sleep 20
+    @page.ClickMailWithText 'shop at One Kings Lane'
+    @page.ClickXpath '//img[@alt="Accept Invitation"]'
   end
 end
 

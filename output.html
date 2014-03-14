@@ -282,28 +282,12 @@ a {
 <div id="div_group_1" class="example_group passed">
   <dl style="margin-left: 0px;">
   <dt id="example_group_1" class="passed">User Login</dt>
-    <script type="text/javascript">makeRed('rspec-header');</script>
-    <script type="text/javascript">makeRed('div_group_1');</script>
-    <script type="text/javascript">makeRed('example_group_1');</script>
     <script type="text/javascript">moveProgressBar('100.0');</script>
-    <dd class="example failed">
-      <span class="failed_spec_name">Forgot Password</span>
-      <span class="duration">16.17903s</span>
-      <div class="failure" id="failure_1">
-        <div class="message"><pre>undefined method `click' for nil:NilClass</pre></div>
-        <div class="backtrace"><pre>./pages/mailinator_page.rb:7:in `ClickText'
-./spec/tests/Test_spec.rb:28:in `block (2 levels) in &lt;top (required)&gt;'</pre></div>
-    <pre class="ruby"><code><span class="linenum">5</span>
-<span class="linenum">6</span>    <span class="keyword">def </span><span class="method">ClickText</span> <span class="ident">text</span>
-<span class="offending"><span class="linenum">7</span>      <span class="ident">find_all</span><span class="punct">(</span><span class="symbol">:xpath</span><span class="punct">,</span> <span class="punct">&quot;</span><span class="string">//*[contains(text(),'</span><span class="punct">&quot;</span> <span class="punct">+</span> <span class="ident">text</span> <span class="punct">+</span> <span class="punct">&quot;</span><span class="string">')]</span><span class="punct">&quot;)[</span><span class="number">0</span><span class="punct">].</span><span class="ident">click</span></span>
-<span class="linenum">8</span>      <span class="constant">self</span>
-<span class="linenum">9</span>    <span class="keyword">end</span></code></pre><table border="1"><th>Command Log</th><tr><td style="color:Black">visit ["http://mailinator.com/inbox.jsp?to=prototest"]</td></tr><tr><td style="color:Black">all [:xpath, "//*[contains(text(),'One Kings Lane')]"]</td></tr><tr><td style="color:Black">click []</td></tr><tr><td style="color:Black">all [:xpath, "//*[contains(text(),'Click here to reset your password')]"]</td></tr><tr><td style="color:Black">all [:xpath, "/html/body/*"]</td></tr></table><table border="1"><th>Test Artifacts</th><tr><td><a href="screenshot_Forgot Password.png">Screenshot Png</a></td></tr><tr><td><a href="screenshot_Forgot Password.html">Source Html</a></td></tr><tr><td><a href="output.txt">Documentation</a></td></tr></span></table>
-      </div>
-    </dd>
+    <dd class="example passed"><span class="passed_spec_name">Invite Friends</span><span class='duration'>50.90539s</span></dd>
   </dl>
 </div>
-<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>16.25605 seconds</strong>";</script>
-<script type="text/javascript">document.getElementById('totals').innerHTML = "1 example, 1 failure";</script>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>50.91840 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "1 example, 0 failures";</script>
 </div>
 </div>
 </body>

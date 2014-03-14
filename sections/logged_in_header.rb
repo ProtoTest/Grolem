@@ -1,4 +1,5 @@
 require_all 'pages'
+require_all 'sections'
 
 module Sections
   include Pages
@@ -19,27 +20,27 @@ module Sections
 
     element :shopping_cart_link, '#micro-cart-container'
 
-    def ClickAllSales
+    def GoToAllSales
       all_sales_link.click
       HomePage.new
     end
 
-    def ClickLogo
+    def GoToLogo
       logo_link.click
       HomePage.new
     end
 
-    def ClickVintage
+    def GoToVintage
       vintage_link.click
       TodaysArrivalsPage.new
     end
 
-    def ClickUpcomingSales
+    def GoToUpcoming
       upcoming_sales.link.click
       CalendarPage.new
     end
 
-    def ClickStyleBlog
+    def GoToStyleBlog
       style_blog.click
       LiveLoveHomePage.new
     end

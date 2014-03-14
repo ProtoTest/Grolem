@@ -18,7 +18,9 @@ module Pages
     def LoginWithInfo email, password
       email_field.set email
       password_field.set password
+      sleep 2
       log_in_button.click
+      sleep 2
       HomePage.new
     end
 
@@ -34,7 +36,8 @@ module Pages
       SignupModal.new
     end
 
-    def LoginWtihFacebook
+    def GoToFacebookLogin
+      sleep 2
       facebook_login_link.click
       FacebookLoginPage.new
     end

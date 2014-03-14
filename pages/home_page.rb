@@ -6,10 +6,10 @@ include Sections
 module Pages
   class HomePage<SitePrism::Page
     set_url "/"
-    section :header, LoggedInHeader, 'header'
+    section :logged_in_header, LoggedInHeader, 'header'
 
     def LogOut
-      header.LogOut
+      logged_in_header.LogOut
       LoginPage.new
     end
   end
