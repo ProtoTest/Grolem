@@ -29,7 +29,6 @@ feature 'User Login' do
     @page = MailinatorPage.new
     visit "http://mailinator.com/inbox.jsp?to=" + @username
 
-    sleep 20
     @page.ClickMailWithText 'shop at One Kings Lane'
     @page.ClickXpath '//img[@alt="Accept Invitation"]'
   end

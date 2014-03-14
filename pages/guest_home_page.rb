@@ -7,7 +7,7 @@ module Pages
   class GuestHomePage<SitePrism::Page
 
     set_url "/?f=m"
-    section :logged_out_header, LoggedOutHeader, 'header'
+    section :header, LoggedOutHeader, 'header'
 
   end
 

@@ -52,9 +52,14 @@ module Sections
     end
 
     def SearchFor text
-      search_fieid.set text
+      search_field.set text
       search_button.click
-      LoginPage.new
+      SearchResultsPage.new
+    end
+
+    def GoToCart
+      shopping_cart_link.click
+      ShoppingCartPage.new
     end
   end
 end

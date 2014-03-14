@@ -3,12 +3,11 @@ feature 'User Login' do
       @rand = rand(1000).to_s
       @email = "testuser" + @rand + "@mailinator.com"
       @email2 =  "testuser" + @rand + @rand + "@mailinator.com"
-      @password = 'Proto123'
+      @password = 'Proto123!'
       @firstname = 'TestUser'
       @lastname = 'ProtoTest'
       @createdemail = 'prototest@mailinator.com'
       @facebookemail = 'bkitchener@prototest.com'
-      @facebookpassword = 'Qubit123!'
       @page = SignupModal.new
     end
 
@@ -32,7 +31,7 @@ feature 'User Login' do
     scenario 'Guest Pass' do
       @page = GuestHomePage.new
       @page.load
-      @page.logged_out_header.should be_all_there
+      @page.header.should be_all_there
     end
 
   scenario 'Forgot Password' do
@@ -73,6 +72,7 @@ feature 'User Login' do
         LoginWithInfo @facebookemail, @password
     @page = InvitePage.new
     @page.load
+    @page.should be_all_there
     @page.SendInviteToEmails @email, 'this is the message i am sending'
 
     @page = MailinatorPage.new
