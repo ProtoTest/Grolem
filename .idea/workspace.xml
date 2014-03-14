@@ -2,27 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e3cd8d5-4fdd-443d-afc9-a496931a93a7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Run_spec__Test_spec___Grolem.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sections/alert_bar.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/guest_home_page.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/invite_page.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sections/logged_out_header.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/verification_error.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshot_Forgot Password.png" afterPath="$PROJECT_DIR$/screenshot_Forgot Password.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Grolem.iml" afterPath="$PROJECT_DIR$/.idea/Grolem.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/join_b_page.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/join_c_page.rb" />
+      <change type="DELETED" beforePath="C:\Users\Brian\Documents\GitHub\Grolem\screenshot_Change Your Mind.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Brian\Documents\GitHub\Grolem\screenshot_Change Your Mind.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Brian\Documents\GitHub\Grolem\screenshot_Enter Blank Registration Info.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Brian\Documents\GitHub\Grolem\screenshot_Enter Blank Registration Info.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Brian\Documents\GitHub\Grolem\screenshot_Forgot Password.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Brian\Documents\GitHub\Grolem\screenshot_Forgot Password.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Brian\Documents\GitHub\Grolem\screenshot_Guest Pass.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Brian\Documents\GitHub\Grolem\screenshot_Guest Pass.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Brian\Documents\GitHub\Grolem\screenshot_Invite Friends.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Brian\Documents\GitHub\Grolem\screenshot_Invite Friends.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Brian\Documents\GitHub\Grolem\screenshot_Login with Facebook.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Brian\Documents\GitHub\Grolem\screenshot_Login with Facebook.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Brian\Documents\GitHub\Grolem\screenshot_Register a new account.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Brian\Documents\GitHub\Grolem\screenshot_Register a new account.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Brian\Documents\GitHub\Grolem\screenshot_Register.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Brian\Documents\GitHub\Grolem\screenshot_Register.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/tests/LoginUser_spec.rb" afterPath="$PROJECT_DIR$/spec/tests/LoginUser_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/tests/Test_spec.rb" afterPath="$PROJECT_DIR$/spec/tests/Test_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/config.rb" afterPath="$PROJECT_DIR$/core/config.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/home_page.rb" afterPath="$PROJECT_DIR$/pages/home_page.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sections/logged_in_header.rb" afterPath="$PROJECT_DIR$/sections/logged_in_header.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/login_modal.rb" afterPath="$PROJECT_DIR$/pages/login_modal.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/mailinator_page.rb" afterPath="$PROJECT_DIR$/pages/mailinator_page.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/login_page.rb" afterPath="$PROJECT_DIR$/pages/login_page.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output.html" afterPath="$PROJECT_DIR$/output.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output.txt" afterPath="$PROJECT_DIR$/output.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/reset_password_page.rb" afterPath="$PROJECT_DIR$/pages/reset_password_page.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshot_Forgot Password.html" afterPath="$PROJECT_DIR$/screenshot_Forgot Password.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/signup_modal.rb" afterPath="$PROJECT_DIR$/pages/signup_modal.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Grolem.iws" />
@@ -35,9 +37,10 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Grolem@Run_spec__LoginUser_spec___Grolem.coverage" NAME="Run spec 'LoginUser_spec': Grolem Coverage Results" MODIFIED="1394573921307" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Grolem" />
-    <SUITE FILE_PATH="coverage/Grolem@Run_spec__Test_spec___Grolem.coverage" NAME="Run spec 'Test_spec': Grolem Coverage Results" MODIFIED="1394822381805" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Grolem" />
+    <SUITE FILE_PATH="coverage/Grolem@Run_spec__LoginUser_spec___Grolem.coverage" NAME="Run spec 'LoginUser_spec': Grolem Coverage Results" MODIFIED="1394830476902" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Grolem" />
+    <SUITE FILE_PATH="coverage/Grolem@Run_spec__Test_spec___Grolem.coverage" NAME="Run spec 'Test_spec': Grolem Coverage Results" MODIFIED="1394830837755" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Grolem" />
     <SUITE FILE_PATH="coverage/Grolem@spec_helper.coverage" NAME="spec_helper Coverage Results" MODIFIED="1394563637070" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/spec" MODULE_NAME="Grolem" />
+    <SUITE FILE_PATH="coverage/Grolem@join_b_page.coverage" NAME="join_b_page Coverage Results" MODIFIED="1394829657843" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pages" MODULE_NAME="Grolem" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -54,88 +57,16 @@
       <file leaf-file-name="Test_spec.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spec/tests/Test_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="503" selection-end="955" vertical-scroll-proportion="0.34510434" vertical-offset="108" max-vertical-offset="731">
+            <state line="29" column="51" selection-start="825" selection-end="825" vertical-scroll-proportion="0.6179775" vertical-offset="108" max-vertical-offset="731">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="facebook_login_page.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/facebook_login_page.rb">
+      <file leaf-file-name="reset_password_page.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/reset_password_page.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="0" selection-start="441" selection-end="441" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="custom_formatter.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/custom_formatter.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="invite_page.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/invite_page.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="266" selection-end="279" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="home_page.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/home_page.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="47" selection-start="216" selection-end="224" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginUser_spec.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spec/tests/LoginUser_spec.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="0" selection-start="1477" selection-end="1521" vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="1445">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/config.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="24" selection-start="1161" selection-end="1161" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="884">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="signup_modal.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/signup_modal.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="11" selection-start="813" selection-end="814" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login_modal.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/login_modal.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="13" selection-start="1007" selection-end="1007" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="850">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="kernel.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_HOME_DIR$/rubystubs193/kernel.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="7" selection-start="200" selection-end="200" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="33218">
+            <state line="8" column="1" selection-start="322" selection-end="322" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
               <folding />
             </state>
           </provider>
@@ -167,23 +98,25 @@
         <option value="$PROJECT_DIR$/pages/welcome_splash_page.rb" />
         <option value="$PROJECT_DIR$/components/logged_in_header.rb" />
         <option value="$PROJECT_DIR$/pages/facebook_login_page.rb" />
-        <option value="$PROJECT_DIR$/pages/login_page.rb" />
         <option value="$PROJECT_DIR$/spec/spec_helper.rb" />
         <option value="$PROJECT_DIR$/core/verification_error.rb" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="C:/Ruby193/lib/ruby/gems/1.9.1/gems/site_prism-2.6/lib/site_prism/page.rb" />
         <option value="$PROJECT_DIR$/pages/reset_password_page.rb" />
-        <option value="$PROJECT_DIR$/pages/home_page.rb" />
         <option value="$PROJECT_DIR$/pages/guest_home_page.rb" />
         <option value="$PROJECT_DIR$/sections/alert_bar.rb" />
         <option value="$PROJECT_DIR$/sections/logged_out_header.rb" />
         <option value="$PROJECT_DIR$/sections/logged_in_header.rb" />
         <option value="$PROJECT_DIR$/pages/mailinator_page.rb" />
-        <option value="$PROJECT_DIR$/spec/tests/LoginUser_spec.rb" />
         <option value="$PROJECT_DIR$/pages/invite_page.rb" />
         <option value="$PROJECT_DIR$/pages/signup_modal.rb" />
         <option value="$PROJECT_DIR$/core/config.rb" />
         <option value="$PROJECT_DIR$/pages/login_modal.rb" />
+        <option value="$PROJECT_DIR$/pages/home_page.rb" />
+        <option value="$PROJECT_DIR$/pages/join_b_page.rb" />
+        <option value="$PROJECT_DIR$/pages/join_c_page.rb" />
+        <option value="$PROJECT_DIR$/pages/login_page.rb" />
+        <option value="$PROJECT_DIR$/spec/tests/LoginUser_spec.rb" />
         <option value="$PROJECT_DIR$/spec/tests/Test_spec.rb" />
       </list>
     </option>
@@ -205,7 +138,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="0" />
+    <option name="STATE" value="1" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
@@ -325,6 +258,7 @@
     <property name="options.searchVisible" value="true" />
     <property name="recentsLimit" value="5" />
     <property name="SearchEverywhereHistory" value="" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RunManager" selected="RSpec.Run spec 'Test_spec': Grolem">
     <configuration default="false" name="Run spec 'LoginUser_spec': Grolem" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
@@ -371,6 +305,24 @@
       <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
       <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
       <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/spec/spec_helper.rb" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="join_b_page" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+      <module name="Grolem" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/pages" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/pages/join_b_page.rb" />
       <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
       <RunnerSettings RunnerId="RubyRunner" />
       <ConfigurationWrapper RunnerId="RubyRunner" />
@@ -477,15 +429,17 @@
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="SETTINGS_VERSION" VALUE="2" />
       <method />
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="RSpec.Run spec 'Test_spec': Grolem" />
       <item index="1" class="java.lang.String" itemvalue="RSpec.Run spec 'LoginUser_spec': Grolem" />
       <item index="2" class="java.lang.String" itemvalue="Ruby.spec_helper" />
+      <item index="3" class="java.lang.String" itemvalue="Ruby.join_b_page" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Ruby.spec_helper" />
-        <item index="1" class="java.lang.String" itemvalue="RSpec.Run spec 'LoginUser_spec': Grolem" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="RSpec.Run spec 'LoginUser_spec': Grolem" />
+        <item index="1" class="java.lang.String" itemvalue="Ruby.join_b_page" />
+        <item index="2" class="java.lang.String" itemvalue="Ruby.spec_helper" />
       </list>
     </recent_temporary>
   </component>
@@ -500,7 +454,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -508,11 +462,11 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32887974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2734375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2734375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3987667" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33299074" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33299074" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -545,12 +499,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/spec/tests/Test_spec.rb</url>
-          <line>24</line>
+          <line>12</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/spec/tests/Test_spec.rb</url>
-          <line>23</line>
+          <line>11</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
@@ -568,20 +522,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pages/register_modal.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="0" selection-start="1023" selection-end="1023" vertical-scroll-proportion="0.0" vertical-offset="578" max-vertical-offset="748">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/spec_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="21" selection-start="762" selection-end="762" vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="1343">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/welcome_splash_page.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="7" selection-start="606" selection-end="606" vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="544">
@@ -760,20 +700,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Ruby193/lib/ruby/gems/1.9.1/gems/require_all-1.3.2/lib/require_all.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="0" selection-start="3257" selection-end="3257" vertical-scroll-proportion="0.0" vertical-offset="1696" max-vertical-offset="4811">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/login_page.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="8" selection-start="842" selection-end="842" vertical-scroll-proportion="0.0" vertical-offset="19" max-vertical-offset="646">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sections/logged_in_header.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="42" column="12" selection-start="1078" selection-end="1078" vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1122">
@@ -798,13 +724,6 @@
     <entry file="file://$PROJECT_DIR$/pages/welcome_splash_page.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="7" selection-start="670" selection-end="670" vertical-scroll-proportion="0.6507177" vertical-offset="0" max-vertical-offset="627">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/reset_password_page.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="8" selection-start="300" selection-end="300" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
           <folding />
         </state>
       </provider>
@@ -844,13 +763,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/home_page.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="47" selection-start="216" selection-end="224" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/rubystubs193/kernel.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="7" selection-start="200" selection-end="200" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="33218">
@@ -858,23 +770,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/spec_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="19" selection-start="746" selection-end="746" vertical-scroll-proportion="0.0" vertical-offset="311" max-vertical-offset="1003">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/invite_page.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="0" selection-start="266" selection-end="279" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/tests/LoginUser_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="0" selection-start="1477" selection-end="1521" vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="1445">
           <folding />
         </state>
       </provider>
@@ -893,13 +791,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/signup_modal.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="11" selection-start="813" selection-end="814" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/facebook_login_page.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="0" selection-start="441" selection-end="441" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
@@ -914,9 +805,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://C:/Ruby193/lib/ruby/gems/1.9.1/gems/require_all-1.3.2/lib/require_all.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="0" selection-start="3257" selection-end="3257" vertical-scroll-proportion="0.0" vertical-offset="1696" max-vertical-offset="4811">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/spec_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="19" selection-start="746" selection-end="746" vertical-scroll-proportion="0.0" vertical-offset="311" max-vertical-offset="1003">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/signup_modal.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="8" selection-start="90" selection-end="90" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/join_c_page.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="136">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/join_b_page.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="53" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="136">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/login_page.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="10" selection-start="797" selection-end="797" vertical-scroll-proportion="0.0" vertical-offset="23" max-vertical-offset="646">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/home_page.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="8" selection-start="227" selection-end="227" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/tests/LoginUser_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="27" selection-start="1736" selection-end="1736" vertical-scroll-proportion="0.0" vertical-offset="702" max-vertical-offset="1649">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/reset_password_page.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="1" selection-start="322" selection-end="322" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/spec/tests/Test_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="503" selection-end="955" vertical-scroll-proportion="0.34510434" vertical-offset="108" max-vertical-offset="731">
+        <state line="29" column="51" selection-start="825" selection-end="825" vertical-scroll-proportion="0.6179775" vertical-offset="108" max-vertical-offset="731">
           <folding />
         </state>
       </provider>

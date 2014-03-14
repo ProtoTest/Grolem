@@ -7,7 +7,7 @@ module Pages
 
     element :email_field, '#email'
     element :password_field,'#password'
-    element :log_in_button , 'input[name=submit]', :text => "LOG IN"
+    element :log_in_button , 'input[value=login]'
     element :join_now_link , 'img[alt=Join Now]'
     element :facebook_login_link , 'a',:text=>'Login with Facebook'
     element :keep_logged_in_cbx,'#remember'
