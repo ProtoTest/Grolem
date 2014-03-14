@@ -22,3 +22,4 @@ doc/
 *.txt
 *.png
 test
+.idea
