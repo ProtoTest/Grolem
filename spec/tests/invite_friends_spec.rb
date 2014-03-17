@@ -3,12 +3,12 @@ require 'rspec'
 feature 'Invite Friends' do
   before(:all) do
     @rand = rand(1000).to_s
-    @email = "testuser" + @rand + "@mailinator.com"
-    @email2 =  "testuser" + @rand + @rand + "@mailinator.com"
+    @newemail = "testuser" + @rand + "@mailinator.com"
+    @newemail2 =  "testuser" + @rand + @rand + "@mailinator.com"
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
-    @createdemail = 'prototest@mailinator.com'
+    @newemail = 'prototest@mailinator.com'
     @facebookemail = 'bkitchener@prototest.com'
     @facebookpassword = 'Qubit123!'
     @page = LoginPage.new
@@ -27,10 +27,10 @@ feature 'Invite Friends' do
     @page = InvitePage.new
     @page.load
     @page.should be_all_there
-    @page.SendInviteToEmails @email, 'this is the message i am sending'
+    @page.SendInviteToEmails @newemail, 'this is the message i am sending'
 
     @page = MailinatorPage.new
-    visit "http://mailinator.com/inbox.jsp?to=" + @username
+    visit "http://mailinator.com/inbox.jsp?to=" + @rand_username
     @page.ClickMailWithText 'shop at One Kings Lane'
     @page.should have_text "this is the message i am sending"
     @page.ClickXpath '//img[@alt="Accept Invitation"]'

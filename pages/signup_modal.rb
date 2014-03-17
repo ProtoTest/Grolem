@@ -14,10 +14,8 @@ module Pages
 
 
     def  EnterEmail username
-      if(has_email_field?)
-        email_field.set username
+      email_field.set username
       shop_now_button.click
-      end
       RegisterModal.new
     end
 

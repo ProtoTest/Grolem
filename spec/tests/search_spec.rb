@@ -3,12 +3,12 @@ require 'spec_helper'
 feature 'Search' do
   before(:all) do
     @rand = rand(1000).to_s
-    @email = "testuser" + @rand + "@mailinator.com"
-    @email2 =  "testuser" + @rand + @rand + "@mailinator.com"
+    @newemail = "testuser" + @rand + "@mailinator.com"
+    @newemail2 =  "testuser" + @rand + @rand + "@mailinator.com"
     @password = 'Proto123!'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
-    @createdemail = 'prototest@mailinator.com'
+    @newemail = 'prototest@mailinator.com'
     @facebookemail = 'bkitchener@prototest.com'
   end
 
