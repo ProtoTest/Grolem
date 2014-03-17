@@ -1,5 +1,3 @@
-require_all 'pages'
-
 module Sections
   include Pages
   class LoggedOutHeader < SitePrism::Section

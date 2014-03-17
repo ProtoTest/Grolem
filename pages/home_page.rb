@@ -1,11 +1,10 @@
-require "site_prism"
-require './pages/login_modal'
 require './sections/logged_in_header'
 
 module Pages
   class HomePage<SitePrism::Page
+    include Sections
     set_url "/"
-    section :header, Sections::LoggedInHeader, 'header'
+    section :header, LoggedInHeader, '.okl-header'
 
     def LogOut
       header.LogOut

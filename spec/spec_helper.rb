@@ -24,7 +24,7 @@ require "syntax"
 require 'require_all'
 require 'site_prism'
 require_all 'pages'
-require_all 'sections'
+
 
 include Browsers
 

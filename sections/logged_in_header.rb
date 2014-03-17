@@ -1,6 +1,3 @@
-require_all 'pages'
-require_all 'sections'
-
 module Sections
   include Pages
   class LoggedInHeader < SitePrism::Section
@@ -18,7 +15,7 @@ module Sections
     element :my_account_link,'a', :text=>"My Account"
     element :log_out_link, 'a', :text=>"LOG OUT"
 
-    element :shopping_cart_link, '#micro-cart-container'
+    element :shopping_cart_link, '.cart'
 
     def GoToAllSales
       all_sales_link.click
