@@ -13,15 +13,21 @@ feature 'User Login' do
     @password = "Proto123!"
     @firstname = "TestUser"
     @lastname = "ProtoTest"
-    @newemail = "prototest@mailinator.com"
+    @email = "prototest@mailinator.com"
     @facebookemail = "bkitchener@prototest.com"
   end
+
   scenario 'Join as new User' do
-    @page = SignupModal.new
+    @page = LoginPage.new
     @page.load
-    @page.
-        EnterEmail(@newemail).
-        EnterInfo(@firstname,@lastname,@password).ClosePanel
+    @page = @page.LoginWithInfo @facebookemail, @password
+    @page = @page.header.SearchFor 'table'
+    @page = @page.GoToFirstProduct.AddToCart
+    @page = ShoppingCartPage.new
+    @page.load
+    sleep (60 * 10)
+    @page.should have_cart_timed_out_message
+    @page.should have_item_reservation_duration text=>'00:00'
   end
 end
 

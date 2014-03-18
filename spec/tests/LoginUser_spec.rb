@@ -16,7 +16,11 @@ feature 'User Login' do
     @page = SignupModal.new
   end
 
-  before(:each) { @page.load }
+  before(:each) do
+    @page.load
+
+  end
+end
 
   scenario 'Join as new User' do
     @page.

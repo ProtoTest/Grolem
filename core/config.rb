@@ -28,6 +28,11 @@ RSpec.configure do |config|
     $logger = CommandLogger.new
     path = example.metadata[:description]
       config.test_name = path
+
+    page.driver.browser.manage.delete_cookie('ewokAuth')
+    page.driver.browser.manage.delete_cookie('ewokAuthGuestPass')
+    page.driver.browser.manage.delete_cookie('keepLogin')
+    page.driver.browser.manage.delete_cookie('is_member')
   end
 
   config.after(:each) do
