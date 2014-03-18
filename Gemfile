@@ -8,4 +8,5 @@ gem "capybara-screenshot"
 gem "site_prism"
 gem "aquarium"
 gem "syntax"
+gem 'ruby-debug-ide'
 gem 'require_all'
