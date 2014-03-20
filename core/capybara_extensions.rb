@@ -6,9 +6,12 @@ module Capybara
       def present?
          page.has_selector? @query.locator
       end
+
+      def set_checked(value)
+        if (self.checked? and not value) or (not self.checked? and value)
+          self.click
+        end
+      end
     end
   end
 end
-
-
-

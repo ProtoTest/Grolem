@@ -19,6 +19,7 @@ require "command_logger"
 require 'config'
 require "capybara-screenshot"
 require 'capybara-screenshot/rspec'
+require 'capybara_extensions'
 require "aquarium"
 require "syntax"
 require 'require_all'
@@ -69,19 +70,6 @@ def remove_all_items_from_cart
   page = ShoppingCartPage.new
   page.load
   page.RemoveAllItemsFromCart
-end
-
-# ADD SOME METHODS TO THE CAPYBARA ELEMENT CLASS
-module Capybara
-  module Node
-    class Element < Base
-      def set_checked(value)
-        if (self.checked? and not value) or (not self.checked? and value)
-          self.click
-        end
-      end
-    end
-  end
 end
 
 
