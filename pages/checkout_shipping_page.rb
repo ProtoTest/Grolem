@@ -9,23 +9,23 @@ module Pages
     element :state_dropdown, '#zone'
     element :zipcode_field, '#postcode'
     element :phone_number_field, '#phonenumber'
-    element :continue_button, '.submits-container'
+    element :continue_btn, :xpath, "//input[@value='Continue >']"
     set_url '/checkout/address'
 
     def EnterAddress firstname, lastname, address, city, state, zip, phone
-      first_name_field.set firstname
-      last_name_field.set lastname
-      address_field.set address
-      city_field.set city
-      state_dropdown.select state
-      zipcode_field.set zip
-      phone_number_field.set phone
-      continue_button.click
+      # if none of these elements are present, the address information has most likely already been
+      # entered into the system and saved
+      if all_there?
+        first_name_field.set firstname
+        last_name_field.set lastname
+        address_field.set address
+        city_field.set city
+        state_dropdown.select state
+        zipcode_field.set zip
+        phone_number_field.set phone
+        continue_btn.click
+      end
 
-      ConfirmAddress
-    end
-
-    def ConfirmAddress
       CheckoutPaymentPage.new
     end
   end

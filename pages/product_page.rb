@@ -7,6 +7,7 @@ module Pages
     element :product_image, '.productImage'
     element :item_quantity_dropdown, '#selectSkuQuantity'
     element :add_to_cart_button, '.addToCart'
+    element :product_name, :xpath, "//h1[@class='serif']"
     section :header, Sections::LoggedInHeader, '.okl-header'
 
     def AddToCart

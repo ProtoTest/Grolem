@@ -3,34 +3,41 @@ require_all 'pages'
 
 include Pages
 
+
 feature 'Checkout' do
 
 # run this once before all of the scenarios
   before(:all) do
     @rand = rand(1000).to_s
-    @email = "testuser" + @rand + "@mailinator.com"
+    #@email = "testuser" + @rand + "@mailinator.com"
+    @email = "msiwiec@mailinator.com"
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
 
 # register the user
-    @page = SignupModal.new
-    @page.load
+    #register_user(@firstname, @lastname, @password, @email)
 
-    @page.EnterEmail(@email).
-        EnterInfo(@firstname,@lastname,@password).ClosePanel
-
-    @initialized = true
   end
 
   before(:each) do
-    set_url config.default_url + "/login" if @initialized
-    @page.load
+    @page = login(@email, @password)
+    remove_all_items_from_cart
+  end
+
+  after(:each) do
+  end
+
+
+
+  scenario 'Verify shopping cart is initially empty' do
+    @page.header.GoToCart.VerifyCartEmpty
   end
 
   scenario 'Add item to cart' do
-
+    @page.header.SearchFor("item").GoToFirstProduct.AddToCart
   end
+
 
 =begin
   scenario 'Remove item from cart' do

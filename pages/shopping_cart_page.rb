@@ -28,14 +28,37 @@ module Pages
     element :paypal_button, 'img[alt=Btn_xpresscheckout]'
     element :cart_timed_out_message, '.expired-msg'
 
+    elements :remove_links, ".remove-link"
+
     section :first_item, CartRowSection, :xpath,'//ul[@class="cart-lines"]/li[1]'
     section :second_item, CartRowSection, :xpath, '//ul[@class="cart-lines"]/li[2]'
     section :third_item, CartRowSection, :xpath, '//ul[@class="cart-lines"]/li[3]'
+
+    sections :cart_items, CartRowSection, :xpath, '//ul[@class="cart-lines"]/li'
 
     def CheckOutNow
       check_out_now_button.click
       CheckoutShippingPage.new
     end
+
+    def VerifyCartEmpty
+      empty_cart = 'Your cart is empty'
+      find_first(:xpath, "//*[contains(text(),'" + empty_cart + "')]")
+      cart_items.size.should == 0
+      self
+    end
+
+    def RemoveAllItemsFromCart
+      num_items = remove_links.size
+
+      num_items.times do
+        remove_links.first.click
+        ShoppingCartPage.new
+      end
+
+      self.VerifyCartEmpty
+    end
+
   end
 
 

@@ -33,6 +33,7 @@ RSpec.configure do |config|
     page.driver.browser.manage.delete_cookie('ewokAuthGuestPass')
     page.driver.browser.manage.delete_cookie('keepLogin')
     page.driver.browser.manage.delete_cookie('is_member')
+    Capybara.reset!
   end
 
   config.after(:each) do
