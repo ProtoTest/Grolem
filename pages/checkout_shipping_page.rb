@@ -12,13 +12,14 @@ module Pages
     element :continue_btn, :xpath, "//input[@value='Continue >']"
     set_url '/checkout/address'
 
-    def EnterAddress firstname, lastname, address, city, state, zip, phone
+    def EnterAddress firstname, lastname, address, address2, city, state, zip, phone
       # if none of these elements are present, the address information has most likely already been
       # entered into the system and saved
       if all_there?
         first_name_field.set firstname
         last_name_field.set lastname
         address_field.set address
+        address_line2_field.set address2 if address2
         city_field.set city
         state_dropdown.select state
         zipcode_field.set zip

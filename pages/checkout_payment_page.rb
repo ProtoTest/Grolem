@@ -54,8 +54,9 @@ module Pages
       self.phone_field.set phone
     end
 
-    def SubmitBillingInfo
+    def Continue
       self.continue_btn.click
+      ReviewOrderPage.new
     end
 
   end
