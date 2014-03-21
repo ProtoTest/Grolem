@@ -1,5 +1,5 @@
 module Pages
-  class InvitePage < SitePrism::Page
+  class InvitePage < BasePage
     element :emails_textarea, '#emailAddresses'
     element :send_invites_button, '.invite'
     element :message_textarea, '#emailMessage'
@@ -16,6 +16,7 @@ module Pages
       end
       sleep 1
       send_invites_button.click
+      sleep 1
       InvitePage.new
     end
   end

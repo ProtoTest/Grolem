@@ -1,7 +1,7 @@
 require 'site_prism'
 
 module Pages
-  class FacebookLoginPage < SitePrism::Page
+  class FacebookLoginPage < BasePage
     set_url 'http://www.facebook.com/login.php'
     element :email_field, '#email'
     element :password_field, '#pass'
@@ -13,7 +13,7 @@ module Pages
       email_field.set email
       password_field.set pass
       login_button.click
-      okay_button.click
+      okay_button.click if has_okay_button?
       HomePage.new
     end
   end

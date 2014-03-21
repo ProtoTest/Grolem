@@ -16,10 +16,10 @@ feature 'Invite Friends' do
 
   before(:each) { @page.load }
 
-  scenario 'Skip Invite' do
-    @page
-
-  end
+  #scenario 'Skip Invite' do
+  #  @page
+  #
+  #end
 
   scenario 'Invite Friends' do
     @page.

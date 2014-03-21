@@ -5,8 +5,10 @@ require 'facebook_login_page'
 include Pages
 
 module Pages
-  class LoginModal < SitePrism::Page
+  class LoginModal < BasePage
     attr_reader :email_field, :password_field,:log_in_button,:join_now_link,:facebook_login_link,:keep_logged_in_cbx
+
+      set_url ''
 
       element :email_field, '#email2'
       element :password_field,'#password2'
@@ -14,6 +16,12 @@ module Pages
       element :join_now_link , '.joinLink'
       element :facebook_login_link , '.fblogin'
       element :keep_logged_in_cbx,'#remember'
+
+    def wait_for_elements
+      wait_until_email_field_visible
+      wait_until_password_field_visible
+      wait_until_log_in_button_visible
+    end
 
     def LoginWithInfo email, password
       email_field.set email

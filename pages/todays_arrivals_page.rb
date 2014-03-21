@@ -1,6 +1,7 @@
 require 'site_prism'
 
 module Pages
-  class TodaysArrivalsPage < SitePrism::Page
+  class TodaysArrivalsPage < BasePage
+    set_url ''
   end
 end

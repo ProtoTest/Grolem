@@ -4,8 +4,8 @@ require 'login_modal'
 require 'home_page'
 
 module Pages
-  class WelcomeSplashPage < SitePrism::Page
-
+  class WelcomeSplashPage < BasePage
+    set_url ''
     attr_reader :close_button,:shop_todays_sales,:welcome_panel,:change_email_pref_link,:invite_friends_button
       element :close_button, '#x_out'
       element :shop_todays_sales, "#shop_todays"

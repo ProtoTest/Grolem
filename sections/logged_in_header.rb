@@ -1,6 +1,6 @@
 module Sections
   include Pages
-  class LoggedInHeader < SitePrism::Section
+  class LoggedInHeader < BaseSection
     element :invite_friends_link,".invite-friends"
     element :all_sales_link,:text,"All Sales"
     element :vintage_link, :text,"Vintage"

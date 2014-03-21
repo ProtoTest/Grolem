@@ -17,17 +17,24 @@ feature 'User Login' do
     @facebookemail = "bkitchener@prototest.com"
   end
 
-  scenario 'Join as new User' do
+  #scenario 'Cart Session Expiration' do
+  #  @page = LoginPage.new
+  #  @page.load
+  #  @page = @page.LoginWithInfo @facebookemail, @password
+  #  @page = @page.header.SearchFor 'table'
+  #  @page = @page.GoToFirstProduct.AddToCart
+  #  @page = ShoppingCartPage.new
+  #  @page.load
+  #  sleep (60 * 10)
+  #  @page.should have_cart_timed_out_message
+  #  @page.should have_item_reservation_duration :text=>'00:00'
+  #end
+
+  scenario 'Test' do
     @page = LoginPage.new
-    @page.load
-    @page = @page.LoginWithInfo @facebookemail, @password
-    @page = @page.header.SearchFor 'table'
-    @page = @page.GoToFirstProduct.AddToCart
-    @page = ShoppingCartPage.new
-    @page.load
-    sleep (60 * 10)
-    @page.should have_cart_timed_out_message
-    @page.should have_item_reservation_duration text=>'00:00'
+
   end
+
+
 end
 

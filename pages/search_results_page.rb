@@ -1,7 +1,7 @@
 require 'site_prism'
 
 module Pages
-  class SearchResultsPage < SitePrism::Page
+  class SearchResultsPage < BasePage
   element :query_phrase, '.query_phrase'
   element :search_results_summary, '.search-results-summary'
   element :sort_dropdown, '.sort-dropdown'
@@ -51,13 +51,13 @@ module Pages
       self
     end
 
-    def SelectPrice values, checked=true
-      price_filter.find(".price-#{values}").set(checked)
+    def SelectPrice values
+      price_filter.find("li.price-#{values}>input").click
       self
     end
 
-    def SelectCondition text, checked=true
-      condition_filter.find(".condition-#{text}").set(checked)
+    def SelectCondition text
+      condition_filter.find("li.condition-#{text}>input").click
       self
     end
 

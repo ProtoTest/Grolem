@@ -1,7 +1,7 @@
 require 'site_prism'
 
 module Pages
-  class SignUpPage < SitePrism::Page
+  class SignUpPage < BasePage
     set_url '/join'
   end
 end

@@ -1,6 +1,7 @@
 require 'site_prism'
 
 module Pages
-  class LiveLoveHomePage < SitePrism::Page
+  class LiveLoveHomePage < BasePage
+    set_url ''
   end
 end

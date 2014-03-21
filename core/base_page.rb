@@ -1,7 +1,11 @@
 module Pages
-  class BasePage
+  class BasePage<SitePrism::Page
+    set_url ''
     def initialize
-      $logger.Log "Base Page Called"
+
+    end
+
+    def wait_for_elements
     end
   end
 end

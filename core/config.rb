@@ -5,7 +5,7 @@ RSpec.configure do |config|
   config.add_setting :default_browser, :default => Browsers::Firefox;
   config.add_setting :remote_driver, :default => false
   config.add_setting :host_ip, :default => "localhost"
-  config.add_setting :element_wait_sec, :default => 5
+  config.add_setting :element_wait_sec, :default => 20
   config.add_setting :screenshot_on_failure, :default => true
   config.add_setting :command_logging, :default => true
   config.add_setting :mock_mobile, :default =>true
@@ -15,6 +15,7 @@ RSpec.configure do |config|
   config.add_formatter :documentation,'output.txt'
   config.add_formatter CustomFormatter,'output.html'
   config.add_setting :test_name, :default=>''
+  config.add_setting :command_delay_sec, :default=>0
 
   config.before(:all) do
 
@@ -28,7 +29,7 @@ RSpec.configure do |config|
     $logger = CommandLogger.new
     path = example.metadata[:description]
       config.test_name = path
-
+    Capybara.reset_sessions!
     page.driver.browser.manage.delete_cookie('ewokAuth')
     page.driver.browser.manage.delete_cookie('ewokAuthGuestPass')
     page.driver.browser.manage.delete_cookie('keepLogin')

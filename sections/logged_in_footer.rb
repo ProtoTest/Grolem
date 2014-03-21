@@ -1,2 +1,2 @@
-class LoggedInFooter
+class LoggedInFooter<BaseSection
 end

@@ -1,6 +1,6 @@
 module Sections
   include Pages
-  class LoggedOutHeader < SitePrism::Section
+  class LoggedOutHeader < BaseSection
     element :invite_friends_link,".invite-friends"
     element :log_in_link, 'a', :text=>'LOG IN'
     element :sign_up_link, 'a', :text=>'SIGN UP'

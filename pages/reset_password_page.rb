@@ -1,5 +1,6 @@
 module Pages
-  class ResetPasswordPage <  SitePrism::Page
+  class ResetPasswordPage <  BasePage
+    set_url ''
     element :new_password_field,'#password'
     element :re_enter_password_field, '#confirm'
     element :reset_password_button, 'input[value=reset]'

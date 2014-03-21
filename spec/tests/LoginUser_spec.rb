@@ -10,31 +10,35 @@ feature 'User Login' do
     @email = "prototest@mailinator.com"
     @facebookemail = "bkitchener@prototest.com"
     @password = "Proto123!"
+    @newpassword = "Test123!"
     @firstname = "TestUser"
     @lastname = "ProtoTest"
-
-    @page = SignupModal.new
+   @page = SignupModal.new
   end
 
   before(:each) do
-    @page.load
-
+   @page.load
   end
-end
 
   scenario 'Join as new User' do
     @page.
         EnterEmail(@newemail).
-        EnterInfo(@firstname,@lastname,@password).ClosePanel
+        EnterInfo(@firstname,@lastname,@password).
+        ClosePanel
   end
   scenario 'Login as Existing Member' do
     @page.
         GoToLoginPage.
-        LoginWithInfo(@newemail,@password).LogOut
+        LoginWithInfo(@email,@password).
+        LogOut
   end
 
   scenario 'Login with Facebook' do
-    @page.GoToLoginPage.GoToFacebookLogin.LoginAs(@facebookemail,@password).LogOut
+    @page = LoginPage.new
+    @page.load
+    @page.GoToFacebookLogin.
+        LoginAs(@facebookemail,@password).
+        LogOut
   end
 
     scenario 'Guest Pass' do
@@ -47,26 +51,29 @@ end
     @page = LoginPage.new
     @page.load
     @page.ForgotPassword @newemail
-    sleep 5
     @page = MailinatorPage.new
     @page.load(username: @rand_username)
     @page.ClickMailWithText 'Please Reset Your One Kings Lane Password'
     @page.ClickBodyText 'Click here to reset your password'
     @page = ResetPasswordPage.new
 
-    @page.ResetPasswordTo(@password).LogOut
+    @page.ResetPasswordTo(@newpassword).LogOut
   end
 
-   scenario 'Join -b' do
+  scenario 'Join -b' do
       @page = JoinBPage.new
       @page.load
-      @page.GoToLoginPage.LoginWithInfo @newemail, @password
+      @page.GoToLoginPage.
+          LoginWithInfo(@email, @password).
+          LogOut
     end
 
     scenario 'Join -c' do
       @page = JoinCPage.new
       @page.load
-      @page.GoToLoginPage
+      @page.GoToLoginPage.
+          LoginWithInfo(@email, @password).
+          LogOut
     end
 
   scenario 'Keep me logged in ' do
@@ -89,11 +96,11 @@ end
     @page.ClickXpath '//img[@alt="Accept Invitation"]'
   end
 
-    scenario '/Login' do
-      page.reset_session!
+  scenario '/Login' do
       @page = LoginPage.new
       @page.load
-      @page.LoginWithInfo(@newemail, @password).LogOut
+      @page.LoginWithInfo(@email, @password).
+          LogOut
     end
 
 end

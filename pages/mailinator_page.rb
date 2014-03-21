@@ -1,5 +1,5 @@
 module Pages
-  class MailinatorPage <SitePrism::Page
+  class MailinatorPage <BasePage
     include Capybara::DSL
     set_url "http://mailinator.com/inbox.jsp?to={username}"
     element :inbox_control_panel,'#InboxCtrl'

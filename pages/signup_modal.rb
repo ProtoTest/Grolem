@@ -3,7 +3,7 @@ require 'register_modal'
 require 'login_modal'
 
 module Pages
-  class SignupModal < SitePrism::Page
+  class SignupModal < BasePage
     attr_reader :email_field,:shop_new_button,:login_button,:okl_logo
       element :email_field,'#email'
       element :shop_now_button, :xpath, "//*[@type='submit']"

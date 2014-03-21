@@ -14,7 +14,7 @@ module Pages
     element :remove_item_link, '#remove-link'
   end
 
-  class ShoppingCartPage < SitePrism::Page
+  class ShoppingCartPage < BasePage
     set_url '/cart'
     element :check_out_now_top_button, :xpath, '//header//a[contains(@class,"checkout-btn")]'
     element :item_reservation_duration, '#countdown'

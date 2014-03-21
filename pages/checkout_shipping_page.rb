@@ -1,6 +1,6 @@
 
 module Pages
-  class CheckoutShippingPage < SitePrism::Page
+  class CheckoutShippingPage < BasePage
     element :first_name_field, '#firstname'
     element :last_name_field, '#lastname'
     element :address_field, '#address1'

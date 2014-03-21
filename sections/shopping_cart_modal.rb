@@ -1,6 +1,5 @@
 module Sections
-  class ShoppingCartModal < SitePrism::Section
+  class ShoppingCartModal < BaseSection
     element :root_container, '.micro-cart'
-
   end
 end
