@@ -1,4 +1,4 @@
-require 'rspec'
+require 'spec_helper'
 
 feature 'Invite Friends' do
   before(:all) do

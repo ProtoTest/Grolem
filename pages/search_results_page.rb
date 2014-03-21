@@ -12,7 +12,7 @@ module Pages
   element :color_filter, '.color-filter'
   element :price_filter, '.price-filter'
   element :condition_filter, '.condition-filter'
-  element :first_product, '.standard'
+  element :first_product, '.productImage'
   element :pagination_container, '.pagination'
   element :next_page_link, '.nextPage'
   element :prev_page_link, '.prevPage'

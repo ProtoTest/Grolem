@@ -14,6 +14,7 @@ module Capybara
       end
     end
   end
+
   class Element
     include Capybara::DSL
     def present?
@@ -24,9 +25,11 @@ module Capybara
       until (visible?)
         puts "waiting_until"
       end
+      def set_checked(value)
+        if (self.checked? and not value) or (not self.checked? and value)
+          self.click
+        end
+      end
     end
   end
 end
-
-
-

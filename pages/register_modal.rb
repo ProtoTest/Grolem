@@ -1,4 +1,3 @@
-require 'base_page'
 require 'welcome_splash_page'
 include Pages
 

@@ -2,6 +2,7 @@ require './sections/logged_in_header'
 
 module Pages
   class HomePage<BasePage
+    attr_reader :header
     include Sections
     set_url "/"
     section :header, LoggedInHeader, '.okl-header'

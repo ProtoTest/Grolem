@@ -19,10 +19,11 @@ require "command_logger"
 require 'config'
 require "capybara-screenshot"
 require 'capybara-screenshot/rspec'
+require 'capybara_extensions'
 require "aquarium"
 require "syntax"
 require 'require_all'
-require 'site_prism'
+require 'base_page'
 require_all 'pages'
 
 
@@ -41,6 +42,37 @@ Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
   "screenshot_" + RSpec.configuration.test_name
 end
 setup_browser
+
+
+#### Some Common Functionality ######
+$ADDRESS = "1999 Broadway"
+$CITY = "Denver"
+$STATE = "Colorado"
+$ZIP = "80222"
+$PHONE = "303-555-1234"
+$VISA_TEST_CC = "44444 44444 44444 8"
+
+def register_user(first_name, last_name, password, email)
+  @page = SignupModal.new
+  @page.load
+
+  @page.EnterEmail(email).
+      EnterInfo(first_name, last_name, password).ClosePanel.LogOut
+end
+
+def login(email, password)
+  @page = LoginPage.new
+  @page.load
+  @page.LoginWithInfo(email, password)
+end
+
+def remove_all_items_from_cart
+  page = ShoppingCartPage.new
+  page.load
+  page.RemoveAllItemsFromCart
+end
+
+
 
 
 

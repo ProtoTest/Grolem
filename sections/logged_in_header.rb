@@ -13,9 +13,9 @@ module Sections
 
     element :welcome_user_dropdown, :xpath, "//span[contains(text(),'Welcome')]"
     element :my_account_link,'a', :text=>"My Account"
-    element :log_out_link, 'a', :text=>"LOG OUT"
+    element :log_out_link, 'a', :xpath, "//a[@href='/logout']"
 
-    element :shopping_cart_link, '.cart'
+    element :shopping_cart_link, :xpath, "//a[@href='/cart']"
 
     def GoToAllSales
       all_sales_link.click
@@ -55,6 +55,7 @@ module Sections
     end
 
     def GoToCart
+      #wait_until_shopping_cart_link_visible
       shopping_cart_link.click
       ShoppingCartPage.new
     end
