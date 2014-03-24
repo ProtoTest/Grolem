@@ -1,4 +1,3 @@
-
 require 'base_section'
 
 module Sections

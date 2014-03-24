@@ -29,7 +29,6 @@ feature 'Checkout' do
   end
 
 
-=begin
   scenario 'Verify shopping cart is initially empty' do
     @page.header.GoToCart.VerifyCartEmpty
   end
@@ -39,7 +38,6 @@ feature 'Checkout' do
     @page.load
     @page.header.SearchFor("lamp").GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToCart
   end
-=end
 
   scenario 'Remove item from cart' do
     @page = HomePage.new
@@ -47,14 +45,17 @@ feature 'Checkout' do
     product_name = @page.header.SearchFor("lamp").GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToCart
 
     @page = ShoppingCartPage.new
-    @page.RemoveItemFromCart(product_name) #.VerifyItemRemovedFromCart(product_name)
+    @page.RemoveItemFromCart(product_name).VerifyItemRemovedFromCart(product_name)
+  end
+
+  scenario 'Check mini cart' do
+    @page = HomePage.new
+    @page.load
+    @page.header.SearchFor("lamp").GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToMiniCart
+
   end
 
 =begin
-  scenario 'Check mini cart' do
-
-  end
-
   scenario 'Can change quantity' do
     @page
 

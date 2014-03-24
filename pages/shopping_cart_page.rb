@@ -12,7 +12,7 @@ module Pages
     element :remove_item_link, '.remove-link'
 
     def to_s
-      $logger.Log("CartRow name: #{name_link.text} \nDeliveryNotice: #{delivery_notice.text} \nTotalPriceLabel: #{total_price_label.text}")
+      $logger.Log("\nCartRow name: #{name_link.text} \nDeliveryNotice: #{delivery_notice.text} \nTotalPriceLabel: #{total_price_label.text}\n")
     end
   end
 
@@ -32,7 +32,7 @@ module Pages
 
     elements :remove_links, ".remove-link"
 
-    sections :cart_items, CartRowSection, :xpath, '//li[@class="clearfix"]'
+    sections :cart_items, CartRowSection, :xpath, ".//ul[@class='cart-lines']/li[@class='clearfix']"
 
     def CheckOutNow
       check_out_now_button.click
@@ -65,10 +65,7 @@ module Pages
     end
 
     def RemoveItemFromCart(item_to_remove)
-      puts "Number of items in cart: #{cart_items.size}"
-      cart_items.each do |item|
-        item.to_s
-      end
+      cart_items.each {|item| item.to_s}
 
       cart_items.each do |item|
         if item.name_link.text.eql?(item_to_remove)
@@ -77,18 +74,18 @@ module Pages
         end
       end
 
-      puts "Sleeping for 5"
-      sleep 5
       ShoppingCartPage.new
     end
 
     def VerifyItemRemovedFromCart(product_name)
       if(cart_items.size > 0)
         cart_items.each do |item|
-          if item.name_link.visible? and item.name_link.text.eql?(product_name)
+          if item.name_link.text.eql?(product_name)
             raise "#{product_name} was not removed from shopping cart"
           end
         end
+      else
+        self.VerifyCartEmpty
       end
 
       self

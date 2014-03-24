@@ -2,6 +2,8 @@ require './sections/logged_in_header'
 
 module Pages
   class ProductPage<BasePage
+    attr_reader :header
+
     include Sections
     set_url '/product/33381/1909101'
     element :product_image, '.productImage'
@@ -13,12 +15,10 @@ module Pages
     section :header, Sections::LoggedInHeader, '.okl-header'
 
     def AddToCart
-      $logger.Log "#{product_price.text}"
       product_txt = product_name.text(:visible)
-      $logger.Log "#{product_txt}"
       add_to_cart_button.click
 
-      self
+      ProductPage.new
     end
 
     def VerifyItemAddedToCart
@@ -28,6 +28,11 @@ module Pages
       cart.VerifyItemsInCart [product_txt]
 
       product_txt
+    end
+
+    def VerifyItemAddedToMiniCart
+      product_txt = product_name.text(:visible)
+      header.mini_cart.VerifyItemInMiniCart(product_txt)
     end
   end
 end

@@ -1,6 +1,10 @@
+require './sections/shopping_cart_modal'
+
 module Sections
   include Pages
   class LoggedInHeader < BaseSection
+    attr_reader :mini_cart
+
     element :invite_friends_link,".invite-friends"
     element :all_sales_link,:text,"All Sales"
     element :vintage_link, :text,"Vintage"
@@ -16,6 +20,8 @@ module Sections
     element :log_out_link, 'a', :xpath, "//a[@href='/logout']"
 
     element :shopping_cart_link, :xpath, "//a[@href='/cart']"
+
+    section :mini_cart, Sections::ShoppingCartModal, '#micro-cart' # typically displays after adding an item to the cart
 
     def GoToAllSales
       all_sales_link.click
