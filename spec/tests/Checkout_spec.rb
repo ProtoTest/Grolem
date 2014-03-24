@@ -22,28 +22,35 @@ feature 'Checkout' do
 
   before(:each) do
     @page = login(@email, @password)
-    remove_all_items_from_cart
   end
 
   after(:each) do
+    remove_all_items_from_cart
   end
 
 
-
+=begin
   scenario 'Verify shopping cart is initially empty' do
     @page.header.GoToCart.VerifyCartEmpty
   end
 
   scenario 'Add item to cart' do
-    @page.header.SearchFor("item").GoToFirstProduct.AddToCart
+    @page = HomePage.new
+    @page.load
+    @page.header.SearchFor("lamp").GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToCart
   end
+=end
 
+  scenario 'Remove item from cart' do
+    @page = HomePage.new
+    @page.load
+    product_name = @page.header.SearchFor("lamp").GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToCart
+
+    @page = ShoppingCartPage.new
+    @page.RemoveItemFromCart(product_name) #.VerifyItemRemovedFromCart(product_name)
+  end
 
 =begin
-  scenario 'Remove item from cart' do
-
-  end
-
   scenario 'Check mini cart' do
 
   end
