@@ -55,17 +55,17 @@ $PHONE = "303-555-1234"
 $VISA_TEST_CC = "44444 44444 44444 8"
 
 def register_user(first_name, last_name, password, email)
-  @page = SignupModal.new
-  @page.load
+  page = SignupModal.new
+  page.load
 
-  @page.EnterEmail(email).
+  page.EnterEmail(email).
       EnterInfo(first_name, last_name, password).ClosePanel.LogOut
 end
 
 def login(email, password)
-  @page = LoginPage.new
-  @page.load
-  @page.LoginWithInfo(email, password)
+  page = LoginPage.new
+  page.load
+  page.LoginWithInfo(email, password)
 end
 
 def remove_all_items_from_cart

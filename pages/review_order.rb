@@ -31,17 +31,18 @@ module Pages
       ReviewOrderPage.new
     end
 
-    def ChangeAddShippingAddress(firstname, lastname, address, address2, city, state, zip, phone)
+
+    def ChangeAddShippingDetails(shipping_info)
       change_address_btn.click
-      CheckoutShippingPage.new.EnterAddress(firstname, lastname, address, address2, city, state, zip, phone)
+      CheckoutShippingPage.new.EnterShippingDetails(shipping_info)
 
       ReviewOrderPage.new
     end
 
-    def ChangePaymentMethod(name, card_number, exp_month, exp_year, cvc, save_payment_info, use_shipping_address)
+    def ChangePaymentMethod(billing_info, save_payment_info, use_shipping_address)
       change_payment_btn.click
       CheckoutPaymentPage.new.
-          EnterCreditCardInfo(name, card_number, exp_month, exp_year, cvc, save_payment_info, use_shipping_address).
+          EnterBillingInfo(billing_info, save_payment_info, use_shipping_address).
           Continue
 
       ReviewOrderPage.new

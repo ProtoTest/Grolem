@@ -30,31 +30,57 @@ module Pages
 
     end
 
-    def EnterCreditCardInfo(name, card_number, exp_month, exp_year, cvc, save_payment_info, use_shipping_address)
-      self.card_name_field.set name
-      self.card_number_field.set card_number
-      self.card_exp_month_dropdown.select exp_month
-      self.card_exp_year_dropdown.select exp_year
-      self.card_cvc_field.set cvc
+    ##
+    # Enter billing details into the form
+    #
+    # @param [Hash] billing_info: The billing info hash
+    # billing_info = {:fullname,
+    #                :credit_card_num,
+    #                :exp_month,
+    #                :exp_year,
+    #                :cvc}
+    # @param [Boolean] save_payment_info: To save the payment information in the system
+    # @param [Boolean] use_shipping_address: To set the billing address as the shipping address
+    def EnterBillingInfo(billing_info, save_payment_info, use_shipping_address)
+      self.card_name_field.set billing_info[:fullname]
+      self.card_number_field.set billing_info[:credit_card_num]
+      self.card_exp_month_dropdown.select billing_info[:exp_month]
+      self.card_exp_year_dropdown.select billing_info[:exp_year]
+      self.card_cvc_field.set billing_info[:cvc]
       self.save_payment_info.set_checked(save_payment_info)
       self.use_shipping_address.set_checked(use_shipping_address)
 
-      self
+      CheckoutPaymentPage.new
     end
 
-    def EnterBillingAddress(firstname, lastname, address1, address2, city, state, zip, phone)
-      self.first_name_field.set firstname
-      self.last_name_field.set lastname
-      self.address1_field.set address1
-      self.address2_field.set address2
-      self.city_field.set city
-      self.state_dropdown.select state
-      self.zip_field.set zip
-      self.phone_field.set phone
+
+    ##
+    # Enter the billing address and phone into the form
+    # @param [Hash] address: A hash containing the address information
+    # address = {:first,
+    #            :last,
+    #            :address1,
+    #            :address2, #optional
+    #            :city,
+    #            :state,
+    #            :zip,
+    #            :phone}
+    def EnterBillingAddressAndPhone(address)
+      self.first_name_field.set address[:first]
+      self.last_name_field.set address[:last]
+      self.address1_field.set address[:address1]
+      self.address2_field.set address[:address2] if address[:address2]
+      self.city_field.set address[:city]
+      self.state_dropdown.select address[:state]
+      self.zip_field.set address[:zip]
+      self.phone_field.set address[:phone]
+
+      CheckoutPaymentPage.new
     end
 
     def Continue
       self.continue_btn.click
+
       ReviewOrderPage.new
     end
   end

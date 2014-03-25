@@ -33,6 +33,20 @@ feature 'Smoke Test' do
     save_payment_info = false
     use_shipping_address = true
 
+    shipping_info = {:first => @firstname,
+                     :last => @lastname,
+                     :address1 => $ADDRESS,
+                     :city => $CITY,
+                     :state => $STATE,
+                     :zip => $ZIP,
+                     :phone => $PHONE}
+
+    billing_info = {:fullname => @fullname,
+                    :credit_card_num => $VISA_TEST_CC,
+                    :exp_month => "1",
+                    :exp_year => "2020",
+                    :cvc => "123"}
+
     @page = HomePage.new
     @page.load
     @page.header.SearchFor("item").
@@ -40,8 +54,9 @@ feature 'Smoke Test' do
         AddToCart.
         header.GoToCart.
         CheckOutNow.
-        EnterAddress(@firstname, @lastname, $ADDRESS, nil, $CITY, $STATE, $ZIP, $PHONE).
-        EnterCreditCardInfo(@fullname, $VISA_TEST_CC, "1", "2020", "123", save_payment_info, use_shipping_address).
+        EnterShippingDetails(shipping_info).
+        Continue.
+        EnterBillingInfo(billing_info, save_payment_info, use_shipping_address).
         Continue.PlaceOrder.VerifyOrderCompleted
 
   end

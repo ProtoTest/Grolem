@@ -12,20 +12,37 @@ module Pages
     element :continue_btn, :xpath, "//input[@value='Continue >']"
     set_url '/checkout/address'
 
-    def EnterAddress firstname, lastname, address, address2, city, state, zip, phone
+
+    ##
+    # Enter the shipping details into the form
+    # @param [Hash] shipping_info: A hash containing the shipping address and phone
+    # address = {:first,
+    #            :last,
+    #            :address1,
+    #            :address2, #optional
+    #            :city,
+    #            :state,
+    #            :zip,
+    #            :phone}
+    def EnterShippingDetails(shipping_info)
       # if none of these elements are present, the address information has most likely already been
       # entered into the system and saved
       if all_there?
-        first_name_field.set firstname
-        last_name_field.set lastname
-        address_field.set address
-        address_line2_field.set address2 if address2
-        city_field.set city
-        state_dropdown.select state
-        zipcode_field.set zip
-        phone_number_field.set phone
-        continue_btn.click
+        first_name_field.set shipping_info[:first]
+        last_name_field.set shipping_info[:last]
+        address_field.set shipping_info[:address1]
+        address_line2_field.set shipping_info[:address2] if shipping_info[:address2]
+        city_field.set shipping_info[:city]
+        state_dropdown.select shipping_info[:state]
+        zipcode_field.set shipping_info[:zip]
+        phone_number_field.set shipping_info[:phone]
       end
+
+      CheckoutShippingPage.new
+    end
+
+    def Continue
+      continue_btn.click
 
       CheckoutPaymentPage.new
     end

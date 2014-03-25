@@ -7,12 +7,6 @@ module Capybara
          page.has_selector? @query.locator
       end
 
-      def wait_until_visible time
-        until (visible?)
-          sleep(1)
-        end
-      end
-
       def set_checked(value)
         if (self.checked? and not value) or (not self.checked? and value)
           self.click
