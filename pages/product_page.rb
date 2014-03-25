@@ -14,8 +14,9 @@ module Pages
     element :product_qty_select, '#selectSkuQuantity'
     section :header, Sections::LoggedInHeader, '.okl-header'
 
-    def AddToCart
+    def AddToCart(qty=nil)
       product_txt = product_name.text(:visible)
+      product_qty_select.select(qty) if qty
       add_to_cart_button.click
 
       ProductPage.new

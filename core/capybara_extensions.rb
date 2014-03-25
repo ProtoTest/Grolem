@@ -18,6 +18,10 @@ module Capybara
           self.click
         end
       end
+
+      def get_selected_option
+        find('option[selected]').text
+      end
     end
   end
 end

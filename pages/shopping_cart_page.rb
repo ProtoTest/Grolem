@@ -1,4 +1,6 @@
-
+##
+# NOTE: This framework only supports manipulating, verifying, one item in the cart at a time
+##
 module Pages
 
   class CartRowSection < SitePrism::Section
@@ -65,7 +67,6 @@ module Pages
     end
 
     def RemoveItemFromCart(item_to_remove)
-      cart_items.each {|item| item.to_s}
 
       cart_items.each do |item|
         if item.name_link.text.eql?(item_to_remove)
@@ -89,6 +90,25 @@ module Pages
       end
 
       self
+    end
+
+    def ChangeVerifyItemQuantityUpdated(qty)
+      # Updating the quantity
+      cart_items.first.item_quantity_dropdown.select(qty) if qty > 0
+
+      # Create another page to wait for the page to re-load/update
+      @page = ShoppingCartPage.new
+
+      # Go back to the HomePage and enter the shopping cart again, to verify product qty was updated
+      @page = HomePage.new
+      @page.load
+      @page.header.GoToCart
+
+      if cart_items.first.item_quantity_dropdown.get_selected_option.eql?(qty.to_s)
+        $logger.Log("Successfully verified the quantity of the item was updated to #{qty}")
+      else
+        raise "Failed to verify the quantity of the item in the shopping cart was updated to #{qty}"
+      end
     end
   end
 

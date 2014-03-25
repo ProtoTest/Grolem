@@ -28,7 +28,6 @@ feature 'Checkout' do
     remove_all_items_from_cart
   end
 
-
   scenario 'Verify shopping cart is initially empty' do
     @page.header.GoToCart.VerifyCartEmpty
   end
@@ -55,12 +54,18 @@ feature 'Checkout' do
 
   end
 
-=begin
   scenario 'Can change quantity' do
-    @page
+    item_quantity = 4
 
+    @page = HomePage.new
+    @page.load
+    @page.header.SearchFor("lamp").GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToCart
+
+    @page = ShoppingCartPage.new
+    @page.ChangeVerifyItemQuantityUpdated(item_quantity)
   end
 
+=begin
   scenario 'Can add new shipping address in checkout flow' do
 
   end
