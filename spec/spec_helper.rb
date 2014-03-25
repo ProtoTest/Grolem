@@ -50,9 +50,10 @@ setup_browser
 $ADDRESS = "1999 Broadway"
 $CITY = "Denver"
 $STATE = "Colorado"
+$STATE_ABBR = "CO"
 $ZIP = "80222"
 $PHONE = "303-555-1234"
-$VISA_TEST_CC = "44444 44444 44444 8"
+$VISA_TEST_CC = "4444444444444448"
 
 def register_user(first_name, last_name, password, email)
   page = SignupModal.new

@@ -10,8 +10,8 @@ feature 'Checkout' do
   before(:all) do
     @rand = rand(1000).to_s
     #@email = "testuser" + @rand + "@mailinator.com"
-    #@email = "testuser939@mailinator.com"
-    @email = "msiwiec@mailinator.com"
+    #@email = "msiwiec@mailinator.com"
+    @email = "testuser207@mailinator.com"
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
@@ -27,7 +27,7 @@ feature 'Checkout' do
   end
 
   after(:each) do
-    remove_all_items_from_cart
+
   end
 =begin
   scenario 'Verify shopping cart is initially empty' do
@@ -38,6 +38,9 @@ feature 'Checkout' do
     @page = HomePage.new
     @page.load
     @page.header.SearchFor("lamp").GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToCart
+
+    # Cleanup
+    remove_all_items_from_cart
   end
 
   scenario 'Remove item from cart' do
@@ -47,6 +50,9 @@ feature 'Checkout' do
 
     @page = ShoppingCartPage.new
     @page.RemoveItemFromCart(product_name).VerifyItemRemovedFromCart(product_name)
+
+    # Cleanup
+    remove_all_items_from_cart
   end
 
   scenario 'Check mini cart' do
@@ -54,6 +60,8 @@ feature 'Checkout' do
     @page.load
     @page.header.SearchFor("lamp").GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToMiniCart
 
+    # Cleanup
+    remove_all_items_from_cart
   end
 
   scenario 'Can change quantity' do
@@ -65,6 +73,9 @@ feature 'Checkout' do
 
     @page = ShoppingCartPage.new
     @page.ChangeVerifyItemQuantityUpdated(item_quantity)
+
+    # Cleanup
+    remove_all_items_from_cart
   end
 =end
 
@@ -77,6 +88,7 @@ feature 'Checkout' do
                      :address1 => $ADDRESS,
                      :city => $CITY,
                      :state => $STATE,
+                     :state_abbr => $STATE_ABBR,
                      :zip => $ZIP,
                      :phone => $PHONE}
 
@@ -88,7 +100,7 @@ feature 'Checkout' do
 
     @page = HomePage.new
     @page.load
-    @page.header.SearchFor("item").
+    @page.header.SearchFor("lamp").
         GoToFirstProduct.
         AddToCart.
         header.GoToCart.
@@ -96,15 +108,12 @@ feature 'Checkout' do
         EnterShippingDetails(shipping_info).
         Continue.
         EnterBillingInfo(billing_info, save_payment_info, use_shipping_address).
-        Continue.VerifyAddressAndCreditCardAdded
-    sleep 5
+        Continue.VerifyAddressAndCreditCardAdded(shipping_info, billing_info)
+
+    # Cleanup
+    remove_all_items_from_cart
   end
 =begin
-  scenario 'Checkout with new credit card' do
-    @page
-
-  end
-
   scenario 'Checkout with saved address in checkout flow' do
     @page
 
