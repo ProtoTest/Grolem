@@ -77,10 +77,9 @@ feature 'Checkout' do
     # Cleanup
     remove_all_items_from_cart
   end
-=end
 
-  scenario 'Can add new shipping address and credit card in checkout flow' do
-    save_payment_info = false
+  scenario 'Can add new shipping address and new credit card in checkout flow' do
+    save_payment_info = true
     use_shipping_address = true
 
     shipping_info = {:first => @firstname,
@@ -113,17 +112,29 @@ feature 'Checkout' do
     # Cleanup
     remove_all_items_from_cart
   end
+=end
+
+  scenario 'Checkout with saved address and saved credit card in checkout flow' do
+    billing_info = {:fullname => @fullname,
+                    :credit_card_num => $VISA_TEST_CC,
+                    :exp_month => "1",
+                    :exp_year => "2020",
+                    :cvc => "123"}
+
+    shipping_info_saved = true
+    credit_info_saved = true
+
+    @page = HomePage.new
+    @page.load
+    @page.header.SearchFor("item").
+        GoToFirstProduct.
+        AddToCart.
+        header.GoToCart.
+        CheckOutNow(shipping_info_saved, credit_info_saved).
+        PlaceOrder.VerifyOrderCompleted
+  end
+
 =begin
-  scenario 'Checkout with saved address in checkout flow' do
-    @page
-
-  end
-
-  scenario 'Checkout with with saved credit card' do
-    @page
-
-  end
-
   scenario 'Checkout with gift message' do
     @page
 

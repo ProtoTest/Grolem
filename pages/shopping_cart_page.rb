@@ -36,10 +36,18 @@ module Pages
 
     sections :cart_items, CartRowSection, :xpath, ".//ul[@class='cart-lines']/li[@class='clearfix']"
 
-    def CheckOutNow
+    def CheckOutNow(is_shipping_info_saved=false, is_credit_card_saved=false)
       check_out_now_button.click
 
-      CheckoutShippingPage.new
+      # if the credit card is already saved in the system,
+      # then the Review Order Page is displayed, otherwise the CheckoutShipping Page is displayed.
+      if is_shipping_info_saved and is_credit_card_saved
+        return ReviewOrderPage.new
+      elsif is_shipping_info_saved and not is_credit_card_saved
+        return CheckoutPaymentPage.new
+      else
+        return CheckoutShippingPage.new
+      end
     end
 
     def VerifyCartEmpty
