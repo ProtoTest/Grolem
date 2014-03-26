@@ -10,12 +10,13 @@ feature 'Checkout' do
   before(:all) do
     @rand = rand(1000).to_s
     #@email = "testuser" + @rand + "@mailinator.com"
-    #@email = "msiwiec@mailinator.com"
-    @email = "testuser207@mailinator.com"
+    @email = "msiwiec@mailinator.com"
+    #@email = "testuser207@mailinator.com"
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
     @fullname = "#{@firstname} #{@lastname}"
+    @item_to_search_for = "lamp"
 
 # register the user
     #register_user(@firstname, @lastname, @password, @email)
@@ -24,12 +25,15 @@ feature 'Checkout' do
 
   before(:each) do
     @page = login(@email, @password)
+
+    # Cleanup
+    remove_all_items_from_cart
   end
 
   after(:each) do
 
   end
-=begin
+
   scenario 'Verify shopping cart is initially empty' do
     @page.header.GoToCart.VerifyCartEmpty
   end
@@ -37,31 +41,25 @@ feature 'Checkout' do
   scenario 'Add item to cart' do
     @page = HomePage.new
     @page.load
-    @page.header.SearchFor("lamp").GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToCart
+    @page.header.SearchFor(@item_to_search_for).GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToCart
 
-    # Cleanup
-    remove_all_items_from_cart
   end
 
   scenario 'Remove item from cart' do
     @page = HomePage.new
     @page.load
-    product_name = @page.header.SearchFor("lamp").GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToCart
+    product_name = @page.header.SearchFor(@item_to_search_for).GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToCart
 
     @page = ShoppingCartPage.new
     @page.RemoveItemFromCart(product_name).VerifyItemRemovedFromCart(product_name)
 
-    # Cleanup
-    remove_all_items_from_cart
   end
 
   scenario 'Check mini cart' do
     @page = HomePage.new
     @page.load
-    @page.header.SearchFor("lamp").GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToMiniCart
+    @page.header.SearchFor(@item_to_search_for).GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToMiniCart
 
-    # Cleanup
-    remove_all_items_from_cart
   end
 
   scenario 'Can change quantity' do
@@ -69,13 +67,11 @@ feature 'Checkout' do
 
     @page = HomePage.new
     @page.load
-    @page.header.SearchFor("lamp").GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToCart
+    @page.header.SearchFor(@item_to_search_for).GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToCart
 
     @page = ShoppingCartPage.new
     @page.ChangeVerifyItemQuantityUpdated(item_quantity)
 
-    # Cleanup
-    remove_all_items_from_cart
   end
 
   scenario 'Can add new shipping address and new credit card in checkout flow' do
@@ -99,7 +95,7 @@ feature 'Checkout' do
 
     @page = HomePage.new
     @page.load
-    @page.header.SearchFor("lamp").
+    @page.header.SearchFor(@item_to_search_for).
         GoToFirstProduct.
         AddToCart.
         header.GoToCart.
@@ -109,10 +105,7 @@ feature 'Checkout' do
         EnterBillingInfo(billing_info, save_payment_info, use_shipping_address).
         Continue.VerifyAddressAndCreditCardAdded(shipping_info, billing_info)
 
-    # Cleanup
-    remove_all_items_from_cart
   end
-=end
 
   scenario 'Checkout with saved address and saved credit card in checkout flow' do
     billing_info = {:fullname => @fullname,
@@ -126,20 +119,34 @@ feature 'Checkout' do
 
     @page = HomePage.new
     @page.load
-    @page.header.SearchFor("item").
+    @page.header.SearchFor(@item_to_search_for).
         GoToFirstProduct.
         AddToCart.
         header.GoToCart.
         CheckOutNow(shipping_info_saved, credit_info_saved).
         PlaceOrder.VerifyOrderCompleted
+
   end
 
-=begin
   scenario 'Checkout with gift message' do
-    @page
+    shipping_info_saved = true
+    credit_info_saved = true
+    gift_msg = "I love you man"
+
+    @page = HomePage.new
+    @page.load
+    @page.header.SearchFor(@item_to_search_for).
+        GoToFirstProduct.
+        AddToCart.
+        header.GoToCart.
+        CheckOutNow(shipping_info_saved, credit_info_saved).
+        AddGiftMessage(gift_msg).
+        PlaceOrder.VerifyOrderCompleted
+
+    sleep 4
 
   end
-
+=begin
   scenario 'Can checkout with PayPal' do
     @page
 

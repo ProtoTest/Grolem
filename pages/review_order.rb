@@ -29,6 +29,11 @@ module Pages
       wait_until_gift_msg_done_btn_visible
       gift_msg_textarea.set msg
       gift_msg_done_btn.click
+
+      # wait for the modal to disappear
+      wait_until_gift_msg_textarea_invisible
+
+      # verify the gift message was added to the form
       find_first(:xpath, "//*[contains(text(),'" + msg + "')]")
 
       ReviewOrderPage.new
@@ -72,6 +77,7 @@ module Pages
     end
 
     def PlaceOrder
+      wait_until_place_order_btn_visible
       place_order_btn.click
 
       OrderCompletedPage.new
