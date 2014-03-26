@@ -2,7 +2,7 @@
 module Pages
   class CheckoutPaymentPage<BasePage
     set_url "/checkout/payment"
-    element :pay_with_paypal_checkbox, '.paypal'
+    element :pay_with_paypal_radio, '.paypal'
 
     # the following are if you are NOT using paypal
     element :pay_with_credit_card, '.new-credit-card'
@@ -27,7 +27,10 @@ module Pages
     element :continue_btn, :xpath, "//*[contains(text(),'CONTINUE')]"
 
     def PayWithPaypal
+      pay_with_paypal_radio.click
+      continue_btn.click
 
+      PayPalPage.new
     end
 
     ##

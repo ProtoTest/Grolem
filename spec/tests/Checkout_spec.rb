@@ -9,17 +9,16 @@ feature 'Checkout' do
 # run this once before all of the scenarios
   before(:all) do
     @rand = rand(1000).to_s
-    #@email = "testuser" + @rand + "@mailinator.com"
-    @email = "msiwiec@mailinator.com"
-    #@email = "testuser207@mailinator.com"
+    @email = "testuser" + @rand + "@mailinator.com"
+    #@email = "msiwiec@mailinator.com"
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
     @fullname = "#{@firstname} #{@lastname}"
     @item_to_search_for = "lamp"
 
-# register the user
-    #register_user(@firstname, @lastname, @password, @email)
+    # register the user
+    register_user(@firstname, @lastname, @password, @email)
 
   end
 
@@ -146,12 +145,22 @@ feature 'Checkout' do
     sleep 4
 
   end
-=begin
+
   scenario 'Can checkout with PayPal' do
-    @page
+    @page = HomePage.new
+    @page.load
+    @page.header.SearchFor(@item_to_search_for).
+        GoToFirstProduct.
+        AddToCart.
+        header.GoToCart.
+        CheckoutWithPayPal.
+        LoginToPayPal.
+        CompletePayPalCheckout.
+        VerifyPayPalPaymentMethod.
+        PlaceOrder.VerifyOrderCompleted
 
   end
-
+=begin
   scenario 'Verify order comes through in AX' do
     @page
 

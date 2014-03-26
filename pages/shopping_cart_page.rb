@@ -1,5 +1,6 @@
 ##
-# NOTE: This framework only supports manipulating, verifying, one item in the cart at a time
+# NOTE: This framework only supports manipulating, verifying, one item in the cart at a time.
+#       Possible inadequacy with the site_prism gem and 'sections'
 ##
 module Pages
 
@@ -117,6 +118,12 @@ module Pages
       else
         raise "Failed to verify the quantity of the item in the shopping cart was updated to #{qty}"
       end
+    end
+
+    def CheckoutWithPayPal
+      paypal_button.click
+
+      PayPalPage.new
     end
   end
 

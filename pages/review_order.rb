@@ -18,6 +18,10 @@ module Pages
     element :gift_msg_textarea, '#giftMessageText'
     element :gift_msg_done_btn, '#submitGiftMessage'
 
+    # PayPal PaymentMethod
+    element :pay_pal_icon, '.paypalIcon'
+    element :pay_pal_email, :xpath, "//div[contains(@class,'billingInfo')]/p"
+
     def wait_for_elements
       wait_until_order_thank_you_visible
       products.size.should > 0
@@ -76,11 +80,23 @@ module Pages
       self
     end
 
+    def VerifyPayPalPaymentMethod
+      wait_until_pay_pal_icon_visible
+      wait_until_pay_pal_email_visible
+
+      if has_no_pay_pal_email? :text => PayPalPage.email
+        raise "Failed to verify PayPal email address should be #{PayPalPage.email}"
+      end
+
+      self
+    end
+
     def PlaceOrder
       wait_until_place_order_btn_visible
       place_order_btn.click
 
       OrderCompletedPage.new
     end
+
   end
 end
