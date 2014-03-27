@@ -1,5 +1,3 @@
-require './sections/shopping_cart_modal'
-
 module Sections
   include Pages
   class LoggedInHeader < BaseSection

@@ -1,2 +1,4 @@
-class LoggedInFooter<BaseSection
+module Sections
+  class LoggedInFooter<BaseSection
+  end
 end

@@ -10,7 +10,6 @@ feature 'Checkout' do
   before(:all) do
     @rand = rand(1000).to_s
     @email = "testuser" + @rand + "@mailinator.com"
-    #@email = "msiwiec@mailinator.com"
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
@@ -40,14 +39,14 @@ feature 'Checkout' do
   scenario 'Add item to cart' do
     @page = HomePage.new
     @page.load
-    @page.header.SearchFor(@item_to_search_for).GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToCart
+    @page.header.SearchFor(@item_to_search_for).GoToFirstProductNotSoldOutOnHold.AddToCart.VerifyItemAddedToCart
 
   end
 
   scenario 'Remove item from cart' do
     @page = HomePage.new
     @page.load
-    product_name = @page.header.SearchFor(@item_to_search_for).GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToCart
+    product_name = @page.header.SearchFor(@item_to_search_for).GoToFirstProductNotSoldOutOnHold.AddToCart.VerifyItemAddedToCart
 
     @page = ShoppingCartPage.new
     @page.RemoveItemFromCart(product_name).VerifyItemRemovedFromCart(product_name)
@@ -57,7 +56,7 @@ feature 'Checkout' do
   scenario 'Check mini cart' do
     @page = HomePage.new
     @page.load
-    @page.header.SearchFor(@item_to_search_for).GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToMiniCart
+    @page.header.SearchFor(@item_to_search_for).GoToFirstProductNotSoldOutOnHold.AddToCart.VerifyItemAddedToMiniCart
 
   end
 
@@ -66,7 +65,7 @@ feature 'Checkout' do
 
     @page = HomePage.new
     @page.load
-    @page.header.SearchFor(@item_to_search_for).GoToFirstProductNotSoldOut.AddToCart.VerifyItemAddedToCart
+    @page.header.SearchFor(@item_to_search_for).GoToFirstProductNotSoldOutOnHold.AddToCart.VerifyItemAddedToCart
 
     @page = ShoppingCartPage.new
     @page.ChangeVerifyItemQuantityUpdated(item_quantity)
@@ -95,7 +94,7 @@ feature 'Checkout' do
     @page = HomePage.new
     @page.load
     @page.header.SearchFor(@item_to_search_for).
-        GoToFirstProduct.
+        GoToFirstProductNotSoldOutOnHold.
         AddToCart.
         header.GoToCart.
         CheckOutNow.
@@ -119,7 +118,7 @@ feature 'Checkout' do
     @page = HomePage.new
     @page.load
     @page.header.SearchFor(@item_to_search_for).
-        GoToFirstProduct.
+        GoToFirstProductNotSoldOutOnHold.
         AddToCart.
         header.GoToCart.
         CheckOutNow(shipping_info_saved, credit_info_saved).
@@ -135,7 +134,7 @@ feature 'Checkout' do
     @page = HomePage.new
     @page.load
     @page.header.SearchFor(@item_to_search_for).
-        GoToFirstProduct.
+        GoToFirstProductNotSoldOutOnHold.
         AddToCart.
         header.GoToCart.
         CheckOutNow(shipping_info_saved, credit_info_saved).
@@ -150,7 +149,7 @@ feature 'Checkout' do
     @page = HomePage.new
     @page.load
     @page.header.SearchFor(@item_to_search_for).
-        GoToFirstProduct.
+        GoToFirstProductNotSoldOutOnHold.
         AddToCart.
         header.GoToCart.
         CheckoutWithPayPal.
@@ -166,8 +165,8 @@ feature 'Checkout' do
 
   end
 
+  # this case is implemented in 'session_spec.rb'
   scenario 'Cart expires after 10 minutes idle' do
-    @page
 
   end
 =end

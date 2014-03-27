@@ -1,4 +1,3 @@
-require './sections/logged_in_header'
 
 module Pages
   class ProductPage<BasePage
