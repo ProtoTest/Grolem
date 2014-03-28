@@ -1,12 +1,9 @@
-
 module Pages
-  class CheckoutShippingPage < BasePage
+  class AddShippingPage < BasePage
+    element :save_btn, :xpath, "//input[contains(@value, 'Save')]"
+    element :cancel_btn, '.cancel-btn'
 
-    element :continue_btn, :xpath, "//input[@value='Continue >']"
     section :add_shipping_section, AddShippingSection, '#new_okl_customer_client_v1_shipping_address'
-
-    set_url '/checkout/address'
-
 
     ##
     # Enter the shipping details into the form
@@ -23,13 +20,19 @@ module Pages
     def EnterShippingDetails(shipping_info)
       add_shipping_section.EnterShippingDetails(shipping_info)
 
-      CheckoutShippingPage.new
+      AddShippingPage.new
     end
 
-    def Continue
-      continue_btn.click
+    def SaveShippingInfo
+      save_btn.click
 
-      CheckoutPaymentPage.new
+      MyAccountInformationPage.new
+    end
+
+    def Cancel
+      cancel_btn.click
+
+      MyAccountInformationPage.new
     end
   end
 end

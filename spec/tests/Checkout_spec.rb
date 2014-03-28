@@ -16,6 +16,21 @@ feature 'Checkout' do
     @fullname = "#{@firstname} #{@lastname}"
     @item_to_search_for = "lamp"
 
+    @shipping_info = {:first => @firstname,
+                      :last => @lastname,
+                      :address1 => $ADDRESS,
+                      :city => $CITY,
+                      :state => $STATE,
+                      :state_abbr => $STATE_ABBR,
+                      :zip => $ZIP,
+                      :phone => $PHONE}
+
+    @billing_info = {:fullname => @fullname,
+                     :credit_card_num => $VISA_TEST_CC,
+                     :exp_month => "1",
+                     :exp_year => "2020",
+                     :cvc => "123"}
+
     # register the user
     register_user(@firstname, @lastname, @password, @email)
 
@@ -76,21 +91,6 @@ feature 'Checkout' do
     save_payment_info = true
     use_shipping_address = true
 
-    shipping_info = {:first => @firstname,
-                     :last => @lastname,
-                     :address1 => $ADDRESS,
-                     :city => $CITY,
-                     :state => $STATE,
-                     :state_abbr => $STATE_ABBR,
-                     :zip => $ZIP,
-                     :phone => $PHONE}
-
-    billing_info = {:fullname => @fullname,
-                    :credit_card_num => $VISA_TEST_CC,
-                    :exp_month => "1",
-                    :exp_year => "2020",
-                    :cvc => "123"}
-
     @page = HomePage.new
     @page.load
     @page.header.SearchFor(@item_to_search_for).
@@ -98,20 +98,14 @@ feature 'Checkout' do
         AddToCart.
         header.GoToCart.
         CheckOutNow.
-        EnterShippingDetails(shipping_info).
+        EnterShippingDetails(@shipping_info).
         Continue.
-        EnterBillingInfo(billing_info, save_payment_info, use_shipping_address).
-        Continue.VerifyAddressAndCreditCardAdded(shipping_info, billing_info)
+        EnterBillingInfo(@billing_info, save_payment_info, use_shipping_address).
+        Continue.VerifyAddressAndCreditCardAdded(@shipping_info, @billing_info)
 
   end
 
   scenario 'Checkout with saved address and saved credit card in checkout flow' do
-    billing_info = {:fullname => @fullname,
-                    :credit_card_num => $VISA_TEST_CC,
-                    :exp_month => "1",
-                    :exp_year => "2020",
-                    :cvc => "123"}
-
     shipping_info_saved = true
     credit_info_saved = true
 
