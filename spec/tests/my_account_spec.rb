@@ -51,17 +51,25 @@ feature 'My Account' do
     @page.AddPaymentMethod.
         EnterBillingInfo(billing_info).
         EnterBillingAddressAndPhone(address).
-        SavePaymentInfo
+        SavePaymentInfo.
+        VerifyPaymentAdded(billing_info)
+  end
 
-    # TODO: Verify the payment added!
-    # TODO: Possible partial (section) for the credit card last 4, etc.
+  scenario 'Remove credit card from account' do
+    billing_info = {:fullname => @fullname,
+                    :credit_card_num => $VISA_TEST_CC,
+                    :exp_month => "1",
+                    :exp_year => "2020",
+                    :cvc => "123"}
+
+    @page = MyAccountInformationPage.new
+    @page.load
+
+    @page.RemovePaymentMethod(billing_info).
+        VerifyPaymentMethodRemoved(billing_info)
   end
 
 =begin
-  scenario 'Remove credit card from account' do
-
-  end
-
   scenario 'Add shipping address to account' do
 
   end
