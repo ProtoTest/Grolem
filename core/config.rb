@@ -1,4 +1,15 @@
 require 'custom_formatter'
+
+def reset_capybara
+  Capybara.reset_sessions!
+  Capybara.reset!
+  page.driver.browser.manage.delete_cookie('ewokAuth')
+  page.driver.browser.manage.delete_cookie('ewokAuthGuestPass')
+  page.driver.browser.manage.delete_cookie('keepLogin')
+  page.driver.browser.manage.delete_cookie('is_member')
+  page.driver.browser.manage.window.maximize
+end
+
 RSpec.configure do |config|
   config.include Capybara::DSL
   config.treat_symbols_as_metadata_keys_with_true_values = true
@@ -19,13 +30,7 @@ RSpec.configure do |config|
 
   config.before(:all) do
     $logger = CommandLogger.new
-    Capybara.reset_sessions!
-    Capybara.reset!
-    page.driver.browser.manage.delete_cookie('ewokAuth')
-    page.driver.browser.manage.delete_cookie('ewokAuthGuestPass')
-    page.driver.browser.manage.delete_cookie('keepLogin')
-    page.driver.browser.manage.delete_cookie('is_member')
-    page.driver.browser.manage.window.maximize
+    reset_capybara
   end
 
   config.after(:all) do
@@ -36,13 +41,7 @@ RSpec.configure do |config|
     $logger = CommandLogger.new
     path = example.metadata[:description]
     config.test_name = path
-    Capybara.reset_sessions!
-    Capybara.reset!
-    page.driver.browser.manage.delete_cookie('ewokAuth')
-    page.driver.browser.manage.delete_cookie('ewokAuthGuestPass')
-    page.driver.browser.manage.delete_cookie('keepLogin')
-    page.driver.browser.manage.delete_cookie('is_member')
-    page.driver.browser.manage.window.maximize
+    reset_capybara
   end
 
   config.after(:each) do
