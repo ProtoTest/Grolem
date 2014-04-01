@@ -11,15 +11,17 @@ module Sections
 
     element :logo_link,'a',:text=>"One Kings Lane"
     element :search_field,'.search-field'
-    element :search_button, '.search-icon'
+    element :search_button, :xpath, "//button[contains(@class,'search-icon')]"
 
     element :welcome_user_dropdown, :xpath, "//span[contains(text(),'Welcome')]"
     element :my_account_link,'a', :text=>"My Account"
     element :log_out_link, 'a', :xpath, "//a[@href='/logout']"
 
-    element :shopping_cart_link, :xpath, "//a[@href='/cart']"
+    elements :shopping_cart_link, :xpath, "//a[@href='/cart']"
 
     section :mini_cart, Sections::ShoppingCartModal, '#micro-cart' # typically displays after adding an item to the cart
+
+    element :referral_credit_link, '.credits', :text => "MY CREDITS $15"
 
     def GoToAllSales
       all_sales_link.click
@@ -48,20 +50,32 @@ module Sections
 
     def LogOut
       welcome_user_dropdown.click
-      log_out_link.click
-      LoginPage.new
+      visit "/logout"
+
+      LoginPage.new.wait_for_elements
     end
 
     def SearchFor text
       search_field.set text
       search_button.click
-      SearchResultsPage.new
+      SearchResultsPage.new.wait_for_elements
     end
 
     def GoToCart
-      wait_until_shopping_cart_link_visible
-      shopping_cart_link.click
-      ShoppingCartPage.new
+      page = ShoppingCartPage.new
+      page.load
+
+      page
+    end
+
+    # for customers who were invited
+    def VerifyReferralAndCredits
+      referral_credit_link.click
+      MyAccountCreditOffersPage.new.wait_for_elements
+    end
+
+    def WaitForMicroCartToDisplay
+      wait_until_mini_cart_visible
     end
   end
 end

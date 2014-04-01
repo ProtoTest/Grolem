@@ -18,6 +18,7 @@ module Pages
       last_name_field.set lastname
       password_field.set password
       shop_today_sales_button.click
+      sleep 1
       WelcomeSplashPage.new
     end
 

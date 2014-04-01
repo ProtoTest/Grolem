@@ -22,6 +22,12 @@ module Pages
   element :back_to_top_button, '.backToTop'
   set_url "/search{?query*}"
 
+    def wait_for_elements
+      wait_until_first_product_visible
+
+      self
+    end
+
     def GoToFirstProduct
       first_product.click
       ProductPage.new

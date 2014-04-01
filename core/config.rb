@@ -18,7 +18,14 @@ RSpec.configure do |config|
   config.add_setting :command_delay_sec, :default=>0
 
   config.before(:all) do
-
+    $logger = CommandLogger.new
+    Capybara.reset_sessions!
+    Capybara.reset!
+    page.driver.browser.manage.delete_cookie('ewokAuth')
+    page.driver.browser.manage.delete_cookie('ewokAuthGuestPass')
+    page.driver.browser.manage.delete_cookie('keepLogin')
+    page.driver.browser.manage.delete_cookie('is_member')
+    page.driver.browser.manage.window.maximize
   end
 
   config.after(:all) do
@@ -28,7 +35,7 @@ RSpec.configure do |config|
   config.before(:each) do
     $logger = CommandLogger.new
     path = example.metadata[:description]
-      config.test_name = path
+    config.test_name = path
     Capybara.reset_sessions!
     Capybara.reset!
     page.driver.browser.manage.delete_cookie('ewokAuth')

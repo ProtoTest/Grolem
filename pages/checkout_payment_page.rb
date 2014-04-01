@@ -12,6 +12,12 @@ module Pages
     element :use_shipping_address, '#use-shipping-address'
     element :continue_btn, :xpath, "//*[contains(text(),'CONTINUE')]"
 
+    def wait_for_elements
+      wait_until_continue_btn_visible
+
+      self
+    end
+
     def PayWithPaypal
       pay_with_paypal_radio.click
       continue_btn.click

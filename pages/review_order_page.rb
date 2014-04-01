@@ -23,8 +23,9 @@ module Pages
     element :pay_pal_email, :xpath, "//div[contains(@class,'billingInfo')]/p"
 
     def wait_for_elements
-      wait_until_order_thank_you_visible
-      products.size.should > 0
+      wait_until_place_order_btn_visible
+
+      self
     end
 
     def AddGiftMessage(msg)

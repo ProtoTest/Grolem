@@ -20,6 +20,8 @@ module Pages
       wait_until_email_field_visible
       wait_until_password_field_visible
       wait_until_log_in_button_visible
+
+      self
     end
 
     def LoginWithInfo email, password

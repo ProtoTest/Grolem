@@ -18,6 +18,8 @@ module Pages
       product_qty_select.select(qty) if qty
       add_to_cart_button.click
 
+      header.WaitForMicroCartToDisplay
+
       ProductPage.new
     end
 

@@ -10,6 +10,10 @@ module Pages
       element :login_button, 'a[data-panel=modalSignup-login]'
       element :okl_logo, '.intro'
       element :error_label, :xpath, "//div/p/span[contains(@class,'error')]"
+
+      # invitee referral image and text (displayed if a customer was invited)
+      element :invite_img, '.savingsSeal'
+      element :invite_disclaimer_label, :xpath, "//*[contains(text(), 'Applies to first purchase of $30 or more')]"
     element :test , '.test'
     set_url ''
 
@@ -31,6 +35,13 @@ module Pages
       login_button.click
       #sleep 2
       LoginModal.new
+    end
+
+    def VerifyInviteSignupModalDisplayed
+      wait_until_invite_img_visible
+      wait_until_invite_disclaimer_label_visible
+
+      self
     end
   end
 end

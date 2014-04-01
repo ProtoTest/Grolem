@@ -7,6 +7,11 @@ module Pages
 
     set_url '/checkout/address'
 
+    def wait_for_elements
+      wait_until_continue_btn_visible
+
+      self
+    end
 
     ##
     # Enter the shipping details into the form

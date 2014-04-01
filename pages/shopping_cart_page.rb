@@ -21,6 +21,9 @@ module Pages
 
   class ShoppingCartPage < BasePage
     set_url '/cart'
+
+    section :header, LoggedInHeader, '.okl-header'
+
     element :check_out_now_top_button, :xpath, '//header//a[contains(@class,"checkout-btn")]'
     element :item_reservation_duration, '#countdown'
     element :add_offer_code_link, '.addOfferCode'
@@ -37,17 +40,21 @@ module Pages
 
     sections :cart_items, CartRowSection, :xpath, ".//ul[@class='cart-lines']/li[@class='clearfix']"
 
+    # Invite Referral Credit
+    element :referral_credit_label, :xpath, "//*[contains(text(), 'Referral Credit')]"
+    element :referral_credit_deduction_label, :xpath, "//*[contains(text(), '-$15.00')]"
+
     def CheckOutNow(is_shipping_info_saved=false, is_credit_card_saved=false)
       check_out_now_button.click
 
       # if the credit card is already saved in the system,
       # then the Review Order Page is displayed, otherwise the CheckoutShipping Page is displayed.
       if is_shipping_info_saved and is_credit_card_saved
-        return ReviewOrderPage.new
+        return ReviewOrderPage.new.wait_for_elements
       elsif is_shipping_info_saved and not is_credit_card_saved
-        return CheckoutPaymentPage.new
+        return CheckoutPaymentPage.new.wait_for_elements
       else
-        return CheckoutShippingPage.new
+        return CheckoutShippingPage.new.wait_for_elements
       end
     end
 
@@ -124,6 +131,13 @@ module Pages
       paypal_button.click
 
       PayPalPage.new
+    end
+
+    def VerifyReferralCreditApplied
+      wait_until_referral_credit_label_visible
+      wait_until_referral_credit_deduction_label_visible
+
+      self
     end
   end
 
