@@ -13,6 +13,14 @@ module Pages
 
     set_url ''
 
+    def wait_for_elements
+      wait_until_first_name_field_visible
+      wait_until_last_name_field_visible
+      wait_until_shop_today_sales_button_visible
+
+      self
+    end
+
     def EnterInfo firstname, lastname, password
       first_name_field.set firstname
       last_name_field.set lastname

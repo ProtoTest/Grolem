@@ -3,8 +3,7 @@ require 'spec_helper'
 feature 'Invite Friends' do
   before(:all) do
     @rand = rand(1000).to_s
-    #@new_customer = "testuser" + @rand + "@mailinator.com"
-    @new_customer = "testuser306@mailinator.com"
+    @new_customer = "testuser" + @rand + "@mailinator.com"
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
@@ -12,7 +11,7 @@ feature 'Invite Friends' do
     @facebookpassword = 'Qubit123!'
   end
 
-  before(:each) { @page = LoginPage.new; @page.load }
+  before(:each) { }
 
   after(:each) {sleep 3;}
 
@@ -27,8 +26,10 @@ feature 'Invite Friends' do
     # You can only invite new customers from an account that isn't disposable
     register_user(@firstname, @lastname, @facebookpassword, @facebookemail)
 
-    @page.
-        LoginWithInfo @facebookemail, @facebookpassword
+    @page = LoginPage.new
+    @page.load
+
+    @page.LoginWithInfo @facebookemail, @facebookpassword
     @page = InvitePage.new
     @page.load
     @page.should be_all_there
@@ -45,7 +46,7 @@ feature 'Invite Friends' do
     @page.should have_text "this is the message i am sending"
     @page.ClickXpath '//img[@alt="Accept Invitation"]'
 
-    @page = SignupModal.new.
+    @page = SignupModal.new.wait_for_elements.
         VerifyInviteSignupModalDisplayed.
         EnterEmail(@new_customer).
         EnterInfo(@firstname,@lastname,@password).
@@ -53,12 +54,18 @@ feature 'Invite Friends' do
   end
 
   scenario 'Search is displayed in header and works' do
+    @page = LoginPage.new
+    @page.load
+
     @page.LoginWithInfo(@new_customer, @password).
         header.SearchFor("lamp").
         GoToFirstProductNotSoldOutOnHold
   end
 
   scenario 'Confirm credit' do
+    @page = LoginPage.new
+    @page.load
+
     @page.LoginWithInfo(@new_customer, @password).
         header.VerifyReferralAndCredits.
         header.SearchFor("lamp").

@@ -17,6 +17,12 @@ module Pages
     element :test , '.test'
     set_url ''
 
+    def wait_for_elements
+      wait_until_email_field_visible
+      wait_until_shop_now_button_visible
+
+      self
+    end
 
     def  EnterEmail username
       email_field.set username
@@ -24,9 +30,9 @@ module Pages
 
       sleep 1
       if has_error_label? and error_label.text.include?("This email is already a registered member")
-        return SignupModal.new
+        return SignupModal.new.wait_for_elements
       else
-        return RegisterModal.new
+        return RegisterModal.new.wait_for_elements
       end
     end
 
@@ -40,6 +46,8 @@ module Pages
     def VerifyInviteSignupModalDisplayed
       wait_until_invite_img_visible
       wait_until_invite_disclaimer_label_visible
+
+      wait_for_elements
 
       self
     end
