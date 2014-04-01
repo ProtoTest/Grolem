@@ -59,7 +59,7 @@ module Sections
     end
 
     def GoToCart
-      #wait_until_shopping_cart_link_visible
+      wait_until_shopping_cart_link_visible
       shopping_cart_link.click
       ShoppingCartPage.new
     end

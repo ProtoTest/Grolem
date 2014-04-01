@@ -127,5 +127,12 @@ module Pages
     end
   end
 
+  ############################ Common Repeatable Actions ########################
+
+  def remove_all_items_from_cart
+    page = ShoppingCartPage.new
+    page.load
+    page.RemoveAllItemsFromCart
+  end
 
 end

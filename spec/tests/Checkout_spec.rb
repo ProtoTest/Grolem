@@ -76,7 +76,7 @@ feature 'Checkout' do
   end
 
   scenario 'Can change quantity' do
-    item_quantity = 4
+    item_quantity = 2
 
     @page = HomePage.new
     @page.load

@@ -42,4 +42,12 @@ module Pages
       sleep 1
     end
   end
+
+  ############################ Common Repeatable Actions ########################
+  def login(email, password)
+    page = LoginPage.new
+    page.load
+    page.LoginWithInfo(email, password)
+  end
+
 end

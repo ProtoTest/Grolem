@@ -1,8 +1,11 @@
 module Pages
   class InvitePage < BasePage
+    attr_reader :header
+
     element :emails_textarea, '#emailAddresses'
     element :send_invites_button, '.invite'
     element :message_textarea, '#emailMessage'
+    section :header, LoggedInHeader, '.okl-header'
 
     set_url '/invite'
 
