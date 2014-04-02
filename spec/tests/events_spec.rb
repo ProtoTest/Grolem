@@ -22,7 +22,8 @@ feature 'Events' do
     @sale_event = @page.header.GoToCurrentSale(rand(16))
     puts @sale_event.sort_options.size
     @sale_event.SortItems(:low_price)
-    puts @sale_event.PriceList
+    prices = @sale_event.PriceList
+    prices.should == prices.sort
   end
 
 end

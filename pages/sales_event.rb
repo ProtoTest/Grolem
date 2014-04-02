@@ -27,10 +27,7 @@ module Pages
 
   private
   def string_to_price(str)
-    puts str
-    r = /\$([\d,]+)/.match(str)[1].gsub!(',','').to_i
-    puts r
-    r
+    /\$([\d,]+)/.match(str)[1].gsub(',','').to_i
   end
 
 end
