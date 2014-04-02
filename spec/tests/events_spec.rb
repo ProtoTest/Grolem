@@ -20,7 +20,6 @@ feature 'Events' do
 
   scenario "Sort by Lowest Price" do
     @sale_event = @page.header.GoToCurrentSale(rand(16))
-    puts @sale_event.sort_options.size
     @sale_event.SortItems(:low_price)
     prices = @sale_event.PriceList
     prices.should == prices.sort
