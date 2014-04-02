@@ -18,7 +18,7 @@ feature 'Events' do
     # Select a random page
   end
 
-  scenario "Ordering by price ascending should re-order the sale items" do
+  scenario "Sort by Lowest Price" do
     @sale_event = @page.header.GoToCurrentSale(rand(16))
     puts @sale_event.sort_options.size
     @sale_event.SortItems(:low_price)
