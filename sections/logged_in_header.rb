@@ -4,10 +4,11 @@ module Sections
     attr_reader :mini_cart
 
     element :invite_friends_link,".invite-friends"
-    element :all_sales_link,:text,"All Sales"
+    element :all_sales_link,"#all-sales"
     element :vintage_link, :text,"Vintage"
     element :upcoming_sales_link, 'a',:text => "Upcoming Sales"
     element :style_blog, 'a',:text=> "Style Blog"
+    elements :all_sales_events, ".latest-sales a"
 
     element :logo_link,'a',:text=>"One Kings Lane"
     element :search_field,'.search-field'
@@ -26,6 +27,15 @@ module Sections
     def GoToAllSales
       all_sales_link.click
       HomePage.new
+    end
+
+    # Go to a current sale by its 0-indexed position in the all sales header dropdown.
+    def GoToCurrentSale(position)
+      # Open the sales drop down: sales aren't loaded until the drop down is visible.
+      all_sales_link.hover
+      sleep(1)
+      all_sales_events[position].click
+      SalesEvent.new
     end
 
     def GoToLogo
