@@ -3,6 +3,14 @@ require 'custom_formatter'
 def reset_capybara
   Capybara.reset_sessions!
   Capybara.reset!
+
+  Capybara.configure do |config|
+    config.match = :prefer_exact
+    config.exact = false
+    config.ignore_hidden_elements = true
+    config.visible_text_only = true
+  end
+
   page.driver.browser.manage.delete_cookie('ewokAuth')
   page.driver.browser.manage.delete_cookie('ewokAuthGuestPass')
   page.driver.browser.manage.delete_cookie('keepLogin')
@@ -47,13 +55,6 @@ RSpec.configure do |config|
   config.after(:each) do
 
   end
-end
-
-Capybara.configure do |config|
-  config.match = :prefer_exact
-  config.exact = false
-  config.ignore_hidden_elements = true
-  config.visible_text_only = true
 end
 
 
