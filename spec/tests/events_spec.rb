@@ -18,11 +18,40 @@ feature 'Events' do
     # Select a random page
   end
 
-  scenario "Sort by Lowest Price" do
+  scenario 'Sort by Lowest Price' do
     @sale_event = @page.header.GoToCurrentSale(rand(16))
     @sale_event.SortItems(:low_price)
     prices = @sale_event.PriceList
     prices.should == prices.sort
+  end
+
+  scenario 'Sort by Featured' do
+    @sale_event = @page.header.GoToCurrentSale(rand(16))
+    @sale_event.SortItems(:featured)
+  end
+
+  scenario 'Sort by Available Now' do
+    @sale_event = @page.header.GoToCurrentSale(11)
+    @sale_event.SortItems(:available)
+    products = @sale_event.products
+    # Looking at all products, starting from the end of the product list,
+    # scan until the first product not marked as "SOLD OUT".
+    i = products.length - 1
+    while i >= 0 do
+      if products[i].text.include?('SOLD OUT')
+        i = i - 1
+      else
+        break
+      end
+    end
+    # From this point on, if a product is marked as "SOLD OUT", the product list is not
+    # properly sorted according to availability.
+    while i >= 0 do
+      if products[i].text.include?('SOLD OUT')
+        fail('Sold out item not at end of page.')
+      end
+      i = i - 1
+    end
   end
 
 end
