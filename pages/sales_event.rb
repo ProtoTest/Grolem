@@ -7,6 +7,8 @@ module Pages
     elements :sort_options, '.sort-filters a'
     elements :products, 'li.product'
     elements :prices, '.price em'
+    section :header, LoggedInHeader, '.okl-header'
+
 
     @@sort_type = [:featured, :low_price, :available]
 

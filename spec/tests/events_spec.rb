@@ -54,4 +54,12 @@ feature 'Events' do
     end
   end
 
+  scenario 'Search shows up in header and works' do
+    @sale_event = @page.header.GoToCurrentSale(rand(16))
+    @sale_event.header.should have_search_field
+    product_name = @sale_event.products[0].find('div.product-info h3').text
+    results_page = @sale_event.header.SearchFor product_name
+    results_page.should have_search_results_summary :text=>product_name
+
+  end
 end
