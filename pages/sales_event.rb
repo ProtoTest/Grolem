@@ -4,25 +4,27 @@ module Pages
     set_url "/sales{/sale}"
 
     element :sort_by, '.sort-filters em'
-    elements :sort_options, ".sort-filters a"
-    element :product, "div.product-info"
+    elements :sort_options, '.sort-filters a'
+    elements :products, 'li.product'
     elements :prices, '.price em'
 
     @@sort_type = [:featured, :low_price, :available]
 
+    def initialize(text)
+      @text = text
+    end
+
 
     def SortItems(sort_type_i)
       list_index = @@sort_type.index(sort_type_i)
-      puts sort_type_i
       sort_by.click
-      sleep(1)
+      wait_for_sort_options
       sort_options[list_index].click
-      puts sort_options[list_index]
     end
   end
 
   def PriceList
-    product.all('.price em').map {|price| string_to_price(price.text)}
+    prices.map {|price| string_to_price(price.text)}
   end
 
   private

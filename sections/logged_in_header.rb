@@ -32,10 +32,12 @@ module Sections
     # Go to a current sale by its 0-indexed position in the all sales header dropdown.
     def GoToCurrentSale(position)
       # Open the sales drop down: sales aren't loaded until the drop down is visible.
+      wait_for_all_sales_link
       all_sales_link.hover
-      sleep(1)
+      wait_for_all_sales_events
+      $logger.Log "Navigating to sale #{all_sales_events[position].text}"
       all_sales_events[position].click
-      SalesEvent.new
+      SalesEvent.new(text)
     end
 
     def GoToLogo
