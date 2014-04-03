@@ -1,7 +1,13 @@
 module Sections
   include Pages
+  class SearchSection < BaseSection
+    element :search_field,'.search-field'
+    element :search_button, :xpath, ".//button[contains(@class,'search-icon')]"
+    element :search_label, :xpath, ".//form[contains(@class,'search-form')]/fieldset/label[contains(text(),'Search by item or category')]"
+  end
+
   class LoggedInHeader < BaseSection
-    attr_reader :mini_cart
+    attr_reader :mini_cart, :search_container
 
     element :invite_friends_link,".invite-friends"
     element :all_sales_link,"#all-sales"
@@ -9,17 +15,13 @@ module Sections
     element :upcoming_sales_link, 'a',:text => "Upcoming Sales"
     element :style_blog, 'a',:text=> "Style Blog"
     elements :all_sales_events, ".latest-sales a"
-
     element :logo_link,'a',:text=>"One Kings Lane"
-    element :search_field,'.search-field'
-    element :search_button, :xpath, "//button[contains(@class,'search-icon')]"
-
     element :welcome_user_dropdown, :xpath, "//span[contains(text(),'Welcome')]"
     element :my_account_link,'a', :text=>"My Account"
     element :log_out_link, 'a', :xpath, "//a[@href='/logout']"
 
     elements :shopping_cart_link, :xpath, "//a[@href='/cart']"
-
+    section :search_container, SearchSection, ".search-container"
     section :mini_cart, Sections::ShoppingCartModal, '#micro-cart' # typically displays after adding an item to the cart
 
     element :referral_credit_link, '.credits', :text => "MY CREDITS $15"
@@ -64,13 +66,14 @@ module Sections
       welcome_user_dropdown.click
       visit "/logout"
 
-      LoginPage.new.wait_for_elements
+      LoginPage.new
     end
 
     def SearchFor text
-      search_field.set text
-      search_button.click
-      SearchResultsPage.new.wait_for_elements
+      search_container.search_field.set text
+      search_container.search_button.click
+
+      SearchResultsPage.new
     end
 
     def GoToCart
@@ -83,7 +86,7 @@ module Sections
     # for customers who were invited
     def VerifyReferralAndCredits
       referral_credit_link.click
-      MyAccountCreditOffersPage.new.wait_for_elements
+      MyAccountCreditOffersPage.new
     end
 
     def WaitForMicroCartToDisplay

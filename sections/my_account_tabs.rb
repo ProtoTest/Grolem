@@ -9,7 +9,7 @@ module Sections
     def GoToOrders
       orders_link.click
 
-      MyAccountOrdersPage.new.wait_for_elements
+      MyAccountOrdersPage.new
     end
 
   end

@@ -33,7 +33,7 @@ module Pages
       wait_until_continue_btn_visible(15)
       continue_btn.click
 
-      ReviewOrderPage.new.wait_for_elements
+      ReviewOrderPage.new
     end
 
   end

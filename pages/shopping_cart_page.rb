@@ -50,11 +50,11 @@ module Pages
       # if the credit card is already saved in the system,
       # then the Review Order Page is displayed, otherwise the CheckoutShipping Page is displayed.
       if is_shipping_info_saved and is_credit_card_saved
-        return ReviewOrderPage.new.wait_for_elements
+        return ReviewOrderPage.new
       elsif is_shipping_info_saved and not is_credit_card_saved
-        return CheckoutPaymentPage.new.wait_for_elements
+        return CheckoutPaymentPage.new
       else
-        return CheckoutShippingPage.new.wait_for_elements
+        return CheckoutShippingPage.new
       end
     end
 
