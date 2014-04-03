@@ -1,6 +1,7 @@
 require 'custom_formatter'
 
 def reset_capybara
+  # reset the capybara session and configuration
   Capybara.reset_sessions!
   Capybara.reset!
 
@@ -11,11 +12,18 @@ def reset_capybara
     config.visible_text_only = true
   end
 
+  # Delete some cookies for the site that are hanging around
   page.driver.browser.manage.delete_cookie('ewokAuth')
   page.driver.browser.manage.delete_cookie('ewokAuthGuestPass')
   page.driver.browser.manage.delete_cookie('keepLogin')
   page.driver.browser.manage.delete_cookie('is_member')
   page.driver.browser.manage.window.maximize
+
+  # With implicit waits enabled, use of wait_until methods is no longer required. This method will
+  # wait for the element to be found on the page until the Capybara default timeout is reached.
+  SitePrism.configure do |config|
+    config.use_implicit_waits = true
+  end
 end
 
 RSpec.configure do |config|
