@@ -1,12 +1,27 @@
 module Sections
-  class WhiteGloveSection < BaseSection
+  class WhiteGloveToolTip < BaseSection
+    element :close_btn, '.close'
+    element :title, '.title', :text => 'White glove & home delivery shipping rate'
+  end
 
+  class WhiteGloveSection < BaseSection
+    element :main_label, :xpath, "./dt[2]"
+    element :icon, :xpath, "./dt[2]/img[contains(@src, 'whiteglove.gif')]"
+    element :description, :xpath, "./dd[2]"
+    element :tool_tip_link, :xpath, "./dd[2]/a[contains(@class, 'shippingTooltip')]"
+  end
+
+  class VMFVendorSection < BaseSection
+    element :vendor_name, 'div h5'
+    element :vendor_description, 'div p'
+    element :vendor_page_link, 'a', :text=>"See seller's other items"
   end
 end
 
 module Pages
   class ProductPage<BasePage
     attr_reader :header, :qty_options, :size_options, :product_qty_select, :product_size_select
+    attr_reader :white_glove_section, :vmf_vendor_section
 
     include Sections
     set_url '/product/33381/1909101'
@@ -17,6 +32,16 @@ module Pages
     element :product_qty_select, '#selectSkuQuantity'
     element :product_size_select, '.productOptionSelect'
     section :header, Sections::LoggedInHeader, '.okl-header'
+
+    # white glove: not always displayed. Depends on whether or not the product has 'extra'
+    # special shipping requirements
+    section :white_glove_section, WhiteGloveSection, :xpath, "//dl[contains(@class,'shippingDetails')]"
+
+    # present, but not visible until tool_tip_link is clicked
+    section :tool_tip_modal, WhiteGloveToolTip, "#productShipping"
+
+    # vintage seller info
+    section :vmf_vendor_section, VMFVendorSection, '.ds-vmf-vendor'
 
     # quantity and size options
     elements :qty_options, '.qty'
@@ -55,6 +80,13 @@ module Pages
 
     def VerifySearchElements
       self.header.should be_all_there
+    end
+
+    # Applies to only VMF products
+    def GoToVMFVendorPage
+      vmf_vendor_section.vendor_page_link.click
+
+      ShopByVendorPage.new
     end
   end
 end

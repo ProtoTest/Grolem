@@ -11,7 +11,7 @@ module Sections
 
     element :invite_friends_link,".invite-friends"
     element :all_sales_link,"#all-sales"
-    element :vintage_link, :text,"Vintage"
+    element :vintage_link, 'a', :text=>"Vintage"
     element :upcoming_sales_link, 'a',:text => "Upcoming Sales"
     element :style_blog, 'a',:text=> "Style Blog"
     elements :all_sales_events, ".latest-sales a"
@@ -24,7 +24,7 @@ module Sections
     section :search_container, SearchSection, ".search-container"
     section :mini_cart, Sections::ShoppingCartModal, '#micro-cart' # typically displays after adding an item to the cart
 
-    element :referral_credit_link, '.credits', :text => "MY CREDITS $15"
+    element :referral_credit_link, '.credits'
 
     def GoToAllSales
       all_sales_link.click
@@ -85,7 +85,14 @@ module Sections
 
     # for customers who were invited
     def VerifyReferralAndCredits
+      referral_link_txt = "MY CREDITS $15"
+
+      if not referral_credit_link.text.eql?(referral_link_txt)
+        raise "Failed to verify the referral credit link in the header's text is #{referral_link_txt}"
+      end
+
       referral_credit_link.click
+
       MyAccountCreditOffersPage.new
     end
 

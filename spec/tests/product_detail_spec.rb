@@ -69,7 +69,14 @@ feature 'Product Details' do
   end
 
   scenario 'White Glove Tool Tip' do
-
+    # Sofa's typically have the 'white glove' special shipping handling
+    @page = HomePage.new
+    @page.load
+    @page = @page.header.SearchFor("Sofa").
+        GoToFirstProductNotSoldOutOnHold
+    @page.white_glove_section.should have_main_label
+    @page.white_glove_section.should have_icon
+    @page.white_glove_section.should have_description
   end
 
   scenario 'Add Product to Cart' do

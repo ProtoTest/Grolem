@@ -17,6 +17,8 @@ def reset_capybara
   page.driver.browser.manage.delete_cookie('ewokAuthGuestPass')
   page.driver.browser.manage.delete_cookie('keepLogin')
   page.driver.browser.manage.delete_cookie('is_member')
+
+  # Ensure the browser is maximized to maximize visibility of element
   page.driver.browser.manage.window.maximize
 
   # With implicit waits enabled, use of wait_until methods is no longer required. This method will
@@ -29,7 +31,7 @@ end
 RSpec.configure do |config|
   config.include Capybara::DSL
   config.treat_symbols_as_metadata_keys_with_true_values = true
-  config.add_setting :default_browser, :default => Browsers::Chrome
+  config.add_setting :default_browser, :default => Browsers::Firefox
   config.add_setting :remote_driver, :default => false
   config.add_setting :host_ip, :default => "localhost"
   config.add_setting :element_wait_sec, :default => 20
