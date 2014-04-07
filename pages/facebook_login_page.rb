@@ -10,11 +10,24 @@ module Pages
     element :cancel_button, 'button',:text=>'Cancel'
 
     def LoginAs email, pass
+      Login(email, pass)
+      FacebookMainPage.new
+    end
+
+    def LoginToShare email, pass
+      Login(email, pass)
+
+      FacebookShareModalPage.new
+    end
+
+
+    private
+
+    def Login email, pass
       email_field.set email
       password_field.set pass
       login_button.click
       okay_button.click if has_okay_button?
-      HomePage.new
     end
   end
 end

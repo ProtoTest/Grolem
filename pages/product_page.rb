@@ -5,10 +5,10 @@ module Sections
   end
 
   class WhiteGloveSection < BaseSection
-    element :main_label, :xpath, "./dt[2]"
-    element :icon, :xpath, "./dt[2]/img[contains(@src, 'whiteglove.gif')]"
-    element :description, :xpath, "./dd[2]"
-    element :tool_tip_link, :xpath, "./dd[2]/a[contains(@class, 'shippingTooltip')]"
+    element :main_label, :xpath, ".//dt[2]"
+    element :icon, :xpath, ".//dt[2]/img[contains(@src, 'whiteglove.gif')]"
+    element :description, :xpath, ".//dd[2]"
+    element :tool_tip_link, :xpath, ".//dd[2]/a[contains(@class, 'shippingTooltip')]"
   end
 
   class VMFVendorSection < BaseSection
@@ -43,9 +43,40 @@ module Pages
     # vintage seller info
     section :vmf_vendor_section, VMFVendorSection, '.ds-vmf-vendor'
 
-    # quantity and size options
+    # quantity and size options (size may not be there)
     elements :qty_options, '.qty'
     elements :size_options, '.opt'
+
+    # social sharing
+    element :facebook_share_link, :xpath, "//*[contains(@class,'fb-share')]"
+    element :email_share_link,  :xpath, "//*[contains(@class,'em-share')]"
+    element :pinterest_share_link, :xpath, "//*[contains(@class, 'pin-it')]"
+
+    # Returns the product text that was shared
+    def ShareViaFacebook(facebook_email, facebook_password, msg=nil)
+
+      product_name_str = product_name.text
+
+      facebook_share_link.click
+      sleep 1
+
+      new_window = page.driver.browser.window_handles.last
+
+      page.within_window new_window do
+        FacebookLoginPage.new.LoginToShare(facebook_email, facebook_password).
+            VerifyProductNameDisplayed(product_name_str).ShareWith("Friends").ShareLink(msg)
+      end
+
+      product_name.text
+    end
+
+    def ShareViaEmail(email, message)
+
+    end
+
+    def ShareViaPinterest(facebook_email, facebook_password)
+
+    end
 
     def AddToCart(qty=nil)
       product_txt = product_name.text(:visible)
