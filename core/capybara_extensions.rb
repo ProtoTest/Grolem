@@ -4,7 +4,7 @@ module Capybara
     class Element
       include Capybara::DSL
       def present?
-         page.has_selector? @query.locator
+         page.has_selector? @query.selector.format, @query.locator
       end
 
       def set_checked(value)
