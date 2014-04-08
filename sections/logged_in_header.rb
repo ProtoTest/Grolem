@@ -4,24 +4,30 @@ module Sections
     element :search_field,'.search-field'
     element :search_button, :xpath, ".//button[contains(@class,'search-icon')]"
     element :search_label, :xpath, ".//form[contains(@class,'search-form')]/fieldset/label[contains(text(),'Search by item or category')]"
+
+    def VerifyPresent
+      search_field.present?
+      search_button.present?
+      search_label.present?
+    end
   end
 
   class LoggedInHeader < BaseSection
     attr_reader :mini_cart, :search_container
 
-    element :invite_friends_link,".invite-friends"
-    element :all_sales_link,"#all-sales"
-    element :vintage_link, 'a', :text=>"Vintage"
-    element :upcoming_sales_link, 'a',:text => "Upcoming Sales"
-    element :style_blog, 'a',:text=> "Style Blog"
-    elements :all_sales_events, ".latest-sales a"
-    element :logo_link,'a',:text=>"One Kings Lane"
+    element :invite_friends_link, '.invite-friends'
+    element :all_sales_link, '#all-sales'
+    element :vintage_link, 'a[data-linkname="header_vmf"]'
+    element :upcoming_sales_link, 'a[data-linkname="header_calendar"]'
+    element :style_blog, 'a[data-linkname="header_llh"]'
+    elements :all_sales_events, '.latest-sales a'
+    element :logo_link,'a[data-linkname="header_logo"]'
     element :welcome_user_dropdown, :xpath, "//span[contains(text(),'Welcome')]"
-    element :my_account_link,'a', :text=>"My Account"
+    element :my_account_link, 'a[data-linkname="header_my_account"]'
     element :log_out_link, 'a', :xpath, "//a[@href='/logout']"
 
     elements :shopping_cart_link, :xpath, "//a[@href='/cart']"
-    section :search_container, SearchSection, ".search-container"
+    section :search_container, SearchSection, '.search-container'
     section :mini_cart, Sections::ShoppingCartModal, '#micro-cart' # typically displays after adding an item to the cart
 
     element :referral_credit_link, '.credits'
@@ -98,6 +104,18 @@ module Sections
 
     def WaitForMicroCartToDisplay
       wait_until_mini_cart_visible
+    end
+
+    def VerifyRenderedCorrectly
+      all_sales_link.present?
+      vintage_link.present?
+      upcoming_sales_link.present?
+      style_blog.present?
+      logo_link.present?
+      welcome_user_dropdown.hover
+      my_account_link.present?
+      log_out_link.present?
+      search_container.VerifyPresent
     end
   end
 end
