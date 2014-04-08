@@ -11,7 +11,7 @@ feature 'Product Details' do
     @email = "msiwiec@prototest.com"
     @share_email = "msiwiec@mailinator.com"
     @facebookemail = "bkitchener@prototest.com"
-    @facebookpassword = 'Qubit123!'
+    @facebookpassword = 'Proto123!'
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
@@ -119,10 +119,21 @@ feature 'Product Details' do
     @page.should have_text product_shared_str
   end
 
-=begin
   scenario 'Social Sharing - Pinterest' do
+    @page = HomePage.new
+    @page.load
+
+    product_shared_str = @page.header.SearchFor("lamp").
+        GoToFirstProductNotSoldOutOnHold.
+        ShareViaPinterest(@facebookemail, @facebookpassword)
+
+    # get into pinterest account and verify product was pinned to the okl board
+    @page = PinterestPage.new
+    @page.load
+
+    @page.should have_text product_shared_str
 
   end
-=end
+
 end
 

@@ -9,6 +9,14 @@ module Pages
     element :okay_button, 'input[type=submit]'
     element :cancel_button, 'button',:text=>'Cancel'
 
+    def Login email, pass
+      email_field.set email
+      password_field.set pass
+      login_button.click
+
+      okay_button.click if has_okay_button?
+    end
+
     def LoginAs email, pass
       Login(email, pass)
       FacebookMainPage.new
@@ -20,15 +28,6 @@ module Pages
       FacebookShareModalPage.new
     end
 
-
-    private
-
-    def Login email, pass
-      email_field.set email
-      password_field.set pass
-      login_button.click
-      okay_button.click if has_okay_button?
-    end
   end
 end
 

@@ -100,7 +100,18 @@ module Pages
     end
 
     def ShareViaPinterest(facebook_email, facebook_password)
+      product_name_str = product_name.text
 
+      pinterest_share_link.click
+      sleep 1
+
+      new_window = page.driver.browser.window_handles.last
+
+      page.within_window new_window do
+        PinterestPage.new.LoginToShare(facebook_email, facebook_password).PinIt
+      end
+
+      product_name_str
     end
 
     def AddToCart(qty=nil)
