@@ -10,7 +10,7 @@ feature 'Vintage Market Find (VMF)' do
   before(:all) do
     @rand = rand(1000).to_s
     @email = "testuser" + @rand + "@mailinator.com"
-    @email = "testuser680@mailinator.com"
+    @email = "msiwiec@mailinator.com"
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
@@ -31,7 +31,7 @@ feature 'Vintage Market Find (VMF)' do
 
   scenario 'Header and page renders correctly' do
     @page.header.GoToVintage
-
+    @page.header.VerifyRenderedCorrectly
   end
 
   scenario 'Badges: Inventory is functional' do
