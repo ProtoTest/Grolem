@@ -67,11 +67,36 @@ module Pages
             VerifyProductNameDisplayed(product_name_str).ShareWith("Friends").ShareLink(msg)
       end
 
-      product_name.text
+      product_name_str
     end
 
-    def ShareViaEmail(email, message)
+    # share via email modal
+    element :share_email_address_field, '#shareEmailAddress'
+    element :share_email_message_text_area, '#share-emailMessage'
+    element :share_email_cancel_link, '.cancel'
+    element :share_email_send_btn, '.submitShareEmail'
 
+    element :share_email_confirm_label, :xpath, "//div[contains(@id, 'emailSuccess')]//p[contains(text(),'Thanks for sharing')]"
+    element :share_email_confirm_close, "div#emailSuccess button"
+
+    def ShareViaEmail(email, message)
+      product_name_str = product_name.text
+
+      email_share_link.click
+
+      wait_until_share_email_address_field_visible
+      wait_until_share_email_message_text_area_visible
+
+      share_email_address_field.set email if email
+      share_email_message_text_area.set message if message
+      share_email_send_btn.click
+
+      wait_until_share_email_confirm_label_visible
+      wait_until_share_email_confirm_close_visible
+
+      share_email_confirm_close.click
+
+      product_name_str
     end
 
     def ShareViaPinterest(facebook_email, facebook_password)

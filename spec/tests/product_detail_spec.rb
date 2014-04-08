@@ -8,28 +8,28 @@ feature 'Product Details' do
 
 # run this once before all of the scenarios
   before(:all) do
-    @rand = rand(1000).to_s
-    @email = "testuser" + @rand + "@mailinator.com"
-    @email = "testuser680@mailinator.com"
-    @email = "msiwiec@mailinator.com"
+    @email = "msiwiec@prototest.com"
+    @share_email = "msiwiec@mailinator.com"
     @facebookemail = "bkitchener@prototest.com"
-    @facebookpassword = "Proto123!"
+    @facebookpassword = 'Qubit123!'
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
     @fullname = "#{@firstname} #{@lastname}"
 
     # register the user
-    #register_user(@firstname, @lastname, @password, @email)
+    register_user(@firstname, @lastname, @password, @email)
 
   end
 
   before(:each) do
+    # In order to be able to send emails from the site, a throwaway email address
+    # must NOT be used.
     @page = login(@email, @password)
   end
 
   after(:each) do
-    sleep 4
+
   end
 
   scenario 'Select Product Quantity and size' do
@@ -102,11 +102,24 @@ feature 'Product Details' do
         VerifyProductShared(product_shared_str)
   end
 
-=begin
   scenario 'Social Sharing - Email' do
+    message = "I am the walrus"
 
+    @page = HomePage.new
+    @page.load
+
+    product_shared_str = @page.header.SearchFor("lamp").
+        GoToFirstProductNotSoldOutOnHold.ShareViaEmail(@share_email, message)
+
+    # visit the mailinator page, with just the username, not the domain
+    visit "http://mailinator.com/inbox.jsp?to=#{@share_email.gsub(/@mailinator.com/, '')}"
+
+    @page = MailinatorPage.new.ClickMailWithText 'thought you would love'
+    @page.should have_text "Personal message: #{message}"
+    @page.should have_text product_shared_str
   end
 
+=begin
   scenario 'Social Sharing - Pinterest' do
 
   end

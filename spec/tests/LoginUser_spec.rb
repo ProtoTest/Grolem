@@ -76,10 +76,14 @@ feature 'User Login' do
           LogOut
     end
 
+=begin
+# THIS scenario is testing in the session_spec
   scenario 'Keep me logged in ' do
     @page
 
   end
+=end
+
   scenario 'Invite Friends' do
     @page = SignupModal.new
     @page.load
