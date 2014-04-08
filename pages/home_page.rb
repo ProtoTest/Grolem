@@ -6,6 +6,7 @@ module Pages
     include Sections
     set_url "/"
     section :header, LoggedInHeader, '.okl-header'
+    section :footer, LoggedInFooter, '#footer'
 
     def wait_for_elements
       wait_until_header_visible

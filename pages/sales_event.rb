@@ -8,6 +8,7 @@ module Pages
     elements :products, 'li.product'
     elements :prices, '.price em'
     section :header, LoggedInHeader, '.okl-header'
+    section :footer, LoggedInFooter, '#footer'
 
 
     @@sort_type = [:featured, :low_price, :available]
