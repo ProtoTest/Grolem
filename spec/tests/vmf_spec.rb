@@ -34,16 +34,27 @@ feature 'Vintage Market Find (VMF)' do
     @page.header.VerifyRenderedCorrectly
   end
 
-  scenario 'Badges: Inventory is functional' do
+  scenario 'Badges: Inventory - Sold Out tag visible' do
+    @page = HomePage.new
+    @page.load
 
+    @page = @page.header.SearchFor("Vintage").
+        GoToFirstProduct(:sold_out)
+
+    @page.should have_text("SOLD OUT")
   end
 
   scenario 'Badges: Vintage tag is visible for vintage items' do
+    @page = HomePage.new
+    @page.load
 
+    @page = @page.header.SearchFor("Vintage").
+        GoToFirstProduct(:available_vintage)
+    @page.wait_until_vmf_vendor_section_visible
   end
 
   scenario 'Today\'s Arrival Carousel Works' do
-
+    
   end
 
   scenario 'Shop by Vendor link works on product detail page (PDP)' do

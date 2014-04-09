@@ -13,6 +13,7 @@ module Pages
   element :price_filter, '.price-filter'
   element :condition_filter, '.condition-filter'
   element :first_product, '.productImage'
+  element :first_product_sold_out, :xpath, "//a[@class='trackProductPlacement' and ./div[contains(@class, 'sold-out')]]"
   element :first_product_not_sold_out_on_hold, :xpath, "//a[@class='trackProductPlacement' and not(./div[contains(@class, 'sold-out')] or ./div[contains(@class, 'on-hold')])]"
   element :first_product_vintage, :xpath, "//a[@class='trackProductPlacement' and ./span[contains(@class, 'vintage')] and not(./div[contains(@class, 'sold-out')] or ./div[contains(@class, 'on-hold')])]"
   element :pagination_container, '.pagination'
@@ -37,12 +38,15 @@ module Pages
     # Currently supported product_type(s) - add more as you need them:
     #   :available (first product found that's not 'sold out' or 'on-hold')
     #   :available_vintage (first available vintage product)
+    #   :sold_out (first sold-out product)
     #   :default (first product found in any product state)
     #
     def GoToFirstProduct(product_type=:default)
       case product_type
         when :available_vintage
           first_product_vintage.click
+        when :sold_out
+          first_product_sold_out.click
         when :available
           first_product_not_sold_out_on_hold.click
         when :default

@@ -37,11 +37,14 @@ feature 'Product Details' do
     @page.load
 
     # Searching for rug products typically have size and quantity
-    @page = @page.header.SearchFor("Bleeker Runner").
-        GoToFirstProduct(:available)
+    @page = @page.header.SearchFor("Rug").
+        GoToFirstProduct
 
     qty = 2
     size = nil
+
+    raise "Product found does not have a size option" if @page.has_no_size_options?
+
     # extract a size to use from the dropdown options
     @page.size_options.each do |opt|
       if not opt.text.include?("SOLD OUT") and not opt.text.include?("ON HOLD")
