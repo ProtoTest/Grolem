@@ -59,7 +59,7 @@ feature 'Invite Friends' do
 
     @page.LoginWithInfo(@new_customer, @password).
         header.SearchFor("lamp").
-        GoToFirstProductNotSoldOutOnHold
+        GoToFirstProduct(:available)
   end
 
   scenario 'Confirm credit' do
@@ -69,7 +69,7 @@ feature 'Invite Friends' do
     @page.LoginWithInfo(@new_customer, @password).
         header.VerifyReferralAndCredits.
         header.SearchFor("lamp").
-        GoToFirstProductNotSoldOutOnHold.
+        GoToFirstProduct(:available).
         AddToCart.
         header.GoToCart.VerifyReferralCreditApplied
   end

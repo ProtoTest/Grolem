@@ -38,7 +38,7 @@ feature 'Product Details' do
 
     # Searching for rug products typically have size and quantity
     @page = @page.header.SearchFor("Bleeker Runner").
-        GoToFirstProductNotSoldOutOnHold
+        GoToFirstProduct(:available)
 
     qty = 2
     size = nil
@@ -57,20 +57,20 @@ feature 'Product Details' do
   scenario 'Add Product to Cart' do
     @page = HomePage.new
     @page.load
-    @page.header.SearchFor("lamp").GoToFirstProductNotSoldOutOnHold.AddToCart.VerifyItemAddedToCart
+    @page.header.SearchFor("lamp").GoToFirstProduct(:available).AddToCart.VerifyItemAddedToCart
   end
 
   scenario 'Search is displayed in Product page header, UI is correct and Search is functional' do
     @page = HomePage.new
     @page.load
     @page = @page.header.SearchFor("lamp").
-        GoToFirstProductNotSoldOutOnHold
+        GoToFirstProduct(:available)
 
     # The header contains the search elements, verify they are all there
     @page.header.search_container.should be_all_there
 
     @page.header.SearchFor("rug").
-        GoToFirstProductNotSoldOutOnHold
+        GoToFirstProduct(:available)
   end
 
   scenario 'White Glove Tool Tip' do
@@ -78,7 +78,7 @@ feature 'Product Details' do
     @page = HomePage.new
     @page.load
     @page = @page.header.SearchFor("Sofa").
-        GoToFirstProductNotSoldOutOnHold
+        GoToFirstProduct(:available)
     @page.white_glove_section.should have_main_label
     @page.white_glove_section.should have_icon
     @page.white_glove_section.should have_description
@@ -91,7 +91,7 @@ feature 'Product Details' do
     @page.load
 
     product_shared_str = @page.header.SearchFor("lamp").
-        GoToFirstProductNotSoldOutOnHold.
+        GoToFirstProduct(:available).
         ShareViaFacebook(@facebookemail, @facebookpassword, share_msg)
 
     # Verify the item was actually posted to the facebook user's wall
@@ -109,7 +109,7 @@ feature 'Product Details' do
     @page.load
 
     product_shared_str = @page.header.SearchFor("lamp").
-        GoToFirstProductNotSoldOutOnHold.ShareViaEmail(@share_email, message)
+        GoToFirstProduct(:available).ShareViaEmail(@share_email, message)
 
     # visit the mailinator page, with just the username, not the domain
     visit "http://mailinator.com/inbox.jsp?to=#{@share_email.gsub(/@mailinator.com/, '')}"
@@ -124,7 +124,7 @@ feature 'Product Details' do
     @page.load
 
     product_shared_str = @page.header.SearchFor("lamp").
-        GoToFirstProductNotSoldOutOnHold.
+        GoToFirstProduct(:available).
         ShareViaPinterest(@facebookemail, @facebookpassword)
 
     # get into pinterest account and verify product was pinned to the okl board

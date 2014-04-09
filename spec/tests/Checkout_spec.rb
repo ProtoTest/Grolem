@@ -54,14 +54,14 @@ feature 'Checkout' do
   scenario 'Add item to cart' do
     @page = HomePage.new
     @page.load
-    @page.header.SearchFor(@item_to_search_for).GoToFirstProductNotSoldOutOnHold.AddToCart.VerifyItemAddedToCart
+    @page.header.SearchFor(@item_to_search_for).GoToFirstProduct(:available).AddToCart.VerifyItemAddedToCart
 
   end
 
   scenario 'Remove item from cart' do
     @page = HomePage.new
     @page.load
-    product_name = @page.header.SearchFor(@item_to_search_for).GoToFirstProductNotSoldOutOnHold.AddToCart.VerifyItemAddedToCart
+    product_name = @page.header.SearchFor(@item_to_search_for).GoToFirstProduct(:available).AddToCart.VerifyItemAddedToCart
 
     @page = ShoppingCartPage.new
     @page.RemoveItemFromCart(product_name).VerifyItemRemovedFromCart(product_name)
@@ -71,7 +71,7 @@ feature 'Checkout' do
   scenario 'Check mini cart' do
     @page = HomePage.new
     @page.load
-    @page.header.SearchFor(@item_to_search_for).GoToFirstProductNotSoldOutOnHold.AddToCart.VerifyItemAddedToMiniCart
+    @page.header.SearchFor(@item_to_search_for).GoToFirstProduct(:available).AddToCart.VerifyItemAddedToMiniCart
 
   end
 
@@ -80,7 +80,7 @@ feature 'Checkout' do
 
     @page = HomePage.new
     @page.load
-    @page.header.SearchFor(@item_to_search_for).GoToFirstProductNotSoldOutOnHold.AddToCart.VerifyItemAddedToCart
+    @page.header.SearchFor(@item_to_search_for).GoToFirstProduct(:available).AddToCart.VerifyItemAddedToCart
 
     @page = ShoppingCartPage.new
     @page.ChangeVerifyItemQuantityUpdated(item_quantity)
@@ -94,7 +94,7 @@ feature 'Checkout' do
     @page = HomePage.new
     @page.load
     @page.header.SearchFor(@item_to_search_for).
-        GoToFirstProductNotSoldOutOnHold.
+        GoToFirstProduct(:available).
         AddToCart.
         header.GoToCart.
         CheckOutNow.
@@ -112,7 +112,7 @@ feature 'Checkout' do
     @page = HomePage.new
     @page.load
     @page.header.SearchFor(@item_to_search_for).
-        GoToFirstProductNotSoldOutOnHold.
+        GoToFirstProduct(:available).
         AddToCart.
         header.GoToCart.
         CheckOutNow(shipping_info_saved, credit_info_saved).
@@ -128,7 +128,7 @@ feature 'Checkout' do
     @page = HomePage.new
     @page.load
     @page.header.SearchFor(@item_to_search_for).
-        GoToFirstProductNotSoldOutOnHold.
+        GoToFirstProduct(:available).
         AddToCart.
         header.GoToCart.
         CheckOutNow(shipping_info_saved, credit_info_saved).
@@ -143,7 +143,7 @@ feature 'Checkout' do
     @page = HomePage.new
     @page.load
     @page.header.SearchFor(@item_to_search_for).
-        GoToFirstProductNotSoldOutOnHold.
+        GoToFirstProduct(:available).
         AddToCart.
         header.GoToCart.
         CheckoutWithPayPal.

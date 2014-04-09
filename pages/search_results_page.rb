@@ -14,6 +14,7 @@ module Pages
   element :condition_filter, '.condition-filter'
   element :first_product, '.productImage'
   element :first_product_not_sold_out_on_hold, :xpath, "//a[@class='trackProductPlacement' and not(./div[contains(@class, 'sold-out')] or ./div[contains(@class, 'on-hold')])]"
+  element :first_product_vintage, :xpath, "//a[@class='trackProductPlacement' and ./span[contains(@class, 'vintage')] and not(./div[contains(@class, 'sold-out')] or ./div[contains(@class, 'on-hold')])]"
   element :pagination_container, '.pagination'
   element :next_page_link, '.nextPage'
   element :prev_page_link, '.prevPage'
@@ -28,13 +29,26 @@ module Pages
       self
     end
 
-    def GoToFirstProduct
-      first_product.click
-      ProductPage.new
-    end
+    ##
+    # Select the first product found and return the Product page for it.
+    #
+    # @param [Symbol] product_type(optional): The type of product to find and click
+    #
+    # Currently supported product_type(s) - add more as you need them:
+    #   :available (first product found that's not 'sold out' or 'on-hold')
+    #   :available_vintage (first available vintage product)
+    #   :default (first product found in any product state)
+    #
+    def GoToFirstProduct(product_type=:default)
+      case product_type
+        when :available_vintage
+          first_product_vintage.click
+        when :available
+          first_product_not_sold_out_on_hold.click
+        when :default
+          first_product.click
+      end
 
-    def GoToFirstProductNotSoldOutOnHold
-      first_product_not_sold_out_on_hold.click
       ProductPage.new
     end
 
