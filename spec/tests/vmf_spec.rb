@@ -26,7 +26,7 @@ feature 'Vintage Market Find (VMF)' do
   end
 
   after(:each) do
-    sleep 4
+
   end
 
   scenario 'Header and page renders correctly' do
@@ -54,14 +54,26 @@ feature 'Vintage Market Find (VMF)' do
   end
 
   scenario 'Today\'s Arrival Carousel Works' do
-    
+    @page.header.GoToVintage.
+        VerifyCarouselPosition(:first).
+        MoveCarouselBack.
+        VerifyCarouselPosition(:first).
+        MoveCarouselForward.
+        VerifyCarouselPosition(:second).
+        MoveCarouselForward.
+        VerifyCarouselPosition(:third).
+        MoveCarouselForward.
+        VerifyCarouselPosition(:third)
   end
 
   scenario 'Shop by Vendor link works on product detail page (PDP)' do
     @page = @page.header.GoToVintage.GoToFirstProduct
 
+    @page.wait_until_vmf_vendor_section_visible
+
     vmf_vendor_name = @page.vmf_vendor_section.vendor_name.text
     @page.GoToVMFVendorPage.VerifyVendorPageDisplayed(vmf_vendor_name)
   end
+
 end
 

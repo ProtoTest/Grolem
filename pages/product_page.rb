@@ -155,5 +155,10 @@ module Pages
 
       ShopByVendorPage.new
     end
+
+    def wait_for_elements
+      wait_until_product_image_visible
+      wait_until_qty_options_visible
+    end
   end
 end
