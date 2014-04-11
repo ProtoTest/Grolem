@@ -36,11 +36,12 @@ module Pages
         zipcode_field.set shipping_info[:zip]
         phone_number_field.set shipping_info[:phone]
       end
-
+    end
 
       def Next
         next_button.click
         MobileCheckoutPaymentPage.new
       end
+
   end
 end

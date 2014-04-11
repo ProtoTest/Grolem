@@ -5,13 +5,47 @@ module Pages
 
     # paypal only
     element :pay_with_paypal_button, 'label.paypal-toggle'
+    element :pay_with_credit_card_button, 'label[for=new-credit-card]'
 
-    # the following are if you are NOT using paypal
+
     section :payment_info, AddPaymentSection, '#new_okl_customer_client_v1_payment_card'
-
-
     element :use_shipping_address, '#use-shipping-address'
+
     element :next_button, :xpath, "button[type=submit]"
+
+# the following are if you are NOT using paypal
+    element :card_name_field, '#okl_customer_client_v1_payment_card_cardholder_name'
+    element :card_number_field, '#okl_customer_client_v1_payment_card_card_number'
+    element :card_exp_month_dropdown, '#okl_customer_client_v1_payment_card_expiration_month'
+    element :card_exp_year_dropdown, '#okl_customer_client_v1_payment_card_expiration_year'
+    element :card_cvc_field, '#okl_customer_client_v1_payment_card_security_code'
+
+    element :first_name_field, '#okl_customer_client_v1_payment_card_billing_address_attributes_firstname'
+    element :last_name_field, '#okl_customer_client_v1_payment_card_billing_address_attributes_lastname'
+    element :address1_field, '#okl_customer_client_v1_payment_card_billing_address_attributes_address_1'
+    element :address2_field, '#okl_customer_client_v1_payment_card_billing_address_attributes_address_2' # optional
+    element :city_field, '#okl_customer_client_v1_payment_card_billing_address_attributes_city'
+    element :zip_field, '#okl_customer_client_v1_payment_card_billing_address_attributes_postcode'
+    element :state_dropdown, '#okl_customer_client_v1_payment_card_billing_address_attributes_state'
+    element :phone_field, '#okl_customer_client_v1_payment_card_billing_address_attributes_phone'
+
+    ##
+    # Enter payment details into the form
+    #
+    # @param [Hash] billing_info: The billing info hash
+    # billing_info = {:fullname,
+    #                :credit_card_num,
+    #                :exp_month,
+    #                :exp_year,
+    #                :cvc}
+    def EnterPaymentInfo(billing_info)
+      self.card_name_field.set billing_info[:fullname]
+      self.card_number_field.set billing_info[:credit_card_num]
+      self.card_exp_month_dropdown.select billing_info[:exp_month]
+      self.card_exp_year_dropdown.select billing_info[:exp_year]
+      self.card_cvc_field.set billing_info[:cvc]
+    end
+
 
     def wait_for_elements
       wait_until_continue_btn_visible

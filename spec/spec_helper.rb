@@ -25,7 +25,6 @@ require "syntax"
 require 'require_all'
 require 'base_page'
 require 'base_section'
-
 require_all 'sections'
 require_all 'pages'
 
