@@ -16,22 +16,25 @@ feature 'Events' do
   before(:each) do
     @page = login(@email, @password)
     # Select a random page
-  end
+    #there's a bit of a bug--doesn't always go to the sale page...
+    begin
+      @sale_event = @page.header.GoToCurrentSale(rand(16))
+    rescue
+      @sale_event = @page.header.GoToCurrentSale(rand(16))
+    end
+    end
 
   scenario 'Sort by Lowest Price' do
-    @sale_event = @page.header.GoToCurrentSale(rand(16))
     @sale_event.SortItems(:low_price)
     prices = @sale_event.PriceList
     prices.should == prices.sort
   end
 
   scenario 'Sort by Featured' do
-    @sale_event = @page.header.GoToCurrentSale(rand(16))
     @sale_event.SortItems(:featured)
   end
 
   scenario 'Sort by Available Now' do
-    @sale_event = @page.header.GoToCurrentSale(11)
     @sale_event.SortItems(:available)
     products = @sale_event.products
     # Looking at all products, starting from the end of the product list,
@@ -55,7 +58,6 @@ feature 'Events' do
   end
 
   scenario 'Search shows up in header and works' do
-    @sale_event = @page.header.GoToCurrentSale(rand(16))
     @sale_event.header.search_container.should have_search_field
     product_name = @sale_event.products[0].find('div.product-info h3').text
     results_page = @sale_event.header.SearchFor product_name
@@ -63,14 +65,10 @@ feature 'Events' do
   end
 
   scenario 'Header present and rendered correctly' do
-    @page.wait_for_header
-    @sale_event = @page.header.GoToCurrentSale(rand(16))
     @sale_event.header.VerifyRenderedCorrectly
   end
 
   scenario 'F00ter present and rendered correctly' do
-    @page.wait_for_header
-    @sale_event = @page.header.GoToCurrentSale(rand(16))
     @sale_event.footer.VerifyRenderedCorrectly
   end
 

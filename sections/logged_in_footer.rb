@@ -16,18 +16,33 @@ module Sections
   end
 
   def VerifyRenderedCorrectly
-    about_us.present?
-    press.present?
-    careers.present?
-    apps_ipad.present?
-    apps_iphone.present?
-    gift_card.present?
-    vendor.present?
-    affiliates.present?
-    sitemap.present?
-    shipping.present?
-    returns.present?
-    help.present?
+    verify_links([[about_us, 'One King\'s lane is a website'],
+        [press, 'Recent Press'],
+        [careers, "One King's Lane has an awesome work environment. Join us."],
+        [apps_ipad, 'one kings lane + ipad'],
+        [apps_iphone, 'One Kings Lane iPhone App'],
+        [gift_card, 'E-Gift Card'],
+        [vendor, 'Become a Vendor on One Kings Lane'],
+        [affiliates, 'Affiliate Program'],
+        [sitemap, 'Everything out site has to offer'],
+        [shipping, 'Shipping & Delivery'],
+        [returns, 'Return policy'],
+        [help, 'Frequently Asked Questions']])
     copyright.present?
   end
+
+  private
+  def verify_links(verifications)
+    failed_elements = verifications.map do |element, verification_text|
+      next_page = element.click
+      correct_page = page.has_text? verification_text
+      page.go_back
+      next if correct_page
+      "Footer link \"#{element.text}\" lead to a page which did not contain the expected text: \"#{verification_text}\""
+    end
+    if failed_elements.length != 0
+      fail(failed_elements.join('\n'))
+    end
+  end
+
 end
