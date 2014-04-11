@@ -8,7 +8,7 @@ module Pages
     element :email_field, '#email'
     element :password_field,'#password'
     element :log_in_button , :xpath, '//input[@name="sumbit"]'
-    element :join_now_link , 'img[alt=Join Now]'
+    element :join_now_link , :xpath, '//input[@alt="Join Now"]'
     element :facebook_login_link , 'a',:text=>'Login with Facebook'
     element :keep_logged_in_cbx,'#remember'
     element :forgot_password_link, 'a',:text=>'Forgot Password?'
@@ -42,6 +42,11 @@ module Pages
       email_address_field.set email
       send_email_button.click
       sleep 1
+    end
+
+    def GoToJoinPage
+      join_now_link.click
+      SignUpPage.new
     end
   end
 

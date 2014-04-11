@@ -60,6 +60,13 @@ feature 'User Login' do
     @page.ResetPasswordTo(@newpassword).LogOut
   end
 
+  scenario 'Join' do
+    @page = SignUpPage.new
+    @page.load
+    @page.EnterInfo(@firstname,@lastname,@email,@password,'').
+        LogOut
+  end
+
   scenario 'Join -b' do
       @page = JoinBPage.new
       @page.load

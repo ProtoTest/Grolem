@@ -5,6 +5,7 @@ module Sections
     element :back_button, 'p.back'
     element :cart_button, 'p.cart'
     element :okl_logo, 'h1.page-title'
+
     def GoHome
       okl_logo.click
       self
@@ -14,12 +15,10 @@ module Sections
       self
     end
 
-
-
-    def GoToLogin
-      GoHome
+    def OpenMenu
+      okl_logo.click
       menu_button.click
-      LoginPage.new
+      MobileAccountPage.new
     end
 
     def GoToCart
