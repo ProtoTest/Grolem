@@ -1,9 +1,9 @@
 module Sections
   include Pages
   class MobileHeader < BaseSection
-    element :menu_button, 'p.menu'
+    element :menu_button, 'p.menu a'
     element :back_button, 'p.back'
-    element :cart_button, 'p.cart'
+    element :cart_button, 'p.cart a'
     element :okl_logo, 'h1.page-title'
 
     def GoHome
@@ -23,7 +23,14 @@ module Sections
 
     def GoToCart
       cart_button.click
-      ShoppingCartPage.new
+      MobileCartPage.new
     end
+
+    def SearchFor text
+      visit "/search?q=#{text}"
+
+      MobileSearchResultsPage.new
+    end
+
   end
 end
