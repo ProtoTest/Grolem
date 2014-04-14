@@ -1,7 +1,7 @@
 module Sections
   include Pages
   class SearchSection < BaseSection
-    element :search_field,'.search-field'
+    element :search_field, '.search-field'
     element :search_button, :xpath, ".//button[contains(@class,'search-icon')]"
     element :search_label, :xpath, ".//form[contains(@class,'search-form')]/fieldset/label[contains(text(),'Search by item or category')]"
 
@@ -21,12 +21,12 @@ module Sections
     element :upcoming_sales_link, 'a[data-linkname="header_calendar"]'
     element :style_blog, 'a[data-linkname="header_llh"]'
     elements :all_sales_events, '.latest-sales a'
-    element :logo_link,'a[data-linkname="header_logo"]'
-    element :welcome_user_dropdown, :xpath, "//span[contains(text(),'Welcome')]"
-    element :my_account_link, 'a[data-linkname="header_my_account"]'
+    element :logo_link, 'a[data-linkname="header_logo"]'
+    element :welcome_user_dropdown, 'li.welcome'
+    element :my_account_link, 'a[href="/my_account"]'
     element :log_out_link, 'a', :xpath, "//a[@href='/logout']"
 
-    elements :shopping_cart_link, :xpath, "//a[@href='/cart']"
+    element :shopping_cart_link, 'a[href="/cart"]'
     section :search_container, SearchSection, '.search-container'
     section :mini_cart, Sections::ShoppingCartModal, '#micro-cart' # typically displays after adding an item to the cart
 
@@ -107,15 +107,42 @@ module Sections
     end
 
     def VerifyRenderedCorrectly
-      all_sales_link.present?
-      vintage_link.present?
-      upcoming_sales_link.present?
-      style_blog.present?
-      logo_link.present?
-      welcome_user_dropdown.hover
-      my_account_link.present?
-      log_out_link.present?
-      search_container.VerifyPresent
+      welcome_user_dropdown.present?
+      link_results = [
+          verify_link(invite_friends_link, 'Get $15 every time a friend you invite makes a first purchase'),
+          verify_link(all_sales_link, 'All Sales'),
+          verify_link(vintage_link, 'Sort by'),
+          verify_link(upcoming_sales_link, 'Calendar'),
+          verify_link(style_blog, 'DAILY INSPIRATION
+from
+ONE KINGS LANE'),
+          verify_link(logo_link, 'Ending Soon'),
+          verify_link(:my_account_link, 'Personal Information', lambda {
+            welcome_user_dropdown.hover
+            wait_for_my_account_link }),
+          verify_link(:shopping_cart_link, 'Shopping Cart'),
+          verify_link(:log_out_link, 'LOG', lambda {
+            welcome_user_dropdown.hover
+            wait_for_my_account_link })]
+      failed_elements = link_results.map do |element, text, correct|
+        next if correct
+        "Link \"#{element.text}\" lead to a page which did not contain the expected text: \"#{text}\""
+      end
+      if failed_elements.length > 0
+        fail(failed_elements.join('\n'))
+      end
+    end
+
+    private
+    def verify_link(element, text, pre_fn=nil)
+      if not pre_fn.nil?
+        pre_fn.call()
+      end
+      self.send(element).click
+      correct_page = page.has_text? text
+      page.go_back
+      [element, text, correct_page]
+
     end
   end
 end

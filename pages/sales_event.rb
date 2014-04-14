@@ -20,6 +20,7 @@ module Pages
 
     def SortItems(sort_type_i)
       list_index = @@sort_type.index(sort_type_i)
+      wait_for_sort_by
       sort_by.click
       wait_for_sort_options
       sort_options[list_index].click
@@ -27,12 +28,12 @@ module Pages
   end
 
   def PriceList
-    prices.map {|price| string_to_price(price.text)}
+    prices.map { |price| string_to_price(price.text) }
   end
 
   private
   def string_to_price(str)
-    /\$([\d,]+)/.match(str)[1].gsub(',','').to_i
+    /\$([\d,]+)/.match(str)[1].gsub(',', '').to_i
   end
 
 end

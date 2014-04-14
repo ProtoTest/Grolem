@@ -16,33 +16,38 @@ module Sections
   end
 
   def VerifyRenderedCorrectly
-    verify_links([[about_us, 'One King\'s lane is a website'],
-        [press, 'Recent Press'],
-        [careers, "One King's Lane has an awesome work environment. Join us."],
-        [apps_ipad, 'one kings lane + ipad'],
-        [apps_iphone, 'One Kings Lane iPhone App'],
-        [gift_card, 'E-Gift Card'],
-        [vendor, 'Become a Vendor on One Kings Lane'],
-        [affiliates, 'Affiliate Program'],
-        [sitemap, 'Everything out site has to offer'],
-        [shipping, 'Shipping & Delivery'],
-        [returns, 'Return policy'],
-        [help, 'Frequently Asked Questions']])
+    link_results = [verify_link(about_us, 'One King\'s lane is a website'),
+                    verify_link(press, 'Recent Press'),
+                    verify_link(careers, "One King's Lane has an awesome work environment. Join us."),
+                    verify_link(apps_ipad, 'one kings lane + ipad'),
+                    verify_link(apps_iphone, 'One Kings Lane iPhone App'),
+                    verify_link(gift_card, 'E-Gift Card'),
+                    verify_link(vendor, 'Become a Vendor on One Kings Lane'),
+                    verify_link(affiliates, 'Affiliate Program'),
+                    verify_link(sitemap, 'Everything out site has to offer'),
+                    verify_link(shipping, 'Shipping & Delivery'),
+                    verify_link(returns, 'Return policy'),
+                    verify_link(help, 'Frequently Asked Questions')]
+    failed_elements = link_results.map do |element, text, correct|
+      next if correct
+      "Link \"#{element.text}\" lead to a page which did not contain the expected text: \"#{text}\"\n"
+    end
     copyright.present?
+    if failed_elements.length > 0
+      fail(failed_elements.join())
+    end
   end
 
   private
-  def verify_links(verifications)
-    failed_elements = verifications.map do |element, verification_text|
-      next_page = element.click
-      correct_page = page.has_text? verification_text
-      page.go_back
-      next if correct_page
-      "Footer link \"#{element.text}\" lead to a page which did not contain the expected text: \"#{verification_text}\""
+  def verify_link(element, text, pre_fn=nil)
+    if pre_fn
+      pre_fn()
     end
-    if failed_elements.length != 0
-      fail(failed_elements.join('\n'))
-    end
+    element.click
+    correct_page = page.has_text? text
+    page.go_back
+    [element, text, correct_page]
+
   end
 
 end

@@ -22,7 +22,7 @@ feature 'Events' do
     rescue
       @sale_event = @page.header.GoToCurrentSale(rand(16))
     end
-    end
+  end
 
   scenario 'Sort by Lowest Price' do
     @sale_event.SortItems(:low_price)
@@ -61,7 +61,7 @@ feature 'Events' do
     @sale_event.header.search_container.should have_search_field
     product_name = @sale_event.products[0].find('div.product-info h3').text
     results_page = @sale_event.header.SearchFor product_name
-    results_page.should have_search_results_summary :text=>product_name
+    results_page.should have_search_results_summary :text => product_name
   end
 
   scenario 'Header present and rendered correctly' do
