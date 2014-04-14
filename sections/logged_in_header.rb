@@ -109,14 +109,14 @@ module Sections
     def VerifyRenderedCorrectly
       welcome_user_dropdown.present?
       link_results = [
-          verify_link(invite_friends_link, 'Get $15 every time a friend you invite makes a first purchase'),
-          verify_link(all_sales_link, 'All Sales'),
-          verify_link(vintage_link, 'Sort by'),
-          verify_link(upcoming_sales_link, 'Calendar'),
-          verify_link(style_blog, 'DAILY INSPIRATION
+          verify_link(:invite_friends_link, 'Get $15 every time a friend you invite makes a first purchase'),
+          verify_link(:all_sales_link, 'All Sales'),
+          verify_link(:vintage_link, 'Sort by'),
+          verify_link(:upcoming_sales_link, 'Calendar'),
+          verify_link(:style_blog, 'DAILY INSPIRATION
 from
 ONE KINGS LANE'),
-          verify_link(logo_link, 'Ending Soon'),
+          verify_link(:logo_link, 'Ending Soon'),
           verify_link(:my_account_link, 'Personal Information', lambda {
             welcome_user_dropdown.hover
             wait_for_my_account_link }),
@@ -126,7 +126,7 @@ ONE KINGS LANE'),
             wait_for_my_account_link })]
       failed_elements = link_results.map do |element, text, correct|
         next if correct
-        "Link \"#{element.text}\" lead to a page which did not contain the expected text: \"#{text}\""
+        "Link \"#{send(element).text}\" lead to a page which did not contain the expected text: \"#{text}\""
       end
       if failed_elements.length > 0
         fail(failed_elements.join('\n'))
