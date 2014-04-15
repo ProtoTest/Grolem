@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 require 'spec_helper'
 require_all 'pages'
 
 include Pages
-
-
 feature 'Product Details' do
 
 # run this once before all of the scenarios
@@ -92,14 +89,4 @@ feature 'Product Details' do
 
 end
 
-=======
-require 'rspec'
 
-describe 'My behaviour' do
-
-  it 'should do something' do
-
-    true.should == false
-  end
-end
->>>>>>> origin/browsermob
