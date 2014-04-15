@@ -69,7 +69,7 @@ module Sections
     end
 
     def LogOut
-      welcome_user_dropdown.click
+      #welcome_user_dropdown.click
       visit "/logout"
 
       LoginPage.new
