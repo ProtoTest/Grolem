@@ -1,3 +1,11 @@
+module Sections
+  class ItemAddedDialogSection < BaseSection
+    element :text, 'p'
+    element :continue_btn, 'a', :text => 'Continue'
+    element :checkout_btn, 'a', :text => 'Checkout'
+  end
+end
+
 module Pages
   class MobileProductPage<BasePage
     element :product_image, 'ul.slides'
@@ -14,7 +22,7 @@ module Pages
     element :facebook_button, 'li.facebook'
     element :pinterest_button, 'li.pinterest'
     elements :size_options, '.opt'
-    element :item_added_modal_text, 'div.dialog p', :text => "This item has been added to your cart"
+    section :item_added_modal_section, ItemAddedDialogSection, 'div.dialog'
 
     def ShareViaFacebook(facebook_email, facebook_password, msg=nil)
 
@@ -69,9 +77,20 @@ module Pages
     def AddToCart
       add_to_cart_button.click
 
-      wait_until_item_added_modal_text_visible
+      wait_until_item_added_modal_section_visible
 
       self
+    end
+
+    def ItemAddedModal_Continue
+      item_added_modal_section.continue_btn.click
+      wait_until_item_added_modal_section_invisible
+      MobileSalesEventPage.new
+    end
+
+    def ItemAddedModal_Checkout
+      item_added_modal_section.checkout_btn.click
+      MobileCartPage.new
     end
 
     def VerifyItemAddedToCart

@@ -16,7 +16,7 @@ module Pages
 
     element :back_button, 'li.back-command'
     element :cart_timer_label, 'abbr.timer'
-    element :check_out_button, 'li.checkout-btn'
+    element :check_out_button, 'a', :text => 'Checkout'
     element :pay_with_creditcard_button, 'a.tgl-choice',:text=>'Credit Card'
     element :pay_with_paypal_button, 'a.tgl-choice',:text=>'PayPal'
 
@@ -26,13 +26,22 @@ module Pages
     element :order_total_label, :xpath, '//tr[@class="total"]/td[@class="cost-item"]'
     element :apply_gift_card_button, 'div.offer-code'
 
-    sections :cart_items, MobileCartItem, 'li.cart-line'
+    sections :cart_items, MobileCartItem, :xpath, "//section[contains(@class,'cart-lines') and not (contains(@class, 'expired-chk-section'))]/ul/li"
 
     elements :remove_btns, 'section.product.cart-product a',:text=>"Remove"
 
-    def GoToCheckout
+    def CheckOutNow(is_shipping_info_saved=false, is_credit_card_saved=false)
       check_out_button.click
-      MobileCheckoutPage.new
+
+      # if the credit card is already saved in the system,
+      # then the Review Order Page is displayed, otherwise the CheckoutShipping Page is displayed.
+      if is_shipping_info_saved and is_credit_card_saved
+        return MobileReviewOrderPage.new
+      elsif is_shipping_info_saved and not is_credit_card_saved
+        return MobileCheckoutPaymentPage.new
+      else
+        return MobileCheckoutShippingPage.new
+      end
     end
 
     def VerifyCartEmpty
@@ -63,8 +72,6 @@ module Pages
       cart_items.each do |item|
         if item.item_title_label.text.eql?(item_to_remove)
           item.remove_button.click
-          sleep 3
-          puts "MJS Waiting for cart item to be removed"
           wait_until_cart_items_invisible
           break
         end
@@ -101,6 +108,12 @@ module Pages
       else
         raise "Failed to verify the quantity of the item in the shopping cart was updated to #{qty}"
       end
+    end
+
+    def PayWithPaypal
+      pay_with_paypal_button.click
+
+      PayPalPage.new
     end
   end
 end

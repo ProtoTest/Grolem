@@ -17,11 +17,14 @@ feature 'Checkout' do
     @rand = rand(1000).to_s
     @email = "testuser" + @rand + "@mailinator.com"
     @email = "msiwiec@mailinator.com"
+    @email = "testuser222@mailinator.com"
+    @email = "testuser183@mailinator.com"
+    @email = "msiwiec@prototest.com"
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
     @fullname = "#{@firstname} #{@lastname}"
-    @item_to_search_for = "item"
+    @item_to_search_for = "lamp"
 
     @shipping_info = {:first => @firstname,
                       :last => @lastname,
@@ -49,7 +52,7 @@ feature 'Checkout' do
     @page = @page.GoToLoginPage.LoginWithInfo(@email, @password)
 
     # Cleanup
-    #remove_all_items_from_cart
+    remove_all_items_from_cart
   end
 
   after(:each) do
@@ -74,8 +77,6 @@ feature 'Checkout' do
     @page.RemoveItemFromCart(product_name).VerifyItemRemovedFromCart(product_name)
 
   end
-=end
-
 
   scenario 'Can change quantity' do
     item_quantity = 2
@@ -86,23 +87,21 @@ feature 'Checkout' do
     @page.ChangeVerifyItemQuantityUpdated(item_quantity)
 
   end
-
+=end
   scenario 'Can add new shipping address and new credit card in checkout flow' do
 
-    @page = HomePage.new
-    @page.load
     @page.header.SearchFor(@item_to_search_for).
         GoToFirstProduct(:available).
         AddToCart.
-        header.GoToCart.
+        ItemAddedModal_Checkout.
         CheckOutNow.
         EnterShippingDetails(@shipping_info).
-        Continue.
-        EnterBillingInfo(@billing_info, save_payment_info, use_shipping_address).
-        Continue.VerifyAddressAndCreditCardAdded(@shipping_info, @billing_info)
+        Next.
+        EnterPaymentInfo(@billing_info).
+        Next.VerifyAddressAndCreditCardAdded(@shipping_info, @billing_info)
 
   end
-=begin
+
   scenario 'Checkout with saved address and saved credit card in checkout flow' do
     shipping_info_saved = true
     credit_info_saved = true
@@ -123,35 +122,29 @@ feature 'Checkout' do
     credit_info_saved = true
     gift_msg = "I love you man"
 
-    @page = HomePage.new
-    @page.load
     @page.header.SearchFor(@item_to_search_for).
         GoToFirstProduct(:available).
         AddToCart.
-        header.GoToCart.
+        ItemAddedModal_Checkout.
         CheckOutNow(shipping_info_saved, credit_info_saved).
         AddGiftMessage(gift_msg).
         PlaceOrder.VerifyOrderCompleted
-
-    sleep 4
-
   end
 
   scenario 'Can checkout with PayPal' do
-    @page = HomePage.new
-    @page.load
+
     @page.header.SearchFor(@item_to_search_for).
         GoToFirstProduct(:available).
         AddToCart.
-        header.GoToCart.
-        CheckoutWithPayPal.
+        ItemAddedModal_Checkout.
+        PayWithPaypal.
         LoginToPayPal.
         CompletePayPalCheckout.
         VerifyPayPalPaymentMethod.
         PlaceOrder.VerifyOrderCompleted
 
   end
-=end
+
 =begin
   scenario 'Verify order comes through in AX' do
     @page

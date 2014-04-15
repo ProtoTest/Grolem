@@ -11,7 +11,7 @@ module Pages
     section :payment_info, AddPaymentSection, '#new_okl_customer_client_v1_payment_card'
     element :use_shipping_address, '#use-shipping-address'
 
-    element :next_button, :xpath, "button[type=submit]"
+    element :next_button, "button[type=submit]", :text => 'Next'
 
 # the following are if you are NOT using paypal
     element :card_name_field, '#okl_customer_client_v1_payment_card_cardholder_name'
@@ -44,6 +44,8 @@ module Pages
       self.card_exp_month_dropdown.select billing_info[:exp_month]
       self.card_exp_year_dropdown.select billing_info[:exp_year]
       self.card_cvc_field.set billing_info[:cvc]
+
+      self
     end
 
 
@@ -54,7 +56,7 @@ module Pages
     end
 
     def PayWithPaypal
-      pay_with_paypal_radio.click
+      pay_with_paypal_button.click
       continue_btn.click
 
       PayPalPage.new
@@ -69,15 +71,13 @@ module Pages
     #                :exp_month,
     #                :exp_year,
     #                :cvc}
-    # @param [Boolean] save_payment_info: To save the payment information in the system
     # @param [Boolean] use_shipping_address: To set the billing address as the shipping address
-    def EnterBillingInfo(billing_info, save_payment_info, use_shipping_address)
-      payment_info.EnterPaymentInfo(billing_info)
+    def EnterBillingInfo(billing_info)
+      payment_info.EnterPaymentInfo(billing_info, use_shipping_address)
 
-      self.save_payment_info.set_checked(save_payment_info)
       self.use_shipping_address.set_checked(use_shipping_address)
 
-      CheckoutPaymentPage.new
+      MobileCheckoutPaymentPage.new
     end
 
 
@@ -94,13 +94,13 @@ module Pages
     #            :phone}
     def EnterBillingAddressAndPhone(address)
       payment_info.EnterPaymentAddressAndPhone(address)
-      CheckoutPaymentPage.new
+      MobileCheckoutPaymentPage.new
     end
 
-    def Continue
-      self.continue_btn.click
+    def Next
+      next_button.click
 
-      ReviewOrderPage.new
+      MobileReviewOrderPage.new
     end
   end
 end
