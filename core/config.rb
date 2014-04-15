@@ -36,6 +36,8 @@ RSpec.configure do |config|
   config.add_setting :default_browser, :default => Browsers::Firefox
   config.add_setting :remote_driver, :default => false
   config.add_setting :host_ip, :default => "localhost"
+  config.add_setting :host_platform, :default=>:any
+  config.add_setting :host_version, :default=>""
   config.add_setting :element_wait_sec, :default => 20
   config.add_setting :screenshot_on_failure, :default => true
   config.add_setting :command_logging, :default => true
@@ -45,7 +47,7 @@ RSpec.configure do |config|
   config.add_setting :ldap_user_password, :default =>"bkitchener123!"
   config.add_formatter :documentation,'output.txt'
   config.add_formatter CustomFormatter,'output.html'
-  config.add_setting :test_name, :default=>''
+  config.add_setting :test_name, :default=>'Test'
   config.add_setting :command_delay_sec, :default=>0
   config.add_setting :browsermob_path, :default=>'C:\Users\Brian\Documents\GitHub\Grolem\browsermob-proxy\bin\browsermob-proxy.bat'
   config.add_setting :use_proxy, :default=>false
@@ -60,7 +62,6 @@ RSpec.configure do |config|
       $proxy = server.create_proxy
     end
     $logger = CommandLogger.new
-    reset_capybara
   end
 
   config.after(:all) do
@@ -74,12 +75,12 @@ RSpec.configure do |config|
     reset_capybara
   end
 
-  config.after    (:each) do
-    if(RSpec.configuration.use_proxy)
-    har = $proxy.har
-    entries = har.entries
-    har.save_to (RSpec.configuration.test_name+ '.har')
-    $proxy.close
+  config.after(:each) do
+    if RSpec.configuration.use_proxy
+      har = $proxy.har
+      entries = har.entries
+      har.save_to (RSpec.configuration.test_name+ '.har')
+      $proxy.close
     end
   end
 end

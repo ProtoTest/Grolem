@@ -4,15 +4,19 @@ module Browsers
   Safari = :safari
   InternetExplorer = :ie
   Android = :android
-  IOS = :iphone
-  MockPhone = :mockphone
-  MockTablet = :mocktablet
+  IPhone = :iphone
+  IPad = :ipad
 
-
-  def get_remote_browser
-    Selenium::WebDriver.for(:remote, :desired_capabilities => RSpec.configuration.default_browser)
-  end
-
+  #:browser_name          => "",
+  #    :version               => "",
+  #    :platform              => :any,
+  #    :javascript_enabled    => false,
+  #:css_selectors_enabled => false,
+  #:takes_screenshot      => false,
+  #:native_events         => false,
+  #:rotatable             => false,
+  #:firefox_profile       => nil,
+  #:proxy                 => nil
   def setup_browser
     $logger.Log "SetDefaultBrowser: #{RSpec.configuration.default_browser}"
     Capybara.register_driver :selenium do |app|
@@ -28,7 +32,25 @@ module Browsers
       else driver = Capybara::Selenium::Driver.new(app, :browser => RSpec.configuration.default_browser)
       end
       if RSpec.configuration.remote_driver
-        driver = Capybara::Selenium::Driver.new(app, :browser => get_remote_browser)
+        case RSpec.configuration.default_browser
+          when :firefox
+            capabilities = Selenium::WebDriver::Remote::Capabilities.firefox(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
+          when :chrome
+            capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
+          when :safari
+            capabilities = Selenium::WebDriver::Remote::Capabilities.safari(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
+          when :ie
+            capabilities = Selenium::WebDriver::Remote::Capabilities.ie(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
+          when :iphone
+            capabilities = Selenium::WebDriver::Remote::Capabilities.iphone(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
+          when :ipad
+            capabilities = Selenium::WebDriver::Remote::Capabilities.ipad(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
+          else
+            capabilities = Selenium::WebDriver::Remote::Capabilities.firefox(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
+        end
+        driver = Capybara::Selenium::Driver.new(app,
+                                       :browser => :remote,
+                                       :desired_capabilities => capabilities)
       end
       driver
     end
