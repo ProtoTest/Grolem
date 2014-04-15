@@ -22,7 +22,7 @@ module Pages
   element :no_results_found, '.search_heading'
   element :color_swatch, '.color-swatch'
   element :back_to_top_button, '.backToTop'
-  set_url "/search{?query*}"
+  set_url "/search{q=?query*}"
 
     def wait_for_elements
       wait_until_first_product_visible
