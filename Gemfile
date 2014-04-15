@@ -9,4 +9,5 @@ gem "site_prism"
 gem "aquarium"
 gem "syntax"
 gem 'require_all'
+gem 'browsermob-proxy'
 

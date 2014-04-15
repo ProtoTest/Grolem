@@ -9,6 +9,9 @@ class CustomFormatter < RSpec::Core::Formatters::HtmlFormatter
     @html << '<tr><td><img  src="screenshot_' + RSpec.configuration.test_name + '.png"/></td></tr>'
     @html << '<tr><td><a href="screenshot_' + RSpec.configuration.test_name + '.html">Source Html</a></td></tr>'
     @html << '<tr><td><a href="output.txt">Documentation</a></td></tr>'
+    if(RSpec.configuration.use_proxy)
+    @html << '<tr><td><a href="'+ RSpec.configuration.test_name + '.har">HAR</a></td></tr>'
+    end
     @html << '</span></table>'
     super + @html
 

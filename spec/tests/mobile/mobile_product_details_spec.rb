@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 require 'spec_helper'
 require_all 'pages'
 
@@ -91,3 +92,14 @@ feature 'Product Details' do
 
 end
 
+=======
+require 'rspec'
+
+describe 'My behaviour' do
+
+  it 'should do something' do
+
+    true.should == false
+  end
+end
+>>>>>>> origin/browsermob

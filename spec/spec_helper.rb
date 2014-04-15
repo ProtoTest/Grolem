@@ -22,6 +22,7 @@ require 'capybara-screenshot/rspec'
 require 'capybara_extensions'
 require "aquarium"
 require "syntax"
+require 'browsermob/proxy'
 require 'require_all'
 require 'base_page'
 require 'base_section'

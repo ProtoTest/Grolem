@@ -12,6 +12,8 @@ def reset_capybara
     config.visible_text_only = true
   end
 
+
+
   # Delete some cookies for the site that are hanging around
   page.driver.browser.manage.delete_cookie('ewokAuth')
   page.driver.browser.manage.delete_cookie('ewokAuthGuestPass')
@@ -45,8 +47,18 @@ RSpec.configure do |config|
   config.add_formatter CustomFormatter,'output.html'
   config.add_setting :test_name, :default=>''
   config.add_setting :command_delay_sec, :default=>0
+  config.add_setting :browsermob_path, :default=>'C:\Users\Brian\Documents\GitHub\Grolem\browsermob-proxy\bin\browsermob-proxy.bat'
+  config.add_setting :use_proxy, :default=>false
+  config.add_setting :proxy_server_port, :default=>8080
+  config.add_setting :proxy_port, :default=>9091
+  config.add_setting :proxy_host, :default=>'localhost'
 
   config.before(:all) do
+    if (RSpec.configuration.use_proxy&&RSpec.configuration.default_browser == Browsers::Firefox)
+      server = BrowserMob::Proxy::Server.new(RSpec.configuration.browsermob_path) #=> #<BrowserMob::Proxy::Server:0x000001022c6ea8 ...>
+      server.start
+      $proxy = server.create_proxy
+    end
     $logger = CommandLogger.new
     reset_capybara
   end
@@ -62,8 +74,13 @@ RSpec.configure do |config|
     reset_capybara
   end
 
-  config.after(:each) do
-
+  config.after    (:each) do
+    if(RSpec.configuration.use_proxy)
+    har = $proxy.har
+    entries = har.entries
+    har.save_to (RSpec.configuration.test_name+ '.har')
+    $proxy.close
+    end
   end
 end
 
