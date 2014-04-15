@@ -112,9 +112,6 @@ module Pages
       # Updating the quantity
       cart_items.first.item_quantity_dropdown.select(qty) if qty > 0
 
-      # Create another page to wait for the page to re-load/update
-      @page = ShoppingCartPage.new
-
       # Go back to the HomePage and enter the shopping cart again, to verify product qty was updated
       @page = HomePage.new
       @page.load

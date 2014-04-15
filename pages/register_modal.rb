@@ -22,8 +22,8 @@ module Pages
     end
 
     def EnterInfo firstname, lastname, password
-      first_name_field.set firstname
-      last_name_field.set lastname
+      # first_name_field.set firstname
+      # last_name_field.set lastname
       password_field.set password
       shop_today_sales_button.click
       sleep 1

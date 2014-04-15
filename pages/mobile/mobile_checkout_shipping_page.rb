@@ -6,10 +6,10 @@ module Pages
     element :address_line2_field, '#address2'
     element :city_field, '#city'
     element :state_dropdown, '#okl_customer_client_v1_shipping_address_state'
-    element :zipcode_field, '#postCode'
+    element :zipcode_field, '#postalCode'
     element :phone_number_field, '#phoneNumber'
 
-    element :back_button, 'li.back-command'
+    element :back_button, 'a', :text => "Back"
     element :next_button, 'button[name=submitShippingAddress]'
     ##
     # Enter the shipping details into the form
@@ -26,6 +26,8 @@ module Pages
     def EnterShippingDetails(shipping_info)
       # if none of these elements are present, the address information has most likely already been
       # entered into the system and saved
+      sleep 3
+
       if all_there?
         first_name_field.set shipping_info[:first]
         last_name_field.set shipping_info[:last]
@@ -35,13 +37,17 @@ module Pages
         state_dropdown.select shipping_info[:state]
         zipcode_field.set shipping_info[:zip]
         phone_number_field.set shipping_info[:phone]
+      else
+        $logger.Log("#{__method__}(): Failed to find the mobile shipping page. Possible shipping info already entered")
       end
+
+      self
     end
 
-      def Next
-        next_button.click
-        MobileCheckoutPaymentPage.new
-      end
+    def Next
+      next_button.click
+      MobileCheckoutPaymentPage.new
+    end
 
   end
 end
