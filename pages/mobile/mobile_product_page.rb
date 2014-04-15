@@ -1,6 +1,7 @@
 module Pages
   class MobileProductPage<BasePage
     element :product_image, 'ul.slides'
+    element :product_name, 'h2.product-name'
     element :our_price_label, 'span.outs'
     element :retail_price_label, 'span.msrp'
     element :quantity_dropdown, 'select[name=quantity]'
@@ -13,6 +14,7 @@ module Pages
     element :facebook_button, 'li.facebook'
     element :pinterest_button, 'li.pinterest'
     elements :size_options, '.opt'
+    element :item_added_modal_text, 'div.dialog p', :text => "This item has been added to your cart"
 
     def ShareViaFacebook(facebook_email, facebook_password, msg=nil)
 
@@ -66,7 +68,19 @@ module Pages
 
     def AddToCart
       add_to_cart_button.click
+
+      wait_until_item_added_modal_text_visible
+
       self
+    end
+
+    def VerifyItemAddedToCart
+      product_txt = product_name.text(:visible)
+      cart = MobileCartPage.new
+      cart.load
+      cart.VerifyItemsInCart [product_txt]
+
+      product_txt
     end
 
 

@@ -17,7 +17,7 @@ feature 'Vintage Market Find (VMF)' do
     @fullname = "#{@firstname} #{@lastname}"
 
     # register the user
-    #register_user(@firstname, @lastname, @password, @email)
+    register_user(@firstname, @lastname, @password, @email)
 
   end
 
