@@ -29,11 +29,15 @@ module Pages
       self
     end
 
-    def CompletePayPalCheckout
+    def CompletePayPalCheckout(mobile_site=false)
       wait_until_continue_btn_visible(15)
       continue_btn.click
 
-      ReviewOrderPage.new
+      if mobile_site
+        return MobileReviewOrderPage.new
+      else
+        return ReviewOrderPage.new
+      end
     end
 
   end

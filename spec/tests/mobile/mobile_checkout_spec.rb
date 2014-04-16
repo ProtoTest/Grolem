@@ -8,6 +8,9 @@ def remove_all_items_from_cart
   page = MobileCartPage.new
   page.load
   page.RemoveAllItemsFromCart
+
+  page = MobileHomePage.new
+  page.load
 end
 
 feature 'Checkout' do
@@ -16,10 +19,6 @@ feature 'Checkout' do
   before(:all) do
     @rand = rand(1000).to_s
     @email = "testuser" + @rand + "@mailinator.com"
-    @email = "msiwiec@mailinator.com"
-    @email = "testuser222@mailinator.com"
-    @email = "testuser183@mailinator.com"
-    @email = "msiwiec@prototest.com"
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
@@ -42,7 +41,7 @@ feature 'Checkout' do
                      :cvc => "123"}
 
     # register the user
-    #register_user(@firstname, @lastname, @password, @email)
+    register_user(@firstname, @lastname, @password, @email)
 
   end
 
@@ -58,19 +57,25 @@ feature 'Checkout' do
   after(:each) do
     sleep 4
   end
-=begin
+
   scenario 'Verify shopping cart is initially empty' do
     @page.header.GoToCart.VerifyCartEmpty
   end
 
   scenario 'Add item to cart' do
-    @page.header.SearchFor(@item_to_search_for).GoToFirstProduct(:available).AddToCart.VerifyItemAddedToCart
+    @page.header.SearchFor(@item_to_search_for).
+        GoToFirstProduct(:available).
+        AddToCart.
+        VerifyItemAddedToCart
 
   end
 
   scenario 'Remove item from cart' do
 
-    product_name = @page.header.SearchFor(@item_to_search_for).GoToFirstProduct(:available).AddToCart.VerifyItemAddedToCart
+    product_name = @page.header.SearchFor(@item_to_search_for).
+        GoToFirstProduct(:available).
+        AddToCart.
+        VerifyItemAddedToCart
 
     @page = MobileCartPage.new
     @page.load
@@ -87,7 +92,7 @@ feature 'Checkout' do
     @page.ChangeVerifyItemQuantityUpdated(item_quantity)
 
   end
-=end
+
   scenario 'Can add new shipping address and new credit card in checkout flow' do
 
     @page.header.SearchFor(@item_to_search_for).
@@ -106,12 +111,10 @@ feature 'Checkout' do
     shipping_info_saved = true
     credit_info_saved = true
 
-    @page = HomePage.new
-    @page.load
     @page.header.SearchFor(@item_to_search_for).
         GoToFirstProduct(:available).
         AddToCart.
-        header.GoToCart.
+        ItemAddedModal_Checkout.
         CheckOutNow(shipping_info_saved, credit_info_saved).
         PlaceOrder.VerifyOrderCompleted
 
@@ -133,13 +136,15 @@ feature 'Checkout' do
 
   scenario 'Can checkout with PayPal' do
 
+    mobile_site = true
+
     @page.header.SearchFor(@item_to_search_for).
         GoToFirstProduct(:available).
         AddToCart.
         ItemAddedModal_Checkout.
         PayWithPaypal.
         LoginToPayPal.
-        CompletePayPalCheckout.
+        CompletePayPalCheckout(mobile_site).
         VerifyPayPalPaymentMethod.
         PlaceOrder.VerifyOrderCompleted
 

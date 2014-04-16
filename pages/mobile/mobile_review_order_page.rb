@@ -18,8 +18,8 @@ module Pages
     element :gift_msg_done_btn, "button[type=submit]", :text => 'Save'
 
     # PayPal PaymentMethod
-    element :pay_pal_icon, '.paypalIcon'
-    element :pay_pal_email, :xpath, "//div[contains(@class,'billingInfo')]/p"
+    element :pay_pal_icon, '.paypal-payment-icon'
+    element :pay_pal_email, :xpath, "//div[contains(@class,'billing-info')]/a/p"
 
     def wait_for_elements
       wait_until_place_order_btn_visible
