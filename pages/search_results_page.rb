@@ -17,6 +17,7 @@ module Pages
   element :first_product_not_sold_out_on_hold, :xpath, "//a[@class='trackProductPlacement' and not(./div[contains(@class, 'sold-out')] or ./div[contains(@class, 'on-hold')])]"
   element :first_product_vintage, :xpath, "//a[@class='trackProductPlacement' and ./span[contains(@class, 'vintage')] and not(./div[contains(@class, 'sold-out')] or ./div[contains(@class, 'on-hold')])]"
   element :pagination_container, '.pagination'
+  elements :pages_links, '.pagination a'
   element :next_page_link, '.nextPage'
   element :prev_page_link, '.prevPage'
   element :no_results_found, '.search_heading'
@@ -54,6 +55,11 @@ module Pages
       end
 
       ProductPage.new
+    end
+
+    def GetNumPaginationLinks
+      # do not count next link
+      pages_links.size - 1
     end
 
     def GoToResultsPage number

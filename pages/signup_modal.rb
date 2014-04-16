@@ -28,6 +28,8 @@ module Pages
       email_field.set username
       shop_now_button.click
 
+      sleep 1
+
       using_wait_time 5 do
         if has_error_label? and error_label.text.include?("This email is already a registered member")
           return SignupModal.new

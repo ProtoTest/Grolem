@@ -11,24 +11,24 @@ feature 'Search' do
     @lastname = 'ProtoTest'
     @newemail = 'prototest@mailinator.com'
     @facebookemail = 'bkitchener@prototest.com'
+
+    # register the user
+    register_user(@firstname, @lastname, @password, @newemail)
   end
 
   before(:each) do
+    @page = LoginPage.new
+    @page.load
+    @page = @page.LoginWithInfo @newemail, @password
   end
 
 scenario 'Search Regular Result Set' do
-  @page = LoginPage.new
-  @page.load
-  @page = @page.LoginWithInfo @facebookemail, @password
   @page = @page.header.SearchFor "rug"
   @page.should have_query_phrase :text=> "rug"
   @page.should have_pagination_container
 end
 
 scenario 'Search Thin Result Set' do
-    @page = LoginPage.new
-    @page.load
-    @page = @page.LoginWithInfo @facebookemail, @password
     @page = @page.header.SearchFor "quill pen"
     @page.should have_no_query_phrase
     @page.should have_no_pagination_container
@@ -36,9 +36,6 @@ scenario 'Search Thin Result Set' do
   end
 
 scenario 'Search null Result Set' do
-  @page = LoginPage.new
-  @page.load
-  @page = @page.LoginWithInfo @facebookemail, @password
   @page = @page.header.SearchFor "nintendo"
   @page.should have_no_query_phrase
   @page.should have_no_pagination_container
@@ -47,9 +44,6 @@ scenario 'Search null Result Set' do
 end
 
 scenario 'Pagination' do
-  @page = LoginPage.new
-  @page.load
-  @page = @page.LoginWithInfo @facebookemail, @password
   @page = @page.header.SearchFor "table"
   @page.current_url.should_not include "&page="
   @page.GoToNextResultsPage
@@ -58,15 +52,14 @@ scenario 'Pagination' do
   @page.GoToPrevResultsPage
   sleep 3
   @page.current_url.should include "&page=0"
-  @page.GoToResultsPage "10"
+
+  num_pagination_links = @page.GetNumPaginationLinks
+  @page.GoToResultsPage num_pagination_links.to_s
   sleep 3
-  @page.current_url.should include "&page=9"
+  @page.current_url.should include "&page=#{num_pagination_links - 1}"
 end
 
   scenario 'Filter' do
-    @page = LoginPage.new
-    @page.load
-    @page = @page.LoginWithInfo @facebookemail, @password
     @page = @page.header.SearchFor 'table'
 
     @page.SelectColor 'White'

@@ -52,9 +52,11 @@ scenario 'Pagination' do
   @page.GoToPrevResultsPage
   sleep 3
   @page.current_url.should include "&page=0"
-  @page.GoToResultsPage "10"
+
+  num_pagination_links = @page.GetNumPaginationLinks
+  @page.GoToResultsPage num_pagination_links.to_s
   sleep 3
-  @page.current_url.should include "&page=9"
+  @page.current_url.should include "&page=#{num_pagination_links - 1}"
 end
 
   scenario 'Filter' do
