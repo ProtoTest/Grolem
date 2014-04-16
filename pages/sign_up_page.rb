@@ -19,7 +19,7 @@ module Pages
       password_field.set password
       referral_field.set referrer
       join_now_button.click
-      wait_until_join_button_invisible
+      wait_until_join_now_button_invisible
       HomePage.new
     end
   end

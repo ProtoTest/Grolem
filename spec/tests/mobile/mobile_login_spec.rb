@@ -29,7 +29,7 @@ feature 'Mobile User Login' do
   end
 
   scenario 'Login as Existing Member' do
-     @page.GoToLoginPage.LoginWithInfo(@facebookemail, @password).footer.LogOut
+     @page.GoToLoginPage.LoginWithInfo(@newemail, @password).footer.LogOut
   end
 
   scenario 'Login with Facebook' do
@@ -43,7 +43,7 @@ feature 'Mobile User Login' do
 
 
   scenario 'Forgot Password' do
-    @page.GoToLoginPage.ForgotPassword @newemail
+   @page.GoToLoginPage.ForgotPassword @newemail
     @page = MailinatorPage.new
     @page.load(username: @rand_username)
     @page.ClickMailWithText 'Please Reset Your One Kings Lane Password'
