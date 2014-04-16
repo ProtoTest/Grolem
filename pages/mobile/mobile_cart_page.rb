@@ -26,6 +26,8 @@ module Pages
     element :order_total_label, :xpath, '//tr[@class="total"]/td[@class="cost-item"]'
     element :apply_gift_card_button, 'div.offer-code'
 
+    element :item_reservation_duration, 'abbr.timer'
+
     sections :cart_items, MobileCartItem, :xpath, "//section[contains(@class,'cart-lines') and not (contains(@class, 'expired-chk-section'))]/ul/li"
 
     elements :remove_btns, 'section.product.cart-product a',:text=>"Remove"
