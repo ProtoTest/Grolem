@@ -14,7 +14,7 @@ end
 module Pages
   class TodaysArrivalsPage < BasePage
     attr_reader :header
-    set_url ''
+    set_url '/vintage-market-finds/todaysarrivals'
 
     element :first_product_link, "li.product.sortable a"
 
