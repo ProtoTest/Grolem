@@ -1,6 +1,5 @@
 module Pages
-  class FacebookMainPage < BasePage
-    set_url "http://www.facebook.com"
+  class MobileFacebookMainPage < BasePage
 
     element :news_feed_link, :xpath, "//div[contains(text(),'News Feed')]"
 
