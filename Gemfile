@@ -10,4 +10,5 @@ gem "aquarium"
 gem "syntax"
 gem 'require_all'
 gem 'browsermob-proxy'
+gem 'parallel_tests'
 

@@ -17,9 +17,11 @@ module Pages
     end
 
     def ClosePanel
-      wait_until_welcome_panel_visible(20)
-      wait_until_close_button_visible(20)
-      close_button.click
+      #wait_until_welcome_panel_visible(20)
+      #wait_until_close_button_visible(20)
+      using_wait_time 20 do
+        close_button.click if has_close_button?
+      end
       HomePage.new
     end
 
