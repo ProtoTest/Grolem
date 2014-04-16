@@ -27,6 +27,11 @@ module Pages
       HomePage.new
     end
 
+    def GoToMyAccount
+      my_account_button.click
+      MyAccountInformationPage.new
+    end
+
 
   end
 end
