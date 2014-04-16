@@ -11,31 +11,29 @@ feature 'Session' do
     @lastname = 'ProtoTest'
     @newemail = 'prototest@mailinator.com'
     @facebookemail = 'bkitchener@prototest.com'
+
+    # register the user
+    register_user(@firstname, @lastname, @password, @newemail)
   end
 
   before(:each) do
+    @page = MobileHomePage.new
+    @page.load
+    @page = @page.GoToLoginPage.LoginWithInfo(@newemail, @password)
   end
 
   scenario 'Cart Session Expiration' do
-    @page = LoginPage.new
-    @page.load
-    @page = @page.LoginWithInfo @facebookemail, @password
     @page = @page.header.SearchFor 'table'
     @page = @page.GoToFirstProduct(:available).AddToCart
-    @page = ShoppingCartPage.new
+    @page = MobileCartPage.new
     @page.load
-    $logger.Log("Waiting for 10 minutes to verify shopping cart session has expired")
     sleep (60 * 10)
-    @page.should have_cart_timed_out_message
     @page.should have_item_reservation_duration :text=>'00:00'
   end
 
   scenario 'Auth Session Expiration' do
-    @page = LoginPage.new
-    @page.load
-    @page = @page.LoginWithInfo @facebookemail, @password
-    @page.WaitForSessionToExpire
+    @page = @page.WaitForSessionToExpire.header.OpenMenu
     @page.header.should be_all_there
-    @page.should have_text "LOG IN"
+    @page.should have_text "Log In/Sign Up"
   end
 end

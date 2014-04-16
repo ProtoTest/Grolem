@@ -18,6 +18,7 @@ module Pages
     end
 
     def WaitForSessionToExpire
+      $logger.Log("#{__method__}(): Waiting for 20 minutes to verify session has expired")
       sleep (20*60)
       section :header, LoggedOutHeader, '.okl-header'
       self
