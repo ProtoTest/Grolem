@@ -19,3 +19,18 @@ module Capybara
     end
   end
 end
+
+def reset_capybara
+  # reset the capybara session and configuration
+  Capybara.reset_sessions!
+  Capybara.reset!
+
+  # Delete some cookies for the site that are hanging around
+  page.driver.browser.manage.delete_cookie('ewokAuth')
+  page.driver.browser.manage.delete_cookie('ewokAuthGuestPass')
+  page.driver.browser.manage.delete_cookie('keepLogin')
+  page.driver.browser.manage.delete_cookie('is_member')
+
+  # Ensure the browser is maximized to maximize visibility of element
+  page.driver.browser.manage.window.maximize
+end

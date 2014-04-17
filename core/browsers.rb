@@ -42,9 +42,9 @@ module Browsers
           when :ie
             capabilities = Selenium::WebDriver::Remote::Capabilities.ie(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
           when :iphone
-            capabilities = Selenium::WebDriver::Remote::Capabilities.iphone(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
+            capabilities = Selenium::WebDriver::Remote::Capabilities.iphone(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip,:app=>RSpec.configuration.app_name)
           when :ipad
-            capabilities = Selenium::WebDriver::Remote::Capabilities.ipad(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
+            capabilities = Selenium::WebDriver::Remote::Capabilities.ipad(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip, :app=>RSpec.configuration.app_name)
           else
             capabilities = Selenium::WebDriver::Remote::Capabilities.firefox(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
         end

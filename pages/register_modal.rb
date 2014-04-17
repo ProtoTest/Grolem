@@ -26,7 +26,7 @@ module Pages
       #last_name_field.set lastname
       password_field.set password
       shop_today_sales_button.click
-      sleep 1
+      sleep 2
       WelcomeSplashPage.new
     end
 
@@ -56,7 +56,7 @@ module Pages
     if page.class.eql?(RegisterModal)
       page.EnterInfo(first_name, last_name, password).ClosePanel.LogOut
     else
-      $logger.Log "The email address '#{email}' is already registered"
+      @logger.Log "The email address '#{email}' is already registered"
     end
 
   end

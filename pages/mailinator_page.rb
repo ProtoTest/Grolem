@@ -12,10 +12,13 @@ module Pages
     end
 
     def ClickBodyText text
-      find_first(:xpath, "//*[contains(text(),'" + text + "')]").click
+      within_frame(find('#mailshowdivbody>iframe')) do
+        find_first(:xpath, "//*[contains(text(),'" + text + "')]").click
+      end
       self
     end
     def ClickXpath xpath
+
       find_first(:xpath, xpath).click
     end
   end
