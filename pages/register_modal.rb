@@ -56,7 +56,7 @@ module Pages
     if page.class.eql?(RegisterModal)
       page.EnterInfo(first_name, last_name, password).ClosePanel.LogOut
     else
-      @logger.Log "The email address '#{email}' is already registered"
+      $logger.Log "The email address '#{email}' is already registered"
     end
 
   end

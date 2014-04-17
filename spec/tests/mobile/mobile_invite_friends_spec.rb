@@ -47,12 +47,6 @@ feature 'Invite Friends' do
         ClosePanel
   end
 
-  scenario 'Search is displayed in header and works' do
-
-    @page = MobileSearchPage.new
-        header.SearchFor("lamp").
-        GoToFirstProduct(:available)
-  end
 
   scenario 'Confirm credit' do
     @page = LoginPage.new

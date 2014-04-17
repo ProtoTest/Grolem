@@ -18,18 +18,18 @@ module Pages
 
     def GoToCurrentSale(position)
       wait_for_all_sales_events
-      @logger.Log "Navigating to sale #{all_sales_events[position].text}"
+      $logger.Log "Navigating to sale #{all_sales_events[position].text}"
       all_sales_events[position].click
-      SalesEvent.new(text)
+      MobileSalesEvent.new(text)
     end
 
     def GoToFirstSale
       first_sales_events.click
-
+      MobileSalesEvent.new
     end
 
     def WaitForSessionToExpire
-      @logger.Log("#{__method__}(): Waiting for 20 minutes to verify session has expired")
+      $logger.Log("#{__method__}(): Waiting for 20 minutes to verify session has expired")
       sleep (20*60)
 
       self
