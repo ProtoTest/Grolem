@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'Invite Friends' do
   before(:all) do
-    @rand = rand(1000).to_s
+    @rand = rand(10000).to_s
     @new_customer = "testuser" + @rand + "@mailinator.com"
     @password = 'Proto123'
     @firstname = 'TestUser'
@@ -47,25 +47,19 @@ feature 'Invite Friends' do
     visit "http://mailinator.com/inbox.jsp?to=#{@new_customer.gsub(/@mailinator.com/, '')}"
 
     @page = MailinatorPage.new.ClickMailWithText 'shop at One Kings Lane'
-    @page.should have_text "this is the message i am sending"
-    @page.ClickXpath '//img[@alt="Accept Invitation"]'
+    within_frame(find('#mailshowdivbody>iframe')) do
+      @page.should have_text "this is the message i am sending"
+      @page.ClickXpath '//img[@alt="Accept Invitation"]'
 
-    @page = SignupModal.new.wait_for_elements.
-        VerifyInviteSignupModalDisplayed.
-        EnterEmail(@new_customer).
-        EnterInfo(@firstname,@lastname,@password).
-        ClosePanel
+      @page = SignupModal.new.wait_for_elements.
+          VerifyInviteSignupModalDisplayed.
+          EnterEmail(@new_customer).
+          EnterInfo(@firstname,@lastname,@password).
+          ClosePanel
+      end
   end
 
-  scenario 'Search is displayed in header and works' do
-    #There is no search box on the mobile page - using desktop page
-    @page = MobileLoginPage.new
-    @page.load
 
-    @page.LoginWithInfo(@new_customer, @password).
-        header.SearchFor("lamp").
-        GoToFirstProduct(:available)
-  end
 
   scenario 'Confirm credit' do
     @page = LoginPage.new

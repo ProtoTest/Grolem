@@ -44,7 +44,7 @@ feature 'Invite Friends' do
 
     @page = MailinatorPage.new.ClickMailWithText 'shop at One Kings Lane'
     within_frame(find('#mailshowdivbody>iframe')) do
-      @page.should have_text "this is the message i am sending"
+      find_first(:xpath,  "//*[contains(text(),'" + text + "')]" ) "this is the message i am sending"
       @page.ClickXpath '//img[@alt="Accept Invitation"]'
 
       @page = SignupModal.new.wait_for_elements.
@@ -55,6 +55,15 @@ feature 'Invite Friends' do
     end
   end
 
+  scenario 'Search is displayed in header and works' do
+    #There is no search box on the mobile page - using desktop page
+    @page = MobileLoginPage.new
+    @page.load
+
+    @page.LoginWithInfo(@new_customer, @password).
+        header.SearchFor("lamp").
+        GoToFirstProduct(:available)
+  end
 
 
   scenario 'Confirm credit' do
