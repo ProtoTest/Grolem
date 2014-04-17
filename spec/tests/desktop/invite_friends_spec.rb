@@ -57,7 +57,7 @@ feature 'Invite Friends' do
 
   scenario 'Search is displayed in header and works' do
     #There is no search box on the mobile page - using desktop page
-    @page = MobileLoginPage.new
+    @page = LoginPage.new
     @page.load
 
     @page.LoginWithInfo(@new_customer, @password).
