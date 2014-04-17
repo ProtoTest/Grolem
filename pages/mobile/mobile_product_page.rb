@@ -98,7 +98,7 @@ module Pages
     def ItemAddedModal_Continue
       item_added_modal_section.continue_btn.click
       wait_until_item_added_modal_section_invisible
-      MobileSalesEventPage.new
+      MobileSalesEvent.new
     end
 
     def ItemAddedModal_Checkout
