@@ -45,7 +45,7 @@ module Sections
       wait_for_all_sales_events
       $logger.Log "Navigating to sale #{all_sales_events[position].text}"
       all_sales_events[position].click
-      SalesEvent.new(text)
+      SalesEvent.new
     end
 
     def GoToLogo

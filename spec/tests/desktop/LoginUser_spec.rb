@@ -54,10 +54,12 @@ feature 'User Login' do
     @page = MailinatorPage.new
     @page.load(username: @rand_username)
     @page.ClickMailWithText 'Please Reset Your One Kings Lane Password'
-    @page.ClickBodyText 'Click here to reset your password'
-    @page = ResetPasswordPage.new
 
-    @page.ResetPasswordTo(@newpassword).LogOut
+    within_frame(find('#mailshowdivbody>iframe')) do
+      @page.ClickBodyText 'Click here to reset your password'
+      @page = ResetPasswordPage.new
+      @page.ResetPasswordTo(@newpassword).LogOut
+    end
   end
 
   scenario 'Join' do
@@ -104,7 +106,9 @@ feature 'User Login' do
     @page = MailinatorPage.new
     @page.load(username:@rand_username2)
     @page.ClickMailWithText 'shop at One Kings Lane'
-    @page.ClickXpath '//img[@alt="Accept Invitation"]'
+    within_frame(find('#mailshowdivbody>iframe')) do
+      @page.ClickXpath '//img[@alt="Accept Invitation"]'
+    end
   end
 
   scenario '/Login' do

@@ -36,7 +36,7 @@ RSpec.configure do |config|
   config.add_formatter JUnitReporter, 'output.xml'
   config.add_setting :test_name, :default=>'Test'
   config.add_setting :command_delay_sec, :default=>0
-  config.add_setting :browsermob_path, :default=>'C:\Users\Brian\Documents\GitHub\Grolem\browsermob-proxy\bin\browsermob-proxy.bat'
+  config.add_setting :browsermob_path, :default=>'C:\Users\SethUrban\Documents\GitHub\Grolem\browsermob-proxy\bin\browsermob-proxy.bat'
   config.add_setting :use_proxy, :default=>false
   config.add_setting :proxy_server_port, :default=>8080
   config.add_setting :proxy_port, :default=>9091

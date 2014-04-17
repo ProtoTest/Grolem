@@ -13,7 +13,7 @@ def remove_all_items_from_cart
   page.load
 end
 
-feature 'Checkout' do
+feature 'Mobile Checkout' do
 
 # run this once before all of the scenarios
   before(:all) do

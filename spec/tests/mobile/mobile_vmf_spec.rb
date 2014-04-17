@@ -4,7 +4,7 @@ require_all 'pages'
 include Pages
 
 
-feature 'Vintage Market Find (VMF)' do
+feature 'Mobile Vintage Market Find (VMF)' do
 
 # run this once before all of the scenarios
   before(:all) do

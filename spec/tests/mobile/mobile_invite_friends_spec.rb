@@ -7,24 +7,34 @@ feature 'Invite Friends' do
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
-    @facebookemail = 'bkitchener@prototest.com'
-    @facebookpassword = 'Qubit123!'
+    @facebookemail = 'msiwiec@prototest.com'
+    @facebookpassword = 'Proto123'
   end
 
-  before(:each) do
-    @page = MobileHomePage.new
-    @page.load
-    @page = MobileLoginPage.new
-    @page.load
-    @page.LoginWithInfo @facebookemail, @facebookpassword
-  end
+  before(:each) { }
+
+  after(:each) {sleep 3;}
+
+  # Skip what invite?
+  #scenario 'Skip Invite' do
+  #  @page
+  #
+  #end
 
   scenario 'Invite Friends' do
     # Create/Verify the facebook email user account is created
     # You can only invite new customers from an account that isn't disposable
     #register_user(@firstname, @lastname, @facebookpassword, @facebookemail)
+    @page = MobileHomePage.new
+    @page.load
 
-    @page = InvitePage.new
+    @page.GoToLoginPage
+
+    @page = MobileLoginPage.new
+
+
+    @page.LoginWithInfo @facebookemail, @facebookpassword
+    @page = MobileInvitePage.new
     @page.load
     @page.should be_all_there
     @page.SendInviteToEmails(@new_customer, 'this is the message i am sending').header.LogOut
@@ -47,6 +57,15 @@ feature 'Invite Friends' do
         ClosePanel
   end
 
+  scenario 'Search is displayed in header and works' do
+    #There is no search box on the mobile page - using desktop page
+    @page = MobileLoginPage.new
+    @page.load
+
+    @page.LoginWithInfo(@new_customer, @password).
+        header.SearchFor("lamp").
+        GoToFirstProduct(:available)
+  end
 
   scenario 'Confirm credit' do
     @page = LoginPage.new

@@ -3,7 +3,7 @@ require_all 'pages'
 
 include Pages
 
-feature 'Events' do
+feature 'Mobile Events' do
 
 # run this once before all of the scenarios
   before(:all) do
@@ -21,13 +21,15 @@ feature 'Events' do
       @sale_event = @page.header.GoToCurrentSale(rand(16))
     rescue
       @sale_event = @page.header.GoToCurrentSale(rand(16))
-    end
+    # register the user
+    register_user(@firstname, @lastname, @password, @email)
   end
 
   scenario 'Sort by Lowest Price' do
     @sale_event.SortItems(:low_price)
     prices = @sale_event.PriceList
     prices.should == prices.sort
+    @sale_event.SortItems(:low_price).VerifyPriceListSortedByLowestPrice
   end
 
   scenario 'Sort by Featured' do
@@ -71,5 +73,4 @@ feature 'Events' do
   scenario 'F00ter present and rendered correctly' do
     @sale_event.footer.VerifyRenderedCorrectly
   end
-
 end

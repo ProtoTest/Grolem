@@ -4,7 +4,7 @@ require 'mailinator_page'
 include Pages
 
 
-feature 'SEO and SEM' do
+feature 'Mobile SEO and SEM' do
     before(:all) do
       @rand = rand(1000).to_s
       @rand_username = "testuser" + @rand

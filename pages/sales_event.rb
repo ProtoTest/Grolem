@@ -13,11 +13,6 @@ module Pages
 
     @@sort_type = [:featured, :low_price, :available]
 
-    def initialize(text)
-      @text = text
-    end
-
-
     def SortItems(sort_type_i)
       list_index = @@sort_type.index(sort_type_i)
       wait_for_sort_by
