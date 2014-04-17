@@ -1,7 +1,7 @@
 require 'spec_helper'
 include Pages
 
-feature 'Search' do
+feature 'Mobile Search' do
   before(:all) do
     @rand = rand(1000).to_s
     @newemail = "testuser" + @rand + "@mailinator.com"

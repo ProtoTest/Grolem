@@ -4,7 +4,7 @@ require_all 'pages'
 include Pages
 
 
-feature 'My Account' do
+feature 'Mobile My Account' do
 
 # run this once before all of the scenarios
   before(:all) do

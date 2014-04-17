@@ -1,7 +1,7 @@
 require 'spec_helper'
 include Pages
 
-feature 'Session' do
+feature 'Mobile Session' do
   before(:all) do
     @rand = rand(1000).to_s
     @newemail = "testuser" + @rand + "@mailinator.com"

@@ -4,7 +4,7 @@ require_all 'pages'
 include Pages
 
 
-feature 'Smoke Test' do
+feature 'Mobile Smoke Test' do
 
 # run this once before all of the scenarios
   before(:all) do

@@ -2,7 +2,7 @@ require 'spec_helper'
 require_all 'pages'
 
 include Pages
-feature 'Product Details' do
+feature 'Mobile Product Details' do
 
 # run this once before all of the scenarios
   before(:all) do
