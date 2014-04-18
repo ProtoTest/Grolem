@@ -10,10 +10,9 @@ feature 'Mobile Vintage Market Find (VMF)' do
   before(:all) do
     @rand = rand(1000).to_s
     @email = "testuser" + @rand + "@mailinator.com"
-    @email = "msiwiec@mailinator.com"
-    @password = 'Proto123'
-    @firstname = 'TestUser'
-    @lastname = 'ProtoTest'
+    @password = OKL_USER_PASSWORD
+    @firstname = OKL_USER_FIRST_NAME
+    @lastname = OKL_USER_LAST_NAME
     @fullname = "#{@firstname} #{@lastname}"
 
     # register the user
@@ -63,7 +62,7 @@ feature 'Mobile Vintage Market Find (VMF)' do
   end
 
   scenario 'Shop by Vendor link works on product detail page (PDP)' do
-    # There is no 'Shop by Vendor' link on the mobile PDP
+    raise "There is no 'Shop by Vendor' link on the mobile PDP"
   end
 
 end
