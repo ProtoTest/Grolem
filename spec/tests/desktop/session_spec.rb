@@ -4,22 +4,22 @@ include Pages
 feature 'Session' do
   before(:all) do
     @rand = rand(1000).to_s
-    @newemail = "testuser" + @rand + "@mailinator.com"
-    @newemail2 =  "testuser" + @rand + @rand + "@mailinator.com"
-    @password = 'Proto123!'
-    @firstname = 'TestUser'
-    @lastname = 'ProtoTest'
-    @newemail = 'prototest@mailinator.com'
-    @facebookemail = 'bkitchener@prototest.com'
+    @email = "testuser" + @rand + "@mailinator.com"
+    @password = OKL_USER_PASSWORD
+    @firstname = OKL_USER_FIRST_NAME
+    @lastname = OKL_USER_LAST_NAME
+
+    # register the user
+    register_user(@firstname, @lastname, @password, @email)
   end
 
   before(:each) do
+    @page = LoginPage.new
+    @page.load
+    @page = @page.LoginWithInfo @email, @password
   end
 
   scenario 'Cart Session Expiration' do
-    @page = LoginPage.new
-    @page.load
-    @page = @page.LoginWithInfo @facebookemail, @password
     @page = @page.header.SearchFor 'table'
     @page = @page.GoToFirstProduct(:available).AddToCart
     @page = ShoppingCartPage.new
@@ -31,9 +31,6 @@ feature 'Session' do
   end
 
   scenario 'Auth Session Expiration' do
-    @page = LoginPage.new
-    @page.load
-    @page = @page.LoginWithInfo @facebookemail, @password
     @page.WaitForSessionToExpire
     @page.header.should be_all_there
     @page.should have_text "LOG IN"
