@@ -3,23 +3,19 @@ include Pages
 
 feature 'Search' do
   before(:all) do
-    @rand = rand(1000).to_s
-    @newemail = "testuser" + @rand + "@mailinator.com"
-    @newemail2 =  "testuser" + @rand + @rand + "@mailinator.com"
-    @password = 'Proto123!'
-    @firstname = 'TestUser'
-    @lastname = 'ProtoTest'
-    @newemail = 'prototest@mailinator.com'
-    @facebookemail = 'bkitchener@prototest.com'
+    @email = PROTOTEST_OKL_EMAIL
+    @password = OKL_USER_PASSWORD
+    @firstname = OKL_USER_FIRST_NAME
+    @lastname = OKL_USER_LAST_NAME
 
     # register the user
-    register_user(@firstname, @lastname, @password, @newemail)
+    register_user(@firstname, @lastname, @password, @email)
   end
 
   before(:each) do
     @page = LoginPage.new
     @page.load
-    @page = @page.LoginWithInfo @newemail, @password
+    @page = @page.LoginWithInfo @email, @password
   end
 
 scenario 'Search Regular Result Set' do
