@@ -44,7 +44,7 @@ feature 'Invite Friends' do
 
     @page = MailinatorPage.new.ClickMailWithText 'shop at One Kings Lane'
     within_frame(find('#mailshowdivbody>iframe')) do
-      find_first(:xpath,  "//*[contains(text(),'" + text + "')]" ) "this is the message i am sending"
+      @page.should have_text "this is the message i am sending"
       @page.ClickXpath '//img[@alt="Accept Invitation"]'
 
       @page = SignupModal.new.wait_for_elements.
