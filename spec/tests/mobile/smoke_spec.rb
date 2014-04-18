@@ -33,17 +33,18 @@ feature 'Mobile Smoke Test' do
 
     shipping_info = {:first => @firstname,
                      :last => @lastname,
-                     :address1 => $ADDRESS,
-                     :city => $CITY,
-                     :state => $STATE,
-                     :zip => $ZIP,
-                     :phone => $PHONE}
+                     :address1 => ADDRESS1,
+                     :city => CITY,
+                     :state => STATE,
+                     :state_abbr => STATE_ABBR,
+                     :zip => ZIP,
+                     :phone => PHONE}
 
     billing_info = {:fullname => @fullname,
-                    :credit_card_num => $VISA_TEST_CC,
-                    :exp_month => "1",
-                    :exp_year => "2020",
-                    :cvc => "123"}
+                    :credit_card_num => VISA_TEST_CC,
+                    :exp_month => CC_EXP_MONTH,
+                    :exp_year => CC_EXP_YEAR,
+                    :cvc => VISA_TEST_CCV}
 
     @page = MobileHomePage.new
     @page.load

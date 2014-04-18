@@ -7,16 +7,19 @@ feature 'Mobile User Login' do
     @rand_username2 = "testuser" + @rand + @rand
     @newemail =  @rand_username + "@mailinator.com"
     @newemail2 =  @rand_username2 + "@mailinator.com"
-    @email = "prototest@mailinator.com"
-    @facebookemail = "bkitchener@prototest.com"
-    @password = "Proto123!"
-    @newpassword = "Test123!"
-    @firstname = "TestUser"
-    @lastname = "ProtoTest"
-    @page = MobileHomePage.new
+    @email = PROTOTEST_OKL_EMAIL
+    @facebookemail = FACEBOOK_EMAIL
+    @facebookpassword = FACEBOOK_PASSWORD
+    @password = OKL_USER_PASSWORD
+    @firstname = OKL_USER_FIRST_NAME
+    @lastname = OKL_USER_LAST_NAME
+
+    # register the initial existing user
+    register_user(@firstname, @lastname, @password, @email)
   end
 
   before(:each) do
+    @page = MobileHomePage.new
     @page.load
   end
 
@@ -29,13 +32,13 @@ feature 'Mobile User Login' do
   end
 
   scenario 'Login as Existing Member' do
-     @page.GoToLoginPage.LoginWithInfo(@newemail, @password).footer.LogOut
+     @page.GoToLoginPage.LoginWithInfo(@email, @password).footer.LogOut
   end
 
   scenario 'Login with Facebook' do
     @page.GoToLoginPage.
         GoToFacebookLogin.
-        LoginAs(@facebookemail,@password)
+        LoginAs(@facebookemail,@facebookpassword)
 
     @page = MobileHomePage.new
     @page.LogOut
@@ -43,6 +46,8 @@ feature 'Mobile User Login' do
 
 
   scenario 'Forgot Password' do
+    new_password = "Test123!"
+
     @page.GoToLoginPage.ForgotPassword @newemail
     @page = MailinatorPage.new
     @page.load(username: @rand_username)
@@ -51,7 +56,7 @@ feature 'Mobile User Login' do
     within_frame(find('#mailshowdivbody>iframe')) do
       @page.ClickBodyText 'Click here to reset your password'
       @page = ResetPasswordPage.new
-      @page.ResetPasswordTo(@newpassword)
+      @page.ResetPasswordTo(new_password)
       @page = MobileHomePage.new
       @page.LogOut
     end
@@ -60,7 +65,7 @@ feature 'Mobile User Login' do
   scenario 'Invite Friends' do
     @page.
         GoToLoginPage.
-        LoginWithInfo @facebookemail, @password
+        LoginWithInfo @email, @password
     sleep 2
     @page = InvitePage.new
     @page.load
@@ -82,7 +87,7 @@ feature 'Mobile User Login' do
     @page = MobileLoginPage.new
     @page.load
 
-    @page.LoginWithInfo(@newemail, @password).LogOut
+    @page.LoginWithInfo(@email, @password).LogOut
 
   end
 

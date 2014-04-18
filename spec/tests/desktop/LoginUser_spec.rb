@@ -8,21 +8,19 @@ feature 'User Login' do
     @newemail =  @rand_username + "@mailinator.com"
     @newemail2 =  @rand_username2 + "@mailinator.com"
     @newemail3 = "testuser#{@rand}#{@rand}#{@rand}@mailinator.com"
-    @email = "prototest@mailinator.com"
-    @facebookemail = "bkitchener@prototest.com"
-    @facebookpassword = "Proto123!"
-    @password = "Proto123"
-    @newpassword = "Test123!"
-    @firstname = "TestUser"
-    @lastname = "ProtoTest"
+    @email = PROTOTEST_OKL_EMAIL
+    @facebookemail = FACEBOOK_EMAIL
+    @facebookpassword = FACEBOOK_PASSWORD
+    @password = OKL_USER_PASSWORD
+    @firstname = OKL_USER_FIRST_NAME
+    @lastname = OKL_USER_LAST_NAME
 
     # register the initial existing user
     register_user(@firstname, @lastname, @password, @email)
-
-    @page = SignupModal.new
   end
 
   before(:each) do
+    @page = SignupModal.new
     @page.load
   end
 
@@ -55,6 +53,8 @@ feature 'User Login' do
   end
 
   scenario 'Forgot Password' do
+    new_password = "Test123!"
+
     @page = LoginPage.new
     @page.load
     @page.ForgotPassword @newemail
@@ -65,7 +65,7 @@ feature 'User Login' do
     within_frame(find('#mailshowdivbody>iframe')) do
       @page.ClickBodyText 'Click here to reset your password'
       @page = ResetPasswordPage.new
-      @page.ResetPasswordTo(@newpassword).LogOut
+      @page.ResetPasswordTo(new_password).LogOut
     end
   end
 
@@ -105,7 +105,7 @@ feature 'User Login' do
     @page.load
     @page.
         GoToLoginPage.
-        LoginWithInfo @facebookemail, @password
+        LoginWithInfo @email, @password
     @page = InvitePage.new
     @page.load
     @page.SendInviteToEmails @newemail2, 'this is the message i am sending'
