@@ -15,11 +15,12 @@ module Pages
       login_button.click
 
       okay_button.click if has_okay_button?
+      FacebookMainPage.new
     end
 
     def LoginAs email, pass
       Login(email, pass)
-      FacebookMainPage.new
+      HomePage.new
     end
 
     def LoginToShare email, pass

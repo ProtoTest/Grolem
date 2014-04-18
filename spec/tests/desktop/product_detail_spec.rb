@@ -100,7 +100,7 @@ feature 'Product Details' do
     # Verify the item was actually posted to the facebook user's wall
     @page = FacebookLoginPage.new
     @page.load
-    @page.LoginAs(@facebookemail, @facebookpassword).
+    @page.Login(@facebookemail, @facebookpassword).
         GoToNewsFeed.
         VerifyProductShared(product_shared_str)
   end

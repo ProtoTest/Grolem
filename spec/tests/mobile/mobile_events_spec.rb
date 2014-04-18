@@ -59,7 +59,7 @@ feature 'Mobile Events' do
     @sale_event.header.should have_okl_logo
   end
 
-  scenario 'F00ter present and rendered correctly' do
+  scenario 'Footer present and rendered correctly' do
     @sale_event.footer.should have_upcoming_sales_link
     @sale_event.footer.should have_my_account_link
     @sale_event.footer.should have_log_out_link

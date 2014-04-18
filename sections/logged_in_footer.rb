@@ -30,10 +30,12 @@ module Sections
                     verify_link(help, 'Frequently Asked Questions')]
     failed_elements = link_results.map do |element, text, correct|
       next if correct
-      "Link \"#{element.text}\" lead to a page which did not contain the expected text: \"#{text}\"\n"
+      "Link \"#{element}\" lead to a page which did not contain the expected text: \"#{text}\"\n"
     end
     copyright.present?
-    if failed_elements.length > 0
+
+    # the link_results.map call will always have at least one element in it, and it should be nil
+    if failed_elements.length > 0 and not failed_elements[0].nil?
       fail(failed_elements.join())
     end
   end

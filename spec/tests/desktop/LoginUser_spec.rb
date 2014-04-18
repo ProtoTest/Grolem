@@ -7,17 +7,23 @@ feature 'User Login' do
     @rand_username2 = "testuser" + @rand + @rand
     @newemail =  @rand_username + "@mailinator.com"
     @newemail2 =  @rand_username2 + "@mailinator.com"
+    @newemail3 = "testuser#{@rand}#{@rand}#{@rand}@mailinator.com"
     @email = "prototest@mailinator.com"
     @facebookemail = "bkitchener@prototest.com"
-    @password = "Proto123!"
+    @facebookpassword = "Proto123!"
+    @password = "Proto123"
     @newpassword = "Test123!"
     @firstname = "TestUser"
     @lastname = "ProtoTest"
-   @page = SignupModal.new
+
+    # register the initial existing user
+    register_user(@firstname, @lastname, @password, @email)
+
+    @page = SignupModal.new
   end
 
   before(:each) do
-   @page.load
+    @page.load
   end
 
   scenario 'Join as new User' do
@@ -26,6 +32,7 @@ feature 'User Login' do
         EnterInfo(@firstname,@lastname,@password).
         ClosePanel
   end
+
   scenario 'Login as Existing Member' do
     @page.
         GoToLoginPage.
@@ -37,15 +44,15 @@ feature 'User Login' do
     @page = LoginPage.new
     @page.load
     @page.GoToFacebookLogin.
-        LoginAs(@facebookemail,@password).
+        LoginAs(@facebookemail,@facebookpassword).
         LogOut
   end
 
-    scenario 'Guest Pass' do
-      @page = GuestHomePage.new
-      @page.load
-      @page.header.should be_all_there
-    end
+  scenario 'Guest Pass' do
+    @page = GuestHomePage.new
+    @page.load
+    @page.header.should be_all_there
+  end
 
   scenario 'Forgot Password' do
     @page = LoginPage.new
@@ -65,7 +72,7 @@ feature 'User Login' do
   scenario 'Join' do
     @page = SignUpPage.new
     @page.load
-    @page.EnterInfo(@firstname,@lastname,@email,@password,'').
+    @page.EnterInfo(@firstname,@lastname,@newemail3,@password,'').
         LogOut
   end
 
@@ -112,10 +119,9 @@ feature 'User Login' do
   end
 
   scenario '/Login' do
-      @page = LoginPage.new
-      @page.load
-      @page.LoginWithInfo(@email, @password).
-          LogOut
+    @page = LoginPage.new
+    @page.load
+    @page.LoginWithInfo(@email, @password).LogOut
     end
 
 end

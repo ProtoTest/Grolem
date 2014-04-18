@@ -126,9 +126,11 @@ ONE KINGS LANE'),
             wait_for_my_account_link })]
       failed_elements = link_results.map do |element, text, correct|
         next if correct
-        "Link \"#{send(element).text}\" lead to a page which did not contain the expected text: \"#{text}\""
+        "Link \"#{element}\" lead to a page which did not contain the expected text: \"#{text}\""
       end
-      if failed_elements.length > 0
+
+      # the link_results.map call will always have at least one element in it, and it should be nil
+      if failed_elements.length > 0 and not failed_elements[0].nil?
         fail(failed_elements.join('\n'))
       end
     end

@@ -68,7 +68,7 @@ feature 'Events' do
     @sale_event.header.VerifyRenderedCorrectly
   end
 
-  scenario 'F00ter present and rendered correctly' do
+  scenario 'Footer present and rendered correctly' do
     @sale_event.footer.VerifyRenderedCorrectly
   end
 

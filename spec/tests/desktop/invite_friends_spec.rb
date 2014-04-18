@@ -7,8 +7,8 @@ feature 'Invite Friends' do
     @password = 'Proto123'
     @firstname = 'TestUser'
     @lastname = 'ProtoTest'
-    @facebookemail = 'bkitchener@prototest.com'
-    @facebookpassword = 'Qubit123!'
+    @facebookemail = 'msiwiec@prototest.com'
+    @facebookpassword = 'Proto123'
   end
 
   before(:each) { }
