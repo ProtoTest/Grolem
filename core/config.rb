@@ -1,4 +1,5 @@
 require 'custom_formatter'
+require 'j_unit_reporter'
 
 def reset_capybara
   # reset the capybara session and configuration
@@ -47,6 +48,7 @@ RSpec.configure do |config|
   config.add_setting :ldap_user_password, :default =>"bkitchener123!"
   config.add_formatter :documentation,'output.txt'
   config.add_formatter CustomFormatter,'output.html'
+  config.add_formatter JUnitReporter,'output.xml'
   config.add_setting :test_name, :default=>'Test'
   config.add_setting :command_delay_sec, :default=>0
   config.add_setting :browsermob_path, :default=>'C:\Users\SethUrban\Documents\GitHub\Grolem\browsermob-proxy\bin\browsermob-proxy.bat'

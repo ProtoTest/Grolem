@@ -16,6 +16,7 @@ require 'site_prism'
 require 'selenium-webdriver'
 require 'browsers'
 require "command_logger"
+require 'j_unit_reporter'
 require 'config'
 require "capybara-screenshot"
 require 'capybara-screenshot/rspec'
