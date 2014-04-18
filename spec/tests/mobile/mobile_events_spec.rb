@@ -8,9 +8,9 @@ feature 'Mobile Events' do
 # run this once before all of the scenarios
   before(:all) do
     @email = "msiwiec@mailinator.com"
-    @password = 'Proto123'
-    @firstname = 'TestUser'
-    @lastname = 'ProtoTest'
+    @password = OKL_USER_PASSWORD
+    @firstname = OKL_USER_FIRST_NAME
+    @lastname = OKL_USER_LAST_NAME
 
     # register the user
     register_user(@firstname, @lastname, @password, @email)
@@ -45,12 +45,19 @@ feature 'Mobile Events' do
   end
 
   scenario 'Verify Inventory Badge works and rendered correctly' do
-    products = @sale_event.products_sold_out
-    products.size.should_not == 0
+    sold_out_products = @sale_event.products_sold_out
+
+    if sold_out_products.empty?
+      raise "Failed to find any 'SOLD OUT' badges on any products in the mobile sales event pages"
+    end
   end
 
   scenario 'Verify Vintage Badge works and rendered correctly' do
-    raise "I'm not finding any Vintage badges on any products in the mobile sales event pages"
+    vintage_products = @sale_event.products_vintage
+
+    if vintage_products.empty?
+      raise "Failed to find any 'VINTAGE' badges on any products in the mobile sales event pages"
+    end
   end
 
   scenario 'Header present and rendered correctly' do

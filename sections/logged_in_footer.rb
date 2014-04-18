@@ -13,43 +13,46 @@ module Sections
     element :returns, 'a[href="http://help.onekingslane.com/customer/portal/articles/72357-return-policy"]'
     element :help, 'a[href="http://help.onekingslane.com"]'
     element :copyright, 'div#oklCopyright'
-  end
 
-  def VerifyRenderedCorrectly
-    link_results = [verify_link(about_us, 'One King\'s lane is a website'),
-                    verify_link(press, 'Recent Press'),
-                    verify_link(careers, "One King's Lane has an awesome work environment. Join us."),
-                    verify_link(apps_ipad, 'one kings lane + ipad'),
-                    verify_link(apps_iphone, 'One Kings Lane iPhone App'),
-                    verify_link(gift_card, 'E-Gift Card'),
-                    verify_link(vendor, 'Become a Vendor on One Kings Lane'),
-                    verify_link(affiliates, 'Affiliate Program'),
-                    verify_link(sitemap, 'Everything out site has to offer'),
-                    verify_link(shipping, 'Shipping & Delivery'),
-                    verify_link(returns, 'Return policy'),
-                    verify_link(help, 'Frequently Asked Questions')]
-    failed_elements = link_results.map do |element, text, correct|
-      next if correct
-      "Link \"#{element}\" lead to a page which did not contain the expected text: \"#{text}\"\n"
+    def VerifyRenderedCorrectly
+      link_results = [
+          verify_link(:about_us, 'One King\'s lane is a website'),
+          verify_link(:press, 'RECENT PRESS'),
+          verify_link(:careers, "One King's Lane has an awesome work environment. Join us."),
+          verify_link(:apps_ipad, 'ONE KINGS LANE + IPAD'),
+          verify_link(:apps_iphone, 'ONE KINGS LANE IPHONE APP'),
+          verify_link(:gift_card, 'E-Gift Card'),
+          verify_link(:vendor, 'Become a Vendor on One Kings Lane'),
+          verify_link(:affiliates, 'Affiliate Program'),
+          verify_link(:sitemap, 'Everything out site has to offer'),
+          verify_link(:shipping, 'Shipping & Delivery'),
+          verify_link(:returns, 'Return policy'),
+          verify_link(:help, 'Frequently Asked Questions')
+      ]
+
+      failed_elements = link_results.map do |element, text, correct|
+        next if correct
+        "Link \"#{element}\" lead to a page which did not contain the expected text: \"#{text}\"\n"
+      end
+      copyright.present?
+
+      # the link_results.map call will always have at least one element in it, and it should be nil
+      if failed_elements.length > 0 and not failed_elements[0].nil?
+        fail(failed_elements.join())
+      end
     end
-    copyright.present?
 
-    # the link_results.map call will always have at least one element in it, and it should be nil
-    if failed_elements.length > 0 and not failed_elements[0].nil?
-      fail(failed_elements.join())
+    private
+    def verify_link(element, text, pre_fn=nil)
+      if pre_fn
+        pre_fn()
+      end
+
+      self.send(element).click
+      correct_page = page.has_text? text
+      page.go_back
+      [element, text, correct_page]
+
     end
   end
-
-  private
-  def verify_link(element, text, pre_fn=nil)
-    if pre_fn
-      pre_fn()
-    end
-    element.click
-    correct_page = page.has_text? text
-    page.go_back
-    [element, text, correct_page]
-
-  end
-
 end

@@ -8,9 +8,12 @@ feature 'Events' do
 # run this once before all of the scenarios
   before(:all) do
     @email = "msiwiec@mailinator.com"
-    @password = 'Proto123'
-    @firstname = 'TestUser'
-    @lastname = 'ProtoTest'
+    @password = OKL_USER_PASSWORD
+    @firstname = OKL_USER_FIRST_NAME
+    @lastname = OKL_USER_LAST_NAME
+
+    # register the user
+    register_user(@firstname, @lastname, @password, @email)
   end
 
   before(:each) do
