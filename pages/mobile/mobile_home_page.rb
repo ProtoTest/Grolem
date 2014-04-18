@@ -31,7 +31,7 @@ module Pages
       # Open the sales drop down: sales aren't loaded until the drop down is visible.
       wait_for_ending_sales_events
 
-      position = rand(todays_sales_events.size)
+      position = rand(ending_sales_events.size)
       $logger.Log "Navigating to sale #{ending_sales_events[position].text}"
       ending_sales_events[position].click
       MobileSalesEvent.new

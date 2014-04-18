@@ -6,6 +6,7 @@ module Pages
     element :sort_options_select, '#product-sort'
     elements :products, :xpath, "//li[contains(@id,'product-tile')]"
     elements :products_sold_out, :xpath, "//li[contains(@id,'product-tile') and contains(@class,'sold')]"
+    elements :products_vintage, :xpath, "//li[contains(@id,'product-tile') and contains(@class,'vintage')]"
     elements :prices, :xpath, "//*[contains(@class,'okl-price') and not (../../../../*[contains(@class,'sold')])]"
     section :header, MobileHeader, '.page-header'
     section :footer, MobileFooter, '.page-footer'
@@ -29,7 +30,7 @@ module Pages
       price_list.each_with_index do |price, index|
         next if index.eql?(price_list.size - 1)
 
-        raise "Price list is not sorted properly: #{price_list}" if price >= price_list[index+1]
+        raise "Price list is not sorted properly: #{price_list}" if price > price_list[index+1]
       end
     end
 
