@@ -17,7 +17,7 @@ module Sections
 
     element :invite_friends_link, '.invite-friends'
     element :all_sales_link, '#all-sales'
-    element :vintage_link, 'a[data-linkname="category_vintage"]'
+    element :vintage_link, 'a', :text => "Vintage"
     element :upcoming_sales_link, 'a[data-linkname="header_calendar"]'
     element :style_blog, 'a[data-linkname="header_llh"]'
     elements :all_sales_events, '.latest-sales a'
