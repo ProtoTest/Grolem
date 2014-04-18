@@ -6,13 +6,12 @@ feature 'Mobile Product Details' do
 
 # run this once before all of the scenarios
   before(:all) do
-    @email = "bkitchener@prototest.com"
-    @share_email = "prototest@mailinator.com"
-    @facebookemail = "bkitchener@prototest.com"
-    @facebookpassword = 'Proto123!'
-    @password = 'Proto123!'
-    @firstname = 'TestUser'
-    @lastname = 'ProtoTest'
+    @email = PROTOTEST_OKL_EMAIL
+    @facebookemail = FACEBOOK_EMAIL
+    @facebookpassword = FACEBOOK_PASSWORD
+    @password = OKL_USER_PASSWORD
+    @firstname = OKL_USER_FIRST_NAME
+    @lastname = OKL_USER_LAST_NAME
     @fullname = "#{@firstname} #{@lastname}"
   end
 
@@ -21,13 +20,13 @@ feature 'Mobile Product Details' do
     @page.load
     @page = MobileLoginPage.new
     @page.load
-    @page.LoginWithInfo(@facebookemail,@password)
+    @page.LoginWithInfo(@email, @password)
     sleep 2
   end
 
   scenario 'Select Product Quantity and size' do
     @page = MobileSearchResultsPage.new
-    visit("/search?q=rugs")
+    visit("/search?q=red rug")
     # Searching for rug products typically have size and quantity
     @page.GoToFirstProduct
 

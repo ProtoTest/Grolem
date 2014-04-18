@@ -8,13 +8,13 @@ feature 'Product Details' do
 
 # run this once before all of the scenarios
   before(:all) do
-    @email = "msiwiec@prototest.com"
     @share_email = "msiwiec@mailinator.com"
-    @facebookemail = "bkitchener@prototest.com"
-    @facebookpassword = 'Proto123!'
-    @password = 'Proto123'
-    @firstname = 'TestUser'
-    @lastname = 'ProtoTest'
+    @email = PROTOTEST_OKL_EMAIL
+    @facebookemail = FACEBOOK_EMAIL
+    @facebookpassword = FACEBOOK_PASSWORD
+    @password = OKL_USER_PASSWORD
+    @firstname = OKL_USER_FIRST_NAME
+    @lastname = OKL_USER_LAST_NAME
     @fullname = "#{@firstname} #{@lastname}"
 
     # register the user
@@ -37,7 +37,7 @@ feature 'Product Details' do
     @page.load
 
     # Searching for rug products typically have size and quantity
-    @page = @page.header.SearchFor("Rug").
+    @page = @page.header.SearchFor("Red Rug").
         GoToFirstProduct
 
     qty = 2
@@ -114,12 +114,19 @@ feature 'Product Details' do
     product_shared_str = @page.header.SearchFor("lamp").
         GoToFirstProduct(:available).ShareViaEmail(@share_email, message)
 
+    # logout
+    @page = HomePage.new
+    @page.load
+    @page.header.LogOut
+
     # visit the mailinator page, with just the username, not the domain
     visit "http://mailinator.com/inbox.jsp?to=#{@share_email.gsub(/@mailinator.com/, '')}"
 
     @page = MailinatorPage.new.ClickMailWithText 'thought you would love'
-    @page.should have_text "Personal message: #{message}"
-    @page.should have_text product_shared_str
+    within_frame(find('#mailshowdivbody>iframe')) do
+      @page.should have_text "Personal message: #{message}"
+      @page.should have_text product_shared_str
+    end
   end
 
   scenario 'Social Sharing - Pinterest' do

@@ -48,9 +48,9 @@ module Pages
     elements :size_options, '.opt'
 
     # social sharing
-    element :facebook_share_link, :xpath, "//*[contains(@class,'fb-share')]"
+    element :facebook_share_link, "a.fb-share"
     element :email_share_link,  :xpath, "//*[contains(@class,'em-share')]"
-    element :pinterest_share_link, :xpath, "//*[contains(@class, 'pin-it')]"
+    element :pinterest_share_link, "a.pin-it"
 
     # Returns the product text that was shared
     def ShareViaFacebook(facebook_email, facebook_password, msg=nil)

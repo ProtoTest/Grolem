@@ -82,6 +82,8 @@ module Pages
     end
 
     def SelectSizeByIndex index
+      raise "Product found does not have a size option" if has_no_size_dropdown?
+
       size_dropdown.click
       size_dropdown.select index
       self
