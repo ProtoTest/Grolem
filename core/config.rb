@@ -43,7 +43,10 @@ RSpec.configure do |config|
   config.add_setting :screenshot_on_failure, :default => true
   config.add_setting :command_logging, :default => true
   config.add_setting :mock_mobile, :default =>true
-  config.add_setting :default_url, :default => "https://bkitchener:bkitchener123!@qa02.newokl.com"
+
+  # Grab the OKL site sub-domain from the environment. Default to qa07 if not set
+  ENV['OKL_SERVER'] ||= "qa07"
+  config.add_setting :default_url, :default => "https://bkitchener:bkitchener123!@#{ENV['OKL_SERVER']}.newokl.com"
   config.add_setting :ldap_username, :default => "bkitchener"
   config.add_setting :ldap_user_password, :default =>"bkitchener123!"
   config.add_formatter :documentation,'output.txt'
