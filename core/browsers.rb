@@ -34,23 +34,24 @@ module Browsers
       if RSpec.configuration.remote_driver
         case RSpec.configuration.default_browser
           when :firefox
-            capabilities = Selenium::WebDriver::Remote::Capabilities.firefox(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
+            capabilities = Selenium::WebDriver::Remote::Capabilities.firefox(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>"http://#{RSpec.configuration.host_ip}:4444/wd/hub")
           when :chrome
-            capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
+            capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>"http://#{RSpec.configuration.host_ip}:4444/wd/hub")
           when :safari
-            capabilities = Selenium::WebDriver::Remote::Capabilities.safari(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
+            capabilities = Selenium::WebDriver::Remote::Capabilities.safari(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>"http://#{RSpec.configuration.host_ip}:4444/wd/hub")
           when :ie
-            capabilities = Selenium::WebDriver::Remote::Capabilities.ie(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
+            capabilities = Selenium::WebDriver::Remote::Capabilities.ie(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>"http://#{RSpec.configuration.host_ip}:4444/wd/hub")
           when :iphone
-            capabilities = Selenium::WebDriver::Remote::Capabilities.iphone(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
+            capabilities = Selenium::WebDriver::Remote::Capabilities.iphone(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>"http://#{RSpec.configuration.host_ip}:4444/wd/hub")
           when :ipad
-            capabilities = Selenium::WebDriver::Remote::Capabilities.ipad(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
+            capabilities = Selenium::WebDriver::Remote::Capabilities.ipad(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>"http://#{RSpec.configuration.host_ip}:4444/wd/hub")
           else
-            capabilities = Selenium::WebDriver::Remote::Capabilities.firefox(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>RSpec.configuration.host_ip)
+            capabilities = Selenium::WebDriver::Remote::Capabilities.firefox(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>"http://#{RSpec.configuration.host_ip}:4444/wd/hub")
         end
         driver = Capybara::Selenium::Driver.new(app,
                                        :browser => :remote,
-                                       :desired_capabilities => capabilities)
+                                       :desired_capabilities => capabilities,
+                                       :url=>"http://#{RSpec.configuration.host_ip}:4444/wd/hub")
       end
       driver
     end

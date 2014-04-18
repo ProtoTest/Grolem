@@ -1,8 +1,7 @@
 require 'spec_helper'
 require_all 'pages'
 RSpec.configuration.remote_driver = true
-RSpec.configuration.host_ip = 'http://qa03.corp.onekingslane.biz:4444/wd/hub'
-
+RSpec.configuration.host_ip = 'qa03.corp.onekingslane.biz'
 include Pages
 
 
