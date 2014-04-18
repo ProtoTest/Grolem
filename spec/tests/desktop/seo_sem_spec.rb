@@ -5,34 +5,28 @@ include Pages
 
 
 feature 'SEO and SEM' do
-    before(:all) do
-      @rand = rand(1000).to_s
-      @rand_username = "testuser" + @rand
-      @rand_username2 = "testuser" + @rand + @rand
-      @newemail =  @rand_username + "@mailinator.com"
-      @newemail2 =  @rand_username2 + "@mailinator.com"
-      @email = "prototest@mailinator.com"
-      @facebookemail = "bkitchener@prototest.com"
-      @password = "Proto123!"
-      @firstname = "TestUser"
-      @lastname = "ProtoTest"
-    end
+  before(:all) do
+    @email = PROTOTEST_OKL_EMAIL
+    @password = OKL_USER_PASSWORD
+    @firstname = OKL_USER_FIRST_NAME
+    @lastname = OKL_USER_LAST_NAME
+  end
 
-    scenario 'Discover' do
-      @page = LoginPage.new
-      @page.load
-      @page.LoginWithInfo(@email, @password)
-      sleep 2
-      @page = DiscoverPage.new
-      @page.load
-      @page.should have_title_label
-      @page.should have_description_label
-      @page.should have_sort_by_best_sellers_link
-      @page.should have_sort_by_price_link
-      @page.should have_products
-      @page.should have_event_container
-      @page.should have_see_all_sales_link
-end
+  scenario 'Discover' do
+    @page = LoginPage.new
+    @page.load
+    @page.LoginWithInfo(@email, @password)
+    sleep 2
+    @page = DiscoverPage.new
+    @page.load
+    @page.should have_title_label
+    @page.should have_description_label
+    @page.should have_sort_by_best_sellers_link
+    @page.should have_sort_by_price_link
+    @page.should have_products
+    @page.should have_event_container
+    @page.should have_see_all_sales_link
+  end
 
   scenario 'Browse' do
     @page = LoginPage.new

@@ -10,9 +10,9 @@ feature 'My Account' do
   before(:all) do
     @rand = rand(1000).to_s
     @email = "testuser" + @rand + "@mailinator.com"
-    @password = 'Proto123'
-    @firstname = 'TestUser'
-    @lastname = 'ProtoTest'
+    @password = OKL_USER_PASSWORD
+    @firstname = OKL_USER_FIRST_NAME
+    @lastname = OKL_USER_LAST_NAME
     @fullname = "#{@firstname} #{@lastname}"
 
     @shipping_info = {:first => @firstname,

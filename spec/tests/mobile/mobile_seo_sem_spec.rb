@@ -5,39 +5,33 @@ include Pages
 
 
 feature 'Mobile SEO and SEM' do
-    before(:all) do
-      @rand = rand(1000).to_s
-      @rand_username = "testuser" + @rand
-      @rand_username2 = "testuser" + @rand + @rand
-      @newemail =  @rand_username + "@mailinator.com"
-      @newemail2 =  @rand_username2 + "@mailinator.com"
-      @email = "prototest@mailinator.com"
-      @facebookemail = "bkitchener@prototest.com"
-      @password = "Proto123!"
-      @firstname = "TestUser"
-      @lastname = "ProtoTest"
+  before(:all) do
+    @email = PROTOTEST_OKL_EMAIL
+    @password = OKL_USER_PASSWORD
+    @firstname = OKL_USER_FIRST_NAME
+    @lastname = OKL_USER_LAST_NAME
 
-      # register the user
-      register_user(@firstname, @lastname, @password, @newemail)
-    end
+    # register the user
+    register_user(@firstname, @lastname, @password, @email)
+  end
 
-    before(:each) do
-      @page = MobileHomePage.new
-      @page.load
-      @page = @page.GoToLoginPage.LoginWithInfo(@newemail, @password)
-    end
+  before(:each) do
+    @page = MobileHomePage.new
+    @page.load
+    @page = @page.GoToLoginPage.LoginWithInfo(@email, @password)
+  end
 
-    scenario 'Discover' do
-      @page = DiscoverPage.new
-      @page.load
-      @page.should have_title_label
-      @page.should have_description_label
-      @page.should have_sort_by_best_sellers_link
-      @page.should have_sort_by_price_link
-      @page.should have_products
-      @page.should have_event_container
-      @page.should have_see_all_sales_link
-end
+  scenario 'Discover' do
+    @page = DiscoverPage.new
+    @page.load
+    @page.should have_title_label
+    @page.should have_description_label
+    @page.should have_sort_by_best_sellers_link
+    @page.should have_sort_by_price_link
+    @page.should have_products
+    @page.should have_event_container
+    @page.should have_see_all_sales_link
+  end
 
   scenario 'Browse' do
     @page = BrowsePage.new
