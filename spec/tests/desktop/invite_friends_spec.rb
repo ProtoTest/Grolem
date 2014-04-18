@@ -4,16 +4,15 @@ feature 'Invite Friends' do
   before(:all) do
     @rand = rand(1000).to_s
     @new_customer = "testuser" + @rand + "@mailinator.com"
-    @password = 'Proto123'
-    @firstname = 'TestUser'
-    @lastname = 'ProtoTest'
-    @facebookemail = 'msiwiec@prototest.com'
-    @facebookpassword = 'Proto123'
+    @firstname = OKL_USER_FIRST_NAME
+    @lastname = OKL_USER_LAST_NAME
+    @email = PROTOTEST_OKL_EMAIL
+    @password = OKL_USER_PASSWORD
   end
 
   before(:each) { }
 
-  after(:each) {sleep 3;}
+  after(:each) {}
 
   # Skip what invite?
   #scenario 'Skip Invite' do
@@ -24,12 +23,12 @@ feature 'Invite Friends' do
   scenario 'Invite Friends' do
     # Create/Verify the facebook email user account is created
     # You can only invite new customers from an account that isn't disposable
-    register_user(@firstname, @lastname, @facebookpassword, @facebookemail)
+    register_user(@firstname, @lastname, @password, @email)
 
     @page = LoginPage.new
     @page.load
 
-    @page.LoginWithInfo @facebookemail, @facebookpassword
+    @page.LoginWithInfo @email, @password
     @page = InvitePage.new
     @page.load
     @page.should be_all_there
@@ -51,16 +50,15 @@ feature 'Invite Friends' do
           VerifyInviteSignupModalDisplayed.
           EnterEmail(@new_customer).
           EnterInfo(@firstname,@lastname,@password).
-          ClosePanel
+          ClosePanel.header.LogOut
     end
   end
 
   scenario 'Search is displayed in header and works' do
-    #There is no search box on the mobile page - using desktop page
     @page = LoginPage.new
     @page.load
 
-    @page.LoginWithInfo(@new_customer, @password).
+    @page.LoginWithInfo(@email, @password).
         header.SearchFor("lamp").
         GoToFirstProduct(:available)
   end

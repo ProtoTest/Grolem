@@ -21,7 +21,7 @@ module Pages
     end
 
     def LoginToPayPal
-      wait_until_login_email_visible
+      wait_until_login_email_visible(15)
       login_email.set @@email
       login_password.set @@password
       login_btn.click
