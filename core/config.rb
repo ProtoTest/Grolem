@@ -35,8 +35,8 @@ RSpec.configure do |config|
   config.include Capybara::DSL
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.add_setting :default_browser, :default => Browsers::Firefox
-  config.add_setting :remote_driver, :default => false
-  config.add_setting :host_ip, :default => "localhost"
+  config.add_setting :remote_driver, :default => true
+  config.add_setting :host_ip, :default => "sfo-qa-grid-hub.corp.onekingslane.biz"
   config.add_setting :host_platform, :default=>:any
   config.add_setting :host_version, :default=>""
   config.add_setting :element_wait_sec, :default => 20
@@ -45,7 +45,7 @@ RSpec.configure do |config|
   config.add_setting :mock_mobile, :default =>true
 
   # Grab the OKL site sub-domain from the environment. Default to qa07 if not set
-  ENV['OKL_SERVER'] ||= "qa07"
+  ENV['OKL_SERVER'] ||= "qa02"
   config.add_setting :default_url, :default => "https://bkitchener:bkitchener123!@#{ENV['OKL_SERVER']}.newokl.com"
   config.add_setting :ldap_username, :default => "bkitchener"
   config.add_setting :ldap_user_password, :default =>"bkitchener123!"
