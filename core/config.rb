@@ -39,10 +39,11 @@ RSpec.configure do |config|
   config.add_setting :host_ip, :default => "sfo-qa-grid-hub.corp.onekingslane.biz"
   config.add_setting :host_platform, :default=>:any
   config.add_setting :host_version, :default=>""
+  config.add_setting :host_port, :default => 4444
   config.add_setting :element_wait_sec, :default => 20
   config.add_setting :screenshot_on_failure, :default => true
   config.add_setting :command_logging, :default => true
-  config.add_setting :mock_mobile, :default =>true
+
 
   # Grab the OKL site sub-domain from the environment. Default to qa07 if not set
   ENV['OKL_SERVER'] ||= "qa02"
@@ -60,23 +61,12 @@ RSpec.configure do |config|
   config.add_setting :proxy_port, :default=>9091
   config.add_setting :proxy_host, :default=>'localhost'
 
-  config.before(:all) do
-    if (RSpec.configuration.use_proxy&&RSpec.configuration.default_browser == Browsers::Firefox)
-      server = BrowserMob::Proxy::Server.new(RSpec.configuration.browsermob_path) #=> #<BrowserMob::Proxy::Server:0x000001022c6ea8 ...>
-      server.start
-      $proxy = server.create_proxy
-    end
-    $logger = CommandLogger.new
-  end
-
-  config.after(:all) do
-
-  end
-
+  #For some reason this doesn't run before the first test, but runs before all the others
   config.before(:each) do
     $logger = CommandLogger.new
     path = example.metadata[:description]
     config.test_name = path
+    $logger.Log "Starting  #{config.test_name}"
     reset_capybara
   end
 
@@ -88,6 +78,19 @@ RSpec.configure do |config|
       $proxy.close
     end
   end
+
+  config.before(:all) do
+    if (RSpec.configuration.use_proxy&&RSpec.configuration.default_browser == Browsers::Firefox)
+      server = BrowserMob::Proxy::Server.new(RSpec.configuration.browsermob_path) #=> #<BrowserMob::Proxy::Server:0x000001022c6ea8 ...>
+      server.start
+      $proxy = server.create_proxy
+    end
+    reset_capybara
+    $logger = CommandLogger.new
+    $logger.Log "Starting tests on #{RSpec.configuration.default_url}"
+    reset_capybara
+  end
+
 end
 
 
