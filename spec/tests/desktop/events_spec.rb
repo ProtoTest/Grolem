@@ -67,11 +67,11 @@ feature 'Events' do
     results_page.should have_search_results_summary :text => product_name
   end
 
-  scenario 'Header present and rendered correctly' do
+  scenario 'Header present, rendered correctly, verify links' do
     @sale_event.header.VerifyRenderedCorrectly
   end
 
-  scenario 'Footer present and rendered correctly' do
+  scenario 'Footer present, rendered correctly, verify links' do
     @sale_event.footer.VerifyRenderedCorrectly
   end
 

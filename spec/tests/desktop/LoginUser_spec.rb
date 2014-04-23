@@ -108,7 +108,7 @@ feature 'User Login' do
         LoginWithInfo @email, @password
     @page = InvitePage.new
     @page.load
-    @page.SendInviteToEmails @newemail2, 'this is the message i am sending'
+    @page.SendInviteToEmails(@newemail2, 'this is the message i am sending').header.LogOut
 
     @page = MailinatorPage.new
     @page.load(username:@rand_username2)
