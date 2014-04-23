@@ -46,7 +46,7 @@ feature 'Invite Friends' do
       @page.should have_text "this is the message i am sending"
       @page.ClickXpath '//img[@alt="Accept Invitation"]'
 
-      @page = SignupModal.new.wait_for_elements.
+      @page = SignupModal.new.
           VerifyInviteSignupModalDisplayed.
           EnterEmail(@new_customer).
           EnterInfo(@firstname,@lastname,@password).

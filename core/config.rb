@@ -39,7 +39,7 @@ RSpec.configure do |config|
   config.add_setting :host_ip, :default => "localhost"
   config.add_setting :host_platform, :default=>:any
   config.add_setting :host_version, :default=>""
-  config.add_setting :element_wait_sec, :default => 5
+  config.add_setting :element_wait_sec, :default => 20
   config.add_setting :screenshot_on_failure, :default => true
   config.add_setting :command_logging, :default => true
   config.add_setting :mock_mobile, :default =>true

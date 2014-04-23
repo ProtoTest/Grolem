@@ -7,7 +7,7 @@ module Pages
     elements :products, :xpath, "//li[contains(@id,'product-tile')]"
     elements :products_sold_out, :xpath, "//li[contains(@id,'product-tile') and contains(@class,'sold')]"
     elements :products_vintage, :xpath, "//li[contains(@id,'product-tile') and contains(@class,'vintage')]"
-    elements :prices, :xpath, "//*[contains(@class,'okl-price') and not (../../../../*[contains(@class,'sold')])]"
+    elements :prices, :xpath, "//*[contains(@class,'okl-price') and not (../../../../../li[contains(@class,'sold')])]"
     section :header, MobileHeader, '.page-header'
     section :footer, MobileFooter, '.page-footer'
 
