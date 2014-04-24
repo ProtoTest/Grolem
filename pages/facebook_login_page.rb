@@ -10,6 +10,7 @@ module Pages
     element :cancel_button, 'button',:text=>'Cancel'
 
     def Login email, pass
+      wait_until_email_field_visible
       email_field.set email
       password_field.set pass
       login_button.click
