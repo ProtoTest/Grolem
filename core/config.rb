@@ -30,22 +30,29 @@ SitePrism.configure do |config|
   config.use_implicit_waits = true
 end
 
+#### ENVIRONMENT SETUP ####
+
+# Use remote web driver, default true
+ENV['OKL_REMOTE_DRIVER'] ||= true
+
+# OKL site sub-domain. Default to qa02 if not set
+ENV['OKL_SERVER'] ||= "qa02"
+
+# OKL host ip. Default to grid hub. Or export to 'localhost' on local machine
+ENV['OKL_HOST_IP'] ||= "sfo-qa-grid-hub.corp.onekingslane.biz"
+
 RSpec.configure do |config|
   config.include Capybara::DSL
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.add_setting :default_browser, :default => Browsers::Firefox
-  config.add_setting :remote_driver, :default => true
-  config.add_setting :host_ip, :default => "sfo-qa-grid-hub.corp.onekingslane.biz"
+  config.add_setting :remote_driver, :default => ENV['OKL_REMOTE_DRIVER']
+  config.add_setting :host_ip, :default => ENV['OKL_HOST_IP']
   config.add_setting :host_platform, :default=>:any
   config.add_setting :host_version, :default=>""
   config.add_setting :host_port, :default => 4444
   config.add_setting :element_wait_sec, :default => 20
   config.add_setting :screenshot_on_failure, :default => true
   config.add_setting :command_logging, :default => true
-
-
-  # Grab the OKL site sub-domain from the environment. Default to qa07 if not set
-  ENV['OKL_SERVER'] ||= "qa02"
   config.add_setting :default_url, :default => "https://bkitchener:bkitchener123!@#{ENV['OKL_SERVER']}.newokl.com"
   config.add_setting :ldap_username, :default => "bkitchener"
   config.add_setting :ldap_user_password, :default =>"bkitchener123!"
