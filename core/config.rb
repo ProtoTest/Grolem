@@ -4,7 +4,6 @@ require 'j_unit_reporter'
 def reset_capybara
   # reset the capybara session and configuration
   Capybara.reset_sessions!
-  Capybara.reset!
 
   Capybara.configure do |config|
     config.match = :prefer_exact
@@ -33,7 +32,7 @@ end
 #### ENVIRONMENT SETUP ####
 
 # Use remote web driver, default true
-ENV['OKL_REMOTE_DRIVER'] ||= true
+ENV['OKL_REMOTE_DRIVER'] ||= "true"
 
 # OKL site sub-domain. Default to qa02 if not set
 ENV['OKL_SERVER'] ||= "qa02"
@@ -45,7 +44,7 @@ RSpec.configure do |config|
   config.include Capybara::DSL
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.add_setting :default_browser, :default => Browsers::Firefox
-  config.add_setting :remote_driver, :default => ENV['OKL_REMOTE_DRIVER']
+  config.add_setting :remote_driver, :default => ENV['OKL_REMOTE_DRIVER'].eql?("true") ? true : false
   config.add_setting :host_ip, :default => ENV['OKL_HOST_IP']
   config.add_setting :host_platform, :default=>:any
   config.add_setting :host_version, :default=>""
