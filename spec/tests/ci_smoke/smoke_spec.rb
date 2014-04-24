@@ -1,7 +1,7 @@
 require 'spec_helper'
 require_all 'pages'
-RSpec.configuration.remote_driver = true
-RSpec.configuration.host_ip = 'sfo-qa-grid-hub.corp.onekingslane.biz'
+#RSpec.configuration.remote_driver = false
+#RSpec.configuration.host_ip = 'qa03.corp.onekingslane.biz'
 include Pages
 
 
@@ -45,7 +45,7 @@ feature 'Smoke Tests' do
     @page = HomePage.new
     @page.load
     @page.header.SearchFor("item").
-        GoToFirstProduct.
+        GoToFirstProduct(:available).
         AddToCart.
         header.GoToCart.
         CheckOutNow.
