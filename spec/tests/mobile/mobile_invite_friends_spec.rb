@@ -62,7 +62,6 @@ feature 'Invite Friends' do
     @page = LoginPage.new
     @page.load
 
-    @new_customer = 'testuser3620@mailinator.com'
     @page.LoginWithInfo(@new_customer, @password).
         header.VerifyReferralAndCredits.
         header.SearchFor("lamp").
