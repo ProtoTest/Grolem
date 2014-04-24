@@ -45,7 +45,7 @@ module Pages
     end
 
     def Next
-      next_button.click
+      next_button.click if has_next_button?
       MobileCheckoutPaymentPage.new
     end
 
