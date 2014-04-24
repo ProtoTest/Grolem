@@ -23,7 +23,10 @@ def verify_order_in_ax(order_id)
 
       mysql_cmd = "mysql --user=#{MYSQL_USERNAME} --password=#{MYSQL_PASSWORD} --host=#{MYSQL_HOST} --port=#{MYSQL_PORT}  --database=#{MYSQL_DB} --execute='#{query}' "
 
-      result = ssh_handle.exec(mysql_cmd).to_s
+      ssh_handle.exec(mysql_cmd) do |ch, stream, data|
+        result = data
+      end
+
     end
 
     return result
