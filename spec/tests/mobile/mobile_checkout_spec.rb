@@ -150,16 +150,32 @@ feature 'Mobile Checkout' do
 
   end
 
-=begin
+
   scenario 'Verify order comes through in AX' do
-    @page
+    shipping_info_saved = true
+    credit_info_saved = true
+
+    order_id = @page.header.SearchFor(@item_to_search_for).
+        GoToFirstProduct(:available).
+        AddToCart.
+        ItemAddedModal_Checkout.
+        CheckOutNow(shipping_info_saved, credit_info_saved).
+        PlaceOrder.VerifyOrderCompleted
+
+    # Give the AX some time to process
+    sleep 10
+
+    if order_id.nil?
+      raise "Failed to get the order ID from the confirmation page"
+    else
+      exec_str = verify_order_in_ax(order_id)
+
+      if not exec_str.include?(order_id.to_s)
+        raise "Failed to verify order_id '#{order_id}' came through the AX: exec_output: #{exec_str}"
+      end
+    end
 
   end
 
-  # this case is implemented in 'session_spec.rb'
-  scenario 'Cart expires after 10 minutes idle' do
-
-  end
-=end
 end
 

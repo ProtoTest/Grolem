@@ -166,6 +166,9 @@ feature 'Checkout' do
         CheckOutNow(shipping_info_saved, credit_info_saved).
         PlaceOrder.VerifyOrderCompleted
 
+    # Give the AX some time to process
+    sleep 10
+
     if order_id.nil?
       raise "Failed to get the order ID from the confirmation page"
     else
