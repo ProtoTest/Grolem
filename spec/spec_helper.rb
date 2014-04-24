@@ -28,6 +28,8 @@ require 'require_all'
 require 'base_page'
 require 'base_section'
 require 'tests/test_data'
+require 'tests/ssh_mysql_access'
+
 require_all 'sections'
 require_all 'pages'
 
