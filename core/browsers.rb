@@ -35,6 +35,8 @@ module Browsers
         driver = Capybara::Selenium::Driver.new(app, :browser => RSpec.configuration.default_browser)
       end
       if RSpec.configuration.remote_driver
+        client = Selenium::WebDriver::Remote::Http::Default.new
+        client.timeout = 120 # seconds
         $logger.Log "Starting Remote Test on Host: '#{RSpec.configuration.host_ip}', Browser: '#{RSpec.configuration.default_browser}', Version : '#{RSpec.configuration.host_version}' OS, : '#{RSpec.configuration.host_platform}'. "
         case RSpec.configuration.default_browser
           when :firefox
@@ -55,7 +57,8 @@ module Browsers
         driver = Capybara::Selenium::Driver.new(app,
                                        :browser => :remote,
                                        :desired_capabilities => capabilities,
-                                       :url=>"http://#{RSpec.configuration.host_ip}:4444/wd/hub")
+                                       :url=>"http://#{RSpec.configuration.host_ip}:4444/wd/hub",
+                                       :http_client=>client)
       end
       driver
     end

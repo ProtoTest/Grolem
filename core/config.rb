@@ -13,8 +13,6 @@ def reset_capybara
     config.visible_text_only = true
   end
 
-
-
   # Delete some cookies for the site that are hanging around
   page.driver.browser.manage.delete_cookie('ewokAuth')
   page.driver.browser.manage.delete_cookie('ewokAuthGuestPass')
@@ -24,11 +22,12 @@ def reset_capybara
   # Ensure the browser is maximized to maximize visibility of element
   page.driver.browser.manage.window.maximize
 
-  # With implicit waits enabled, use of wait_until methods is no longer required. This method will
-  # wait for the element to be found on the page until the Capybara default timeout is reached.
-  SitePrism.configure do |config|
-    config.use_implicit_waits = true
-  end
+end
+
+# With implicit waits enabled, use of wait_until methods is no longer required. This method will
+# wait for the element to be found on the page until the Capybara default timeout is reached.
+SitePrism.configure do |config|
+  config.use_implicit_waits = true
 end
 
 RSpec.configure do |config|
@@ -77,7 +76,11 @@ RSpec.configure do |config|
       har.save_to (RSpec.configuration.test_name+ '.har')
       $proxy.close
     end
-  end
+      if example.exception.is_a? Timeout::Error
+        # restart Selenium driver
+        Capybara.send(:session_pool).delete_if { |key, value| key =~ /selenium/i }
+      end
+    end
 
   config.before(:all) do
     if (RSpec.configuration.use_proxy&&RSpec.configuration.default_browser == Browsers::Firefox)
