@@ -10,17 +10,23 @@ feature 'Smoke Tests' do
 # run this once before all of the scenarios
   before(:all) do
     @rand = rand(1000).to_s
-    @email = "testuser" + @rand + "@mailinator.com"
+    @rand2 = rand(1000).to_s
+    @mobile_email = "mobile_testuser" + @rand + @rand2 + "@mailinator.com"
+
     @password = OKL_USER_PASSWORD
     @firstname = OKL_USER_FIRST_NAME
     @lastname = OKL_USER_LAST_NAME
     @fullname = "#{@firstname} #{@lastname}"
-
-# register the user
-  register_user(@firstname, @lastname, @password, @email)
-
   end
 
+  before(:each) do
+    @rand = rand(1000).to_s
+    @rand2 = rand(1000).to_s
+    @email = "testuser" + @rand + @rand2 + "@mailinator.com"
+
+    # register the user
+    register_user(@firstname, @lastname, @password, @email)
+  end
 
 
   scenario 'Desktop Smoke Test' do

@@ -72,7 +72,7 @@ module Sections
       #welcome_user_dropdown.click
       visit "/logout"
 
-      LoginPage.new
+      LoginPage.new.wait_for_elements
     end
 
     def SearchFor text
