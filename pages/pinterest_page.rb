@@ -14,12 +14,15 @@ module Pages
     element :login_with_facebook_link, :xpath, "//span[contains(text(), 'Facebook')]"
 
     def LoginToShare(facebook_email, facebook_password)
+      wait_until_already_have_account_link_visible
       already_have_account_link.click
 
-      cur_window = page.driver.browser.window_handles.last
-
+      wait_until_login_with_facebook_link_visible
       login_with_facebook_link.click
 
+      # wait for this new window to display
+      sleep 5
+      
       # new window displayed here to allow Pinterest to post to facebook
       new_window = page.driver.browser.window_handles.last
 
