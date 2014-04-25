@@ -41,8 +41,9 @@ module Pages
 
       share_section.click
       facebook_button.click
-      sleep 1
 
+      # wait for this new window to display
+      sleep 5
       new_window = page.driver.browser.window_handles.last
 
       page.within_window new_window do
