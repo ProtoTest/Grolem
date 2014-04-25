@@ -22,7 +22,7 @@ module Pages
 
       # wait for this new window to display
       sleep 5
-      
+
       # new window displayed here to allow Pinterest to post to facebook
       new_window = page.driver.browser.window_handles.last
 

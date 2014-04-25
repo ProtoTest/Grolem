@@ -40,55 +40,59 @@ scenario 'Search null Result Set' do
 end
 
 scenario 'Pagination' do
+  delay = 5
+
   @page = @page.header.SearchFor "table"
   @page.current_url.should_not include "&page="
   @page.GoToNextResultsPage
-  sleep 3
+  sleep delay
   @page.current_url.should include "&page=1"
   @page.GoToPrevResultsPage
-  sleep 3
+  sleep delay
   @page.current_url.should include "&page=0"
 
   num_pagination_links = @page.GetNumPaginationLinks
   @page.GoToResultsPage num_pagination_links.to_s
-  sleep 3
+  sleep delay
   @page.current_url.should include "&page=#{num_pagination_links - 1}"
 end
 
   scenario 'Filter' do
+    delay = 5
+
     @page = @page.header.SearchFor 'table'
 
     @page.SelectColor 'White'
-    sleep 2
+    sleep delay
     @page.current_url.should include 'color_hex=%23FFFFFF'
     @page.SelectColor 'White'
-    sleep 2
+    sleep delay
     @page.current_url.should_not include 'color_hex=%23FFFFFF'
 
     @page.SelectCategory 'Furniture'
-    sleep 2
+    sleep delay
     @page.current_url.should include 'level_1_category_ids=130000'
     @page.category_filter.should have_link 'Tables'
 
     @page.SelectPrice '100-250'
-    sleep 2
+    sleep delay
     @page.current_url.should include 'price_ranges=100-250'
     @page.SelectPrice '100-250'
-    sleep 2
+    sleep delay
     @page.current_url.should_not include 'price_ranges=100-250'
 
     @page.SelectCondition 'new'
-    sleep 2
+    sleep delay
     @page.current_url.should include 'vmf=false'
     @page.SelectCondition 'new'
-    sleep 2
+    sleep delay
     @page.current_url.should_not include 'vmf=false'
 
     @page.SelectCondition 'vintage'
-    sleep 2
+    sleep delay
     @page.current_url.should include 'vmf=true'
     @page.SelectCondition 'vintage'
-    sleep 2
+    sleep delay
     @page.current_url.should_not include 'vmf=true'
   end
 end
