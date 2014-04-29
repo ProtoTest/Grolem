@@ -37,22 +37,51 @@ module Browsers
       if RSpec.configuration.remote_driver
         client = Selenium::WebDriver::Remote::Http::Default.new
         client.timeout = 120 # seconds
-        $logger.Log "Starting Remote Test on Host: '#{RSpec.configuration.host_ip}', Browser: '#{RSpec.configuration.default_browser}', Version : '#{RSpec.configuration.host_version}' OS, : '#{RSpec.configuration.host_platform}'. "
+        $logger.Log "Starting Remote Test on Host: '#{RSpec.configuration.host_ip}', Browser: '#{RSpec.configuration.default_browser}', Version : '#{RSpec.configuration.host_version}' OS: '#{RSpec.configuration.host_platform}'. "
         case RSpec.configuration.default_browser
           when :firefox
-            capabilities = Selenium::WebDriver::Remote::Capabilities.firefox(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>"http://#{RSpec.configuration.host_ip}:#{RSpec.configuration.host_port}/wd/hub")
+            capabilities = Selenium::WebDriver::Remote::Capabilities.firefox(
+                :platform=>RSpec.configuration.host_platform,
+                :version=>RSpec.configuration.host_version,
+                :url=>"http://#{RSpec.configuration.host_ip}:#{RSpec.configuration.host_port}/wd/hub")
           when :chrome
-            capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>"http://#{RSpec.configuration.host_ip}:#{RSpec.configuration.host_port}/wd/hub")
+            capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+                :platform=>RSpec.configuration.host_platform,
+                :version=>RSpec.configuration.host_version,
+                :url=>"http://#{RSpec.configuration.host_ip}:#{RSpec.configuration.host_port}/wd/hub")
           when :safari
-            capabilities = Selenium::WebDriver::Remote::Capabilities.safari(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>"http://#{RSpec.configuration.host_ip}:#{RSpec.configuration.host_port}/wd/hub")
+            capabilities = Selenium::WebDriver::Remote::Capabilities.safari(
+                :platform=>RSpec.configuration.host_platform,
+                :version=>RSpec.configuration.host_version,
+                :url=>"http://#{RSpec.configuration.host_ip}:#{RSpec.configuration.host_port}/wd/hub")
           when :ie
-            capabilities = Selenium::WebDriver::Remote::Capabilities.ie(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>"http://#{RSpec.configuration.host_ip}:#{RSpec.configuration.host_port}/wd/hub")
+            capabilities = Selenium::WebDriver::Remote::Capabilities.ie(
+                :platform=>RSpec.configuration.host_platform,
+                :version=>RSpec.configuration.host_version,
+                :url=>"http://#{RSpec.configuration.host_ip}:#{RSpec.configuration.host_port}/wd/hub")
           when :iphone
-            capabilities = Selenium::WebDriver::Remote::Capabilities.iphone(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>"http://#{RSpec.configuration.host_ip}:#{RSpec.configuration.host_port}/wd/hub")
+            capabilities = Selenium::WebDriver::Remote::Capabilities.iphone(
+                :platform=>"MAC",
+                :version=>RSpec.configuration.host_version,
+                :url=>"http://#{RSpec.configuration.host_ip}:#{RSpec.configuration.host_port}/wd/hub",
+                :sdkVersion=>RSpec.configuration.host_version,
+                :simulator=>true,
+                :deviceName=>"iphone",
+                :browserName=>"iOS")
           when :ipad
-            capabilities = Selenium::WebDriver::Remote::Capabilities.ipad(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>"http://#{RSpec.configuration.host_ip}:#{RSpec.configuration.host_port}/wd/hub")
+            capabilities = Selenium::WebDriver::Remote::Capabilities.ipad(
+                :platform=>"MAC",
+                :version=>RSpec.configuration.host_version,
+                :url=>"http://#{RSpec.configuration.host_ip}:#{RSpec.configuration.host_port}/wd/hub",
+                :sdkVersion=>RSpec.configuration.host_version,
+                :simulator=>true,
+                :deviceName=>"ipad",
+                :browserName=>"iOS")
           else
-            capabilities = Selenium::WebDriver::Remote::Capabilities.firefox(:platform=>RSpec.configuration.host_platform, :version=>RSpec.configuration.host_version,:url=>"http://#{RSpec.configuration.host_ip}:#{RSpec.configuration.host_port}/wd/hub")
+            capabilities = Selenium::WebDriver::Remote::Capabilities.firefox(
+                :platform=>RSpec.configuration.host_platform,
+                :version=>RSpec.configuration.host_version,
+                :url=>"http://#{RSpec.configuration.host_ip}:#{RSpec.configuration.host_port}/wd/hub")
         end
         driver = Capybara::Selenium::Driver.new(app,
                                        :browser => :remote,
