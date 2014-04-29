@@ -14,7 +14,10 @@ module Pages
     end
 
     def LogOut
+      wait_until_footer_visible
       footer.LogOut
+
+      MobileLoginPage.new.wait_for_elements
     end
 
     def WaitForSessionToExpire

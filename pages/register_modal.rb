@@ -46,18 +46,23 @@ module Pages
 
   ############################ Common Repeatable Actions ########################
   def register_user(first_name, last_name, password, email)
-    page = SignupModal.new
-    page.load
-
-    page = page.EnterEmail(email)
-
-    # If the RegisterModal page is returned, then the email address is not in the system yet.
-    # Continue to enter information to register the account
-    if page.class.eql?(RegisterModal)
-      page.EnterInfo(first_name, last_name, password).ClosePanel.LogOut
+    if RSpec.configuration.default_browser.eql?(:iphone)
+      page = MobileJoinPage.new
+      page.load
+      page.EnterInfo(first_name, last_name, email, password).LogOut
     else
-      $logger.Log "The email address '#{email}' is already registered"
-    end
+      page = SignupModal.new
+      page.load
 
+      page = page.EnterEmail(email)
+
+      # If the RegisterModal page is returned, then the email address is not in the system yet.
+      # Continue to enter information to register the account
+      if page.class.eql?(RegisterModal)
+        page.EnterInfo(first_name, last_name, password).ClosePanel.LogOut
+      else
+        $logger.Log "The email address '#{email}' is already registered"
+      end
+    end
   end
 end

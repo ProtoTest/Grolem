@@ -1,6 +1,12 @@
 module Pages
   class MobileLoginPage<LoginPage
     set_url '/login'
+
+    def wait_for_elements
+      wait_until_email_field_visible
+      wait_until_password_field_visible
+    end
+
     def LoginWithInfo email, password
       wait_until_email_field_visible
 

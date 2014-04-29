@@ -5,9 +5,11 @@ module Pages
     set_url '/login'
     attr_reader :email_field, :password_field,:log_in_button,:join_now_link,:facebook_login_link,:keep_logged_in_cbx
 
-    element :email_field, '#email'
-    element :password_field,'#password'
-    element :log_in_button , :xpath, '//input[@name="sumbit"]'
+    # ensure email, password, login elements are the same across desktop/mobile/iphone web pages
+    element :email_field, 'input[name=email]'
+    element :password_field,'input[name=password]'
+    element :log_in_button , :xpath, '//*[@name="sumbit" or @type="submit" ]'
+
     element :join_now_link , :xpath, '//input[@alt="Join Now"]'
     element :facebook_login_link , 'a',:text=>'Login with Facebook'
     element :keep_logged_in_cbx,'#remember'
