@@ -26,7 +26,7 @@ module Pages
     def EnterShippingDetails(shipping_info)
       # if none of these elements are present, the address information has most likely already been
       # entered into the system and saved
-      sleep 3
+      sleep 10
 
       if all_there?
         first_name_field.set shipping_info[:first]

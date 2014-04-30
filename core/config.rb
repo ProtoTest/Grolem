@@ -24,6 +24,9 @@ def reset_capybara
 
     # Ensure the browser is maximized to maximize visibility of element
     page.driver.browser.manage.window.maximize
+
+    # Set the page load timeout
+    page.driver.browser.manage.timeouts.page_load = Rspec.configuration.page_load_timeout
   end
 end
 
@@ -45,9 +48,12 @@ ENV['OKL_SERVER'] ||= "qa02"
 # OKL default browser, default to firefox
 ENV['OKL_BROWSER'] ||= "Firefox"
 
+# initialize runtime configuration
 browser = Browsers::Firefox
 host_platform = :any
 host_version = ""
+element_wait_sec = 30
+
 case ENV['OKL_BROWSER'].downcase.chomp
   when "firefox" then browser = Browsers::Firefox
   when "chrome" then browser = Browsers::Chrome
@@ -58,10 +64,12 @@ case ENV['OKL_BROWSER'].downcase.chomp
     browser = Browsers::IPhone
     host_platform = :mac
     host_version = "7.0.3" # ios sdk version
+    element_wait_sec = 60
   when "ipad"
     browser = Browsers::IPad
     host_platform = :mac
     host_version = "7.0.3" # ios sdk version
+    element_wait_sec = 60
 end
 
 # if running locally, then put username/password in url, and set host to 'localhost',
@@ -88,7 +96,8 @@ RSpec.configure do |config|
   config.add_setting :host_platform, :default=>host_platform
   config.add_setting :host_version, :default=>host_version
   config.add_setting :host_port, :default => 4444
-  config.add_setting :element_wait_sec, :default => 20
+  config.add_setting :page_load_timeout, :default => 30
+  config.add_setting :element_wait_sec, :default => element_wait_sec
   config.add_setting :screenshot_on_failure, :default => true
   config.add_setting :command_logging, :default => true
   config.add_setting :default_url, :default => default_url

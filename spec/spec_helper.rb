@@ -38,6 +38,10 @@ include Browsers
 HOST = ENV['HOST'] || 'local'
 DEBUG = ENV['DEBUG'] == 'true' ? true : false
 
+# Helper constants for switching in/out code for iphone or IOS
+IPHONE = RSpec.configuration.default_browser.eql?(Browsers::IPhone)
+IOS = RSpec.configuration.default_browser.eql?(Browsers::IPhone) || RSpec.configuration.default_browser.eql?(Browsers::IPad)
+
 Capybara.default_driver = :selenium
 Capybara.app_host = RSpec.configuration.default_url
 Capybara.default_wait_time = RSpec.configuration.element_wait_sec

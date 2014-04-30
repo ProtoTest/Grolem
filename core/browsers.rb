@@ -31,7 +31,7 @@ module Browsers
         profile["network.proxy.http_port"] = RSpec.configuration.proxy_port
         driver = Capybara::Selenium::Driver.new(app,  :browser => RSpec.configuration.default_browser,:profile => profile)
       else
-        $logger.Log "Starting Local #{RSpec.configuration.default_browser} Browser"
+        $logger.Log "Starting #{RSpec.configuration.default_browser} Browser"
         driver = Capybara::Selenium::Driver.new(app, :browser => RSpec.configuration.default_browser)
       end
       if RSpec.configuration.remote_driver

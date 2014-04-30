@@ -29,7 +29,7 @@ feature 'Smoke Tests' do
   end
 
 
-  scenario 'Desktop Smoke Test' do
+  scenario 'Desktop Smoke Test', desktop: true, ipad: true do
     save_payment_info = false
     use_shipping_address = true
 
@@ -63,7 +63,7 @@ feature 'Smoke Tests' do
   end
 
 
-  scenario 'Mobile Layout Smoke Test' do
+  scenario 'Mobile Layout Smoke Test', iphone: true, desktop: true do
 
     shipping_info = {:first => @firstname,
                      :last => @lastname,

@@ -28,6 +28,10 @@ module Pages
     def wait_for_elements
       wait_until_first_product_visible
 
+      # for IOS need to wait for page to load as much as it can, specially for 'sold out' tag
+      if IOS
+        find(:xpath, "//div[contains(@class, 'sold-out')]")
+      end
       self
     end
 
@@ -43,6 +47,9 @@ module Pages
     #   :default (first product found in any product state)
     #
     def GoToFirstProduct(product_type=:default)
+
+      wait_for_elements
+
       case product_type
         when :available_vintage
           first_product_vintage.click

@@ -33,6 +33,9 @@ module Pages
     elements :remove_btns, 'section.product.cart-product a',:text=>"Remove"
 
     def CheckOutNow(is_shipping_info_saved=false, is_credit_card_saved=false)
+      wait_until_check_out_button_visible
+      wait_until_order_total_label_visible
+
       check_out_button.click
 
       # if the credit card is already saved in the system,

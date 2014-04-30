@@ -10,7 +10,12 @@ module Pages
     elements :ending_sales_events, '.items.ending > ul > li > a'
 
     def GoToLoginPage
-      header.OpenMenu.GoToLogin
+      if IPHONE
+        visit "/login"
+        return MobileLoginPage.new
+      else
+        return header.OpenMenu.GoToLogin
+      end
     end
 
     def LogOut

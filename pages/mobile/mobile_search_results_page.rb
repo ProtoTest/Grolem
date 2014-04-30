@@ -12,6 +12,9 @@ module Pages
     #   :default (first product found in any product state)
     #
     def GoToFirstProduct(product_type=:default)
+
+      wait_for_elements
+
       case product_type
         when :available_vintage
           first_product_vintage.click
