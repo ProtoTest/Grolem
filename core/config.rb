@@ -24,9 +24,6 @@ def reset_capybara
 
     # Ensure the browser is maximized to maximize visibility of element
     page.driver.browser.manage.window.maximize
-
-    # Set the page load timeout
-    page.driver.browser.manage.timeouts.page_load = Rspec.configuration.page_load_timeout
   end
 end
 
