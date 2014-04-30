@@ -72,7 +72,7 @@ if ENV['OKL_REMOTE_DRIVER'].eql?("false")
   remote_driver = false
 else
   default_url = "https://#{ENV['OKL_SERVER']}.newokl.com"
-  host_ip = "localhost" #"sfo-qa-grid-hub.corp.onekingslane.biz"
+  host_ip = "sfo-qa-grid-hub.corp.onekingslane.biz"
   remote_driver = true
 end
 
