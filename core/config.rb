@@ -46,7 +46,7 @@ ENV['OKL_SERVER'] ||= "qa02"
 ENV['OKL_BROWSER'] ||= "Firefox"
 
 browser = Browsers::Firefox
-host_platform = :all
+host_platform = :any
 host_version = ""
 case ENV['OKL_BROWSER'].downcase.chomp
   when "firefox" then browser = Browsers::Firefox
@@ -72,7 +72,7 @@ if ENV['OKL_REMOTE_DRIVER'].eql?("false")
   remote_driver = false
 else
   default_url = "https://#{ENV['OKL_SERVER']}.newokl.com"
-  host_ip ="sfo-qa-grid-hub.corp.onekingslane.biz"
+  host_ip = "localhost" #"sfo-qa-grid-hub.corp.onekingslane.biz"
   remote_driver = true
 end
 
