@@ -1,5 +1,5 @@
 require "site_prism"
-require './sections/logged_out_header'
+require 'logged_out_header'
 
 include Sections
 module Pages

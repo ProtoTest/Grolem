@@ -1,4 +1,4 @@
-require './sections/logged_in_header'
+require 'logged_in_header'
 
 module Pages
   class HomePage<BasePage

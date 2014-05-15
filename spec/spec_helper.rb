@@ -1,7 +1,7 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'core'))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'pages'))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'sections'))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'pages/storefront'))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'sections/storefront'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 

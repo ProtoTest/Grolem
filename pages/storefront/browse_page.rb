@@ -1,4 +1,4 @@
-require './sections/product_container'
+require 'product_container'
 
 module Pages
   class BrowsePage<BasePage
